@@ -1,0 +1,278 @@
+[
+    {
+      "id": "title",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "jcr:title",
+          "value": "",
+          "label": "Text"
+        },
+        {
+          "component": "select",
+          "name": "type",
+          "value": "h1",
+          "label": "Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            },
+            {
+              "name": "h2",
+              "value": "h2"
+            },
+            {
+              "name": "h3",
+              "value": "h3"
+            },
+            {
+              "name": "h4",
+              "value": "h4"
+            },
+            {
+              "name": "h5",
+              "value": "h5"
+            },
+            {
+              "name": "h6",
+              "value": "h6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "image",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "fileReference",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "alt",
+          "value": "Default alt",
+          "label": "Alt Text"
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "href",
+          "value": "",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "value": "",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "value": "",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "type",
+          "value": "",
+          "label": "Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "columns",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
+        }
+      ]
+    },
+    {
+      "id": "accordion-item",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "accordianLabel",
+          "value": "",
+          "label": "Item Label",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "accordianBody",
+          "value": "",
+          "label": "Item Body",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "pressRelease",
+          "label": "Press Release",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "financialSupplement",
+          "label": "Financial Supplement",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "presentation",
+          "label": "Presentation",
+          "multi": false
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "fields": [
+        {
+          "component": "aem-content",
+          "name": "reference",
+          "value": "",
+          "label": "Article",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "cardCategory",
+          "value": "",
+          "label": "Category",
+          "valueType": "string",
+          "options": [
+            {
+              "value": "press release",
+              "name": "Press Release"
+            },
+            {
+              "value": "health & wellness",
+              "name": "Health & Wellness"
+            },
+            {
+              "value": "technology & innovation",
+              "name": "Technology & Innovation"
+            },
+            {
+              "value": "perspectives",
+              "name": "Perspectives"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section",
+      "fields": [
+        {
+          "component": "text",
+          "name": "style",
+          "value": "",
+          "label": "Style",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "buttonName",
+          "label": "Button Name",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "reference",
+          "value": "",
+          "label": "Button Link",
+          "valueType": "string"
+        },      
+        {
+          "component": "select",
+          "name": "type",
+          "value": "",
+          "label": "Style",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Hero",
+              "value": "hero-banner"
+            },
+            {
+              "name": "Featured",
+              "value": "featured"
+            }
+          ]
+        }
+      ]
+    }
+  ]
