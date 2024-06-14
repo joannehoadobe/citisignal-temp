@@ -2,8 +2,8 @@
 
 ## Environments
 
-- Preview: https://main--citisignal--adobedevxsc.hlx.page/
-- Live: https://main--citisignal--adobedevxsc.hlx.live/
+- Preview: https://main--citisignal-temp--joannehoadobe.hlx.page/
+- Live: https://main--citisignal-temp--joannehoadobe.hlx.live/
 
 ## Pre-requisites
 
