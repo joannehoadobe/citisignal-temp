@@ -242,6 +242,7 @@ async function loadEager(doc) {
   });
 
   const main = doc.querySelector('main');
+  console.log(main);
   if (main) {
     decorateMain(main);
     aggregateTabSectionsIntoComponents(main);
