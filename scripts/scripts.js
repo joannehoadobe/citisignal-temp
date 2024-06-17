@@ -457,6 +457,7 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy', pluginContext);
   await loadLazy(document);
   loadDelayed();
+  console.log('end load page');
 }
 
 loadPage();

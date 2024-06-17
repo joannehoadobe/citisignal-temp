@@ -470,6 +470,7 @@ function init() {
   window.addEventListener('error', (event) => {
     sampleRUM('error', { source: event.filename, target: event.lineno });
   });
+  console.log('end init');
 }
 
 /**
