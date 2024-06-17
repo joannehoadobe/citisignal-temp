@@ -21,6 +21,8 @@ export default async function decorate(block) {
   // block.append(footer);
   // load footer as fragment
   const footerMeta = getMetadata('footer');
+  console.log('footer meta = ' + footerMeta);
+  console.log('footer meta footer = ' + footerMeta.footer);
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
   const fragment = await loadFragment(footerPath);
 
