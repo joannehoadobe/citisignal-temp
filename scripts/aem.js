@@ -455,6 +455,7 @@ function setup() {
  */
 
 function init() {
+  console.log('got here');
   setup();
   sampleRUM('top');
 
