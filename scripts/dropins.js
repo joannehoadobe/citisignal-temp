@@ -2,12 +2,12 @@
 /* eslint-disable import/no-unresolved */
 // Drop-in Tools
 /* eslint-disable */
-import { events } from '../__dropins__/tools/event-bus.js';
-import { setEndpoint } from '../__dropins__/tools/fetch-graphql.js';
-import { initializers } from '../__dropins__/tools/initializer.js';
+import { events } from './__dropins__/tools/event-bus.js';
+import { setEndpoint } from './__dropins__/tools/fetch-graphql.js';
+import { initializers } from './__dropins__/tools/initializer.js';
 
 // Drop-ins
-import * as cart from '../__dropins__/storefront-cart/api.js';
+import * as cart from './__dropins__/storefront-cart/api.js';
 
 // Libs
 import { getConfigValue } from './configs.js';
