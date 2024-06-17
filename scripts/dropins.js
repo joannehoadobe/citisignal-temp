@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 // Drop-in Tools
-import { events } from '@dropins/tools/event-bus.js';
+import { events } from '../__dropins__/tools/event-bus.js';
 import { setEndpoint } from '@dropins/tools/fetch-graphql.js';
 import { initializers } from '@dropins/tools/initializer.js';
 
