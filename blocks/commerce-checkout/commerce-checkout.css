@@ -73,6 +73,6 @@ select:-webkit-autofill ~ label,
 select:-webkit-autofill:hover ~ label,
 select:-webkit-autofill:focus ~ label {
   font:var(--type-body-2-default-font);
-  letter-spacing:var(--type-body-2-default-letter-spacing)
+  letter-spacing:var(--type-body-2-default-letter-spacing);
   border: 1px solid green;
 }

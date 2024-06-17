@@ -94,7 +94,7 @@ footer .wrapper .section.social-media img {
 }
 
 /* Media Queries */
-@media (max-width: 900px) {
+@media (width <= 900px) { /* (max-width: 900px) { */
   footer {
     padding: 4rem 7rem;
   }
