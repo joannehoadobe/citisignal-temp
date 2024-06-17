@@ -138,8 +138,7 @@ export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
   console.log(`navMeta = ${navMeta}`);
-  
-  const navPath = navMeta || '/nav'; //navMeta ? new URL(navMeta).pathname : '/nav';
+  const navPath = navMeta || '/nav'; /* navMeta ? new URL(navMeta).pathname : '/nav'; */
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
