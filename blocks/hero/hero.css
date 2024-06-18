@@ -53,6 +53,16 @@ main .hero-container > div {
   line-height: normal;
 }
 
+/* Default Content Wrapper Styles */
+.hero-container .default-content-wrapper h1,
+.hero-container .default-content-wrapper h2,
+.hero-container .default-content-wrapper h3,
+.hero-container .default-content-wrapper h4,
+.hero-container .default-content-wrapper h5,
+.hero-container .default-content-wrapper h6 {
+  margin: 1rem 0 3rem;
+}
+
 .hero div:nth-child(3) h3 {
   font-size: 24px;
   font-weight: 600;
@@ -96,17 +106,7 @@ main .hero-container > div {
   height: 100%;
 }
 
-/* Default Content Wrapper Styles */
-.hero-container .default-content-wrapper h1,
-.hero-container .default-content-wrapper h2,
-.hero-container .default-content-wrapper h3,
-.hero-container .default-content-wrapper h4,
-.hero-container .default-content-wrapper h5,
-.hero-container .default-content-wrapper h6 {
-  margin: 1rem 0 3rem;
-}
-
-@media (max-width: 900px) {
+@media (width <= 900 px) { /* (max-width: 900px) { */
   /* Responsive Styles for Hero Sections */
   .hero {
     display: flex;
@@ -158,7 +158,7 @@ main .hero-container > div {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) { /* (max-width: 768px) { */
   main .hero-container {
     padding: 1.5rem 15px 0;
   }
