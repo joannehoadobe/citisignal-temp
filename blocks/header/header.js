@@ -194,12 +194,12 @@ export default async function decorate(block) {
     const show = state ?? !minicartPanel.classList.contains('nav-panel--show');
 
     if (show) {
-      // await cartProvider.render(MiniCart, {
-      //   routeEmptyCartCTA: () => '/',
-      //   routeProduct: (product) => `/products/${product.url.urlKey}/${product.sku}`,
-      //   routeCart: () => '/cart',
-      //   routeCheckout: () => '/checkout',
-      // })(minicartPanel);
+      await cartProvider.render(MiniCart, {
+        routeEmptyCartCTA: () => '/',
+        routeProduct: (product) => `/products/${product.url.urlKey}/${product.sku}`,
+        routeCart: () => '/cart',
+        routeCheckout: () => '/checkout',
+      })(minicartPanel);
     } else {
       minicartPanel.innerHTML = '';
     }
@@ -210,13 +210,13 @@ export default async function decorate(block) {
   cartButton.addEventListener('click', () => toggleMiniCart());
 
   // Cart Item Counter
-  // events.on('cart/data', (data) => {
-  //   if (data?.totalQuantity) {
-  //     cartButton.setAttribute('data-count', data.totalQuantity);
-  //   } else {
-  //     cartButton.removeAttribute('data-count');
-  //   }
-  // }, { eager: true });
+  events.on('cart/data', (data) => {
+    if (data?.totalQuantity) {
+      cartButton.setAttribute('data-count', data.totalQuantity);
+    } else {
+      cartButton.removeAttribute('data-count');
+    }
+  }, { eager: true });
 
   /** Search */
   const search = document.createRange().createContextualFragment(`
