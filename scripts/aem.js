@@ -459,7 +459,6 @@ function init() {
   setup();
   console.log('after set up');
   sampleRUM('top');
-  console.log('after sampleRUM');
 
   window.addEventListener('load', () => sampleRUM('load'));
 
