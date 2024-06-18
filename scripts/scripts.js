@@ -452,21 +452,13 @@ export function getBlockPlaceholderInfo(block) {
 }
 
 async function loadPage() {
-<<<<<<< HEAD
-  console.log('beginning load page');
-=======
   console.log('beginning load page in scripts.js');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
   await window.hlx.plugins.load('eager', pluginContext);
   await loadEager(document);
   await window.hlx.plugins.load('lazy', pluginContext);
   await loadLazy(document);
   loadDelayed();
-<<<<<<< HEAD
-  console.log('end load page');
-=======
   console.log('end load page in scripts.js');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
 }
 
 loadPage();
