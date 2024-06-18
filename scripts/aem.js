@@ -456,6 +456,7 @@ function setup() {
 
 function init() {
   setup();
+  console.log('after set up in init in aem.js');
   sampleRUM('top');
 
   window.addEventListener('load', () => sampleRUM('load'));
@@ -467,6 +468,7 @@ function init() {
   window.addEventListener('error', (event) => {
     sampleRUM('error', { source: event.filename, target: event.lineno });
   });
+  console.log('end init in aem.js');
 }
 
 /**
