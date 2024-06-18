@@ -10,13 +10,9 @@ import {
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
-<<<<<<< HEAD
-async function applyChanges(event) {
-=======
 console.log('before functions in editor-support');
 async function applyChanges(event) {
-  console.log('in begging in applyChanges');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
+  console.log('in beginning in applyChanges');
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
 
@@ -32,10 +28,7 @@ async function applyChanges(event) {
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
-<<<<<<< HEAD
-=======
   console.log('before IF element in applyChanges');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
   if (element) {
     if (element.matches('main')) {
       const newMain = parsedUpdate.querySelector(`[data-aue-resource="${resource}"]`);
@@ -51,10 +44,7 @@ async function applyChanges(event) {
       return true;
     }
 
-<<<<<<< HEAD
-=======
     console.log('before IF block in applyChanges');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
     const block = element.parentElement?.closest('.block[data-aue-resource]') || element?.closest('.block[data-aue-resource]');
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
@@ -99,18 +89,12 @@ async function applyChanges(event) {
     }
   }
 
-<<<<<<< HEAD
-=======
   console.log('end applyChanges');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
   return false;
 }
 
 function attachEventListners(main) {
-<<<<<<< HEAD
-=======
   console.log('beginning attachEventListeners');
->>>>>>> e33903ae842f1f62390733811cc4d9f3a36ea771
   [
     'aue:content-patch',
     'aue:content-update',
