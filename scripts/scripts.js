@@ -18,7 +18,7 @@ import {
   toClassName,
   waitForLCP,
 } from './aem.js';
-import initializeDropins from './dropins.js';
+// import initializeDropins from './dropins.js';
 
 // Define an execution context
 const pluginContext = {
