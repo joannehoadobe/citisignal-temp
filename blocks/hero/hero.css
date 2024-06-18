@@ -106,7 +106,7 @@ main .hero-container > div {
   height: 100%;
 }
 
-@media (width <= 900 px) { /* (max-width: 900px) { */
+@media (width <= 900px) { /* (max-width: 900px) { */
   /* Responsive Styles for Hero Sections */
   .hero {
     display: flex;
