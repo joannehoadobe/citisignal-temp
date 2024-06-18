@@ -12,7 +12,7 @@ export default async function decorate(block) {
   // load footer fragment
   console.log(`footerMeta = ${footerMeta}`);
   console.log(`footerMeta footer = ${footerMeta.footer}`);
-  const footerPath = footerMeta.footer || '/footer';
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer'; /* footerMeta.footer || '/footer'; */
   console.log(`footerPath = ${footerPath}`);
   const fragment = await loadFragment(footerPath);
 
