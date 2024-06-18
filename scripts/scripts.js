@@ -208,7 +208,7 @@ async function decorateTemplates(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  initializeDropins();
+  // initializeDropins();
   decorateTemplateAndTheme();
 
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
