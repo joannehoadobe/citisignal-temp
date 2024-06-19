@@ -236,6 +236,27 @@
           "value": ""
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Heading",
+          "headingType": "h1",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "headingType",
+          "value": "h1",
+          "label": "Heading Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            }
+          ]
+        },
+        {
           "component": "richtext",
           "name": "text",
           "value": "",
@@ -255,23 +276,6 @@
           "value": "",
           "label": "Button Link",
           "valueType": "string"
-        },      
-        {
-          "component": "select",
-          "name": "type",
-          "value": "",
-          "label": "Style",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Hero",
-              "value": "hero-banner"
-            },
-            {
-              "name": "Featured",
-              "value": "featured"
-            }
-          ]
         }
       ]
     }

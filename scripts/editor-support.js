@@ -12,7 +12,6 @@ import { decorateMain } from './scripts.js';
 
 console.log('before functions in editor-support');
 async function applyChanges(event) {
-  console.log('in beginning in applyChanges');
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
 
@@ -28,7 +27,6 @@ async function applyChanges(event) {
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
-  console.log('before IF element in applyChanges');
   if (element) {
     if (element.matches('main')) {
       const newMain = parsedUpdate.querySelector(`[data-aue-resource="${resource}"]`);
@@ -44,7 +42,6 @@ async function applyChanges(event) {
       return true;
     }
 
-    console.log('before IF block in applyChanges');
     const block = element.parentElement?.closest('.block[data-aue-resource]') || element?.closest('.block[data-aue-resource]');
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
@@ -89,12 +86,11 @@ async function applyChanges(event) {
     }
   }
 
-  console.log('end applyChanges');
   return false;
 }
 
 function attachEventListners(main) {
-  console.log('beginning attachEventListeners');
+  console.log('beginning attachEventListeners in editor-support');
   [
     'aue:content-patch',
     'aue:content-update',
