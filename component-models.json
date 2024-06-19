@@ -240,7 +240,6 @@
           "valueType": "string",
           "name": "heading",
           "label": "Heading",
-          "headingType": "h1",
           "value": ""
         },
         {
