@@ -265,13 +265,13 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "buttonName",
-          "label": "Button Name",
+          "name": "buttonTitle",
+          "label": "Button Title",
           "value": ""
         },
         {
           "component": "aem-content",
-          "name": "reference",
+          "name": "button",
           "value": "",
           "label": "Button Link",
           "valueType": "string"
