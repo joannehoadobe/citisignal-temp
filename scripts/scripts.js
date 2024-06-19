@@ -18,7 +18,7 @@ import {
   toClassName,
   waitForLCP,
 } from './aem.js';
-// import initializeDropins from './dropins.js';
+import initializeDropins from './dropins.js';
 
 // Define an execution context
 const pluginContext = {
@@ -208,7 +208,7 @@ async function decorateTemplates(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  // initializeDropins();
+  initializeDropins();
   decorateTemplateAndTheme();
 
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {

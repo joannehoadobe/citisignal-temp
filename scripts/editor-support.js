@@ -12,7 +12,6 @@ import { decorateMain } from './scripts.js';
 
 console.log('before functions in editor-support');
 async function applyChanges(event) {
-  console.log('in begging in applyChanges');
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
 
@@ -94,7 +93,7 @@ async function applyChanges(event) {
 }
 
 function attachEventListners(main) {
-  console.log('beginning attachEventListeners');
+  console.log('beginning attachEventListeners in editor-support');
   [
     'aue:content-patch',
     'aue:content-update',
