@@ -244,6 +244,19 @@
           "value": ""
         },
         {
+          "component": "select",
+          "name": "headingType",
+          "value": "h1",
+          "label": "Heading Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            }
+          ]
+        },
+        {
           "component": "richtext",
           "name": "text",
           "value": "",
