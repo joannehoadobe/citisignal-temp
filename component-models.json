@@ -236,24 +236,11 @@
           "value": ""
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "heading",
           "label": "Heading",
-          "value": ""
-        },
-        {
-          "component": "select",
-          "name": "headingType",
-          "value": "h1",
-          "label": "Heading Type",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "h1",
-              "value": "h1"
-            }
-          ]
+          "value": "" 
         },
         {
           "component": "richtext",
@@ -261,6 +248,13 @@
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "buttonText",
+          "label": "Button Text",
+          "value": ""
         },
         {
           "component": "text",
