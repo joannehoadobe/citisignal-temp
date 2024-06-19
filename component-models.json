@@ -276,23 +276,6 @@
           "value": "",
           "label": "Button Link",
           "valueType": "string"
-        },      
-        {
-          "component": "select",
-          "name": "type",
-          "value": "",
-          "label": "Style",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Hero",
-              "value": "hero-banner"
-            },
-            {
-              "name": "Featured",
-              "value": "featured"
-            }
-          ]
         }
       ]
     }
