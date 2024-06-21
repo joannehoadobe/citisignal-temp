@@ -338,8 +338,8 @@
         },
         {
           "component": "select",
-          "name": "instagram_imageIcon",
-          "value": ":instagram-icon:",
+          "name": "instagram_icon",
+          "value": "",
           "label": "Instagram Icon",
           "valueType": "string",
           "options": [
@@ -360,13 +360,13 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "instagram_imageAlt",
+          "name": "instagram_iconAlt",
           "label": "Instagram Alt Text",
           "value": ""
         },
         {
-          "component": "reference",
-          "name": "instagram_imageLink",
+          "component": "aem-content",
+          "name": "instagram_iconLink",
           "value": "",
           "label": "Instagram Link",
           "valueType": "string"
