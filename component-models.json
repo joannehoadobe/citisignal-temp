@@ -338,7 +338,7 @@
         },
         {
           "component": "select",
-          "name": "instagram_image",
+          "name": "instagram_imageIcon",
           "value": ":instagram-icon:",
           "label": "Instagram Icon",
           "valueType": "string",
@@ -365,7 +365,7 @@
           "value": ""
         },
         {
-          "component": "aem-content",
+          "component": "reference",
           "name": "instagram_imageLink",
           "value": "",
           "label": "Instagram Link",
