@@ -303,7 +303,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "facebook",
+          "name": "facebookIcon",
           "value": ":facebook-icon:",
           "label": "Icon",
           "valueType": "string",
@@ -334,6 +334,41 @@
           "name": "facebookLink",
           "value": "",
           "label": "Link",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "instagram_image",
+          "value": ":instagram-icon:",
+          "label": "Instagram Icon",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Facebook",
+              "value": ":facebook-icon:"
+            },
+            {
+              "name": "Instagram",
+              "value": ":instagram-icon:"
+            },
+            {
+              "name": "Twitter/X",
+              "value": ":twitter-icon:"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "instagram_imageAlt",
+          "label": "Instagram Alt Text",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "instagram_imageLink",
+          "value": "",
+          "label": "Instagram Link",
           "valueType": "string"
         }
       ]
