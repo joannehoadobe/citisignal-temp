@@ -363,6 +363,20 @@
           "value": "",
           "label": "Instagram Link",
           "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "twitter_image",
+          "label": "Twitter Image",
+          "multi": false
+        },
+        {
+          "component": "aem-content",
+          "name": "twitter_imageLink",
+          "value": "",
+          "label": "Twitter Link",
+          "valueType": "string"
         }
       ]
     }
