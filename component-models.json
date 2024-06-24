@@ -317,41 +317,6 @@
       "fields": [
         {
           "component": "select",
-          "name": "facebookIcon",
-          "value": "",
-          "label": "Icon",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Facebook",
-              "value": ":facebook:"
-            },
-            {
-              "name": "Instagram",
-              "value": ":instagram:"
-            },
-            {
-              "name": "Twitter/X",
-              "value": ":twitter:"
-            }
-          ]
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "facebookAlt",
-          "label": "Alt Text",
-          "value": ""
-        },
-        {
-          "component": "aem-content",
-          "name": "facebookLink",
-          "value": "",
-          "label": "Link",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
           "name": "instagram_icon",
           "value": "",
           "label": "Instagram Icon",
@@ -379,6 +344,34 @@
           "valueType": "string"
         },
         {
+          "component": "select",
+          "name": "facebook_icon",
+          "value": "",
+          "label": "Facebook Icon",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Facebook",
+              "value": ":facebook:"
+            },
+            {
+              "name": "Instagram",
+              "value": ":instagram:"
+            },
+            {
+              "name": "Twitter/X",
+              "value": ":twitter:"
+            }
+          ]
+        },
+        {
+          "component": "aem-content",
+          "name": "facebook_iconLink",
+          "value": "",
+          "label": "Facebook Link",
+          "valueType": "string"
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "twitter_image",
@@ -387,7 +380,7 @@
         },
         {
           "component": "aem-content",
-          "name": "twitter_imageLink",
+          "name": "twitter_iconLink",
           "value": "",
           "label": "Twitter Link",
           "valueType": "string"
