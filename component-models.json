@@ -384,6 +384,13 @@
           "value": "",
           "label": "Twitter Link",
           "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "twitter_text",
+          "value": "",
+          "label": "Twitter Text",
+          "valueType": "string"
         }
       ]
     }
