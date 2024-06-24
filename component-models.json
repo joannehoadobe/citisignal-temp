@@ -358,15 +358,8 @@
           ]
         },
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "instagram_iconAlt",
-          "label": "Instagram Alt Text",
-          "value": ""
-        },
-        {
           "component": "aem-content",
-          "name": "instagram_iconLink",
+          "name": "instagram_link",
           "value": "",
           "label": "Instagram Link",
           "valueType": "string"
