@@ -6,6 +6,7 @@ export default async function decorate(block) {
     const spanTag = child.querySelector('span');
     const anchorTag = child.querySelector('a');
     spanTag.parentNode.removeChild(spanTag);
+    anchorTag.textContent = '';
     anchorTag.appendChild(spanTag);
   });
 }
