@@ -372,24 +372,31 @@
           "valueType": "string"
         },
         {
-          "component": "reference",
+          "component": "select",
+          "name": "twitter_icon",
+          "value": "",
+          "label": "Twitter Icon",
           "valueType": "string",
-          "name": "twitter_image",
-          "label": "Twitter Image",
-          "multi": false
+          "options": [
+            {
+              "name": "Facebook",
+              "value": ":facebook:"
+            },
+            {
+              "name": "Instagram",
+              "value": ":instagram:"
+            },
+            {
+              "name": "Twitter/X",
+              "value": ":twitter:"
+            }
+          ]
         },
         {
           "component": "aem-content",
           "name": "twitter_iconLink",
           "value": "",
           "label": "Twitter Link",
-          "valueType": "string"
-        },
-        {
-          "component": "richtext",
-          "name": "twitter_text",
-          "value": "",
-          "label": "Twitter Text",
           "valueType": "string"
         }
       ]
