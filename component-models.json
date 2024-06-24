@@ -304,21 +304,21 @@
         {
           "component": "select",
           "name": "facebookIcon",
-          "value": ":facebook-icon:",
+          "value": "",
           "label": "Icon",
           "valueType": "string",
           "options": [
             {
               "name": "Facebook",
-              "value": ":facebook-icon:"
+              "value": ":facebook:"
             },
             {
               "name": "Instagram",
-              "value": ":instagram-icon:"
+              "value": ":instagram:"
             },
             {
               "name": "Twitter/X",
-              "value": ":twitter-icon:"
+              "value": ":twitter:"
             }
           ]
         },
@@ -345,21 +345,21 @@
           "options": [
             {
               "name": "Facebook",
-              "value": ":facebook-icon:"
+              "value": ":facebook:"
             },
             {
               "name": "Instagram",
-              "value": ":instagram-icon:"
+              "value": ":instagram:"
             },
             {
               "name": "Twitter/X",
-              "value": ":twitter-icon:"
+              "value": ":twitter:"
             }
           ]
         },
         {
           "component": "aem-content",
-          "name": "instagram_link",
+          "name": "instagram_iconLink",
           "value": "",
           "label": "Instagram Link",
           "valueType": "string"
