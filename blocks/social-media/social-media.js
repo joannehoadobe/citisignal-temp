@@ -7,7 +7,7 @@ export default async function decorate(block) {
     const spanTag = child.querySelector('span');
     const anchorTag = child.querySelector('a');
     if (anchorTag.querySelector('span')) {
-      // do not do anything
+      // do not do anything since span already inside anchor
     } else {
       if (spanTag && spanTag.parentElement.tagName.toLowerCase() === 'p') {
         const parentPTag = spanTag.parentNode;
