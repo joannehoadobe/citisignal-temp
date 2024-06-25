@@ -303,7 +303,8 @@ function loadDelayed() {
     // eslint-disable-next-line import/no-cycle
     return import('./delayed.js');
   }, 3000);
-  // load anything that can be postponed to the latest here
+  // load anything that can be postponed to the latest here; load sidekick if needed for x-walk
+  // import('./sidekick.js').then(({ initSidekick }) => initSidekick());
 }
 
 export async function fetchIndex(indexFile, pageSize = 500) {
