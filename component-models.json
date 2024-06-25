@@ -436,13 +436,6 @@
           "name": "iconAlt",
           "label": "Logo Alt Text",
           "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "iconTitle",
-          "label": "Logo Title Attribute",
-          "value": ""
         }
       ]
     }
