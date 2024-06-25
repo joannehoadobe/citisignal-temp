@@ -250,15 +250,28 @@
           "value": ""
         },
         {
-          "component": "richtext",
+          "component": "text",
           "valueType": "string",
           "name": "heading",
           "label": "Heading",
           "value": "" 
         },
         {
+          "component": "select",
+          "name": "headingType",
+          "value": "",
+          "label": "Heading Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            }
+          ]
+        },
+        {
           "component": "richtext",
-          "name": "text",
+          "name": "main_text",
           "value": "",
           "label": "Text",
           "valueType": "string"
@@ -266,20 +279,20 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "buttonText",
-          "label": "Button Text",
+          "name": "main_linkTitle",
+          "label": "Button Title Attribute",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "buttonTitle",
-          "label": "Button Title Attribute",
+          "name": "main_linkText",
+          "label": "Button Text",
           "value": ""
         },
         {
           "component": "aem-content",
-          "name": "button",
+          "name": "main_link",
           "value": "",
           "label": "Button Link",
           "valueType": "string"
