@@ -273,7 +273,7 @@
           "component": "richtext",
           "name": "main_text",
           "value": "",
-          "label": "Text",
+          "label": "Description",
           "valueType": "string"
         },
         {
@@ -411,6 +411,31 @@
           "value": "",
           "label": "Twitter Link",
           "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "simple-logo",
+      "fields": [
+        {
+          "component": "select",
+          "name": "logo",
+          "value": "",
+          "label": "Logo/Icon",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Footer",
+              "value": ":footer-logo:"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "logoAlt",
+          "label": "Logo Alt Text",
+          "value": ""
         }
       ]
     }
