@@ -10,14 +10,13 @@ import {
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
-console.log('before functions in editor-support');
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
 
   const resource = detail?.request?.target?.resource // update, patch components
-      || detail?.request?.target?.container?.resource // update, patch, add to sections
-      || detail?.request?.to?.container?.resource; // move in sections
+    || detail?.request?.target?.container?.resource // update, patch, add to sections
+    || detail?.request?.to?.container?.resource; // move in sections
   if (!resource) return false;
   const updates = detail?.response?.updates;
   if (!updates.length) return false;
@@ -90,7 +89,6 @@ async function applyChanges(event) {
 }
 
 function attachEventListners(main) {
-  console.log('beginning attachEventListeners in editor-support');
   [
     'aue:content-patch',
     'aue:content-update',

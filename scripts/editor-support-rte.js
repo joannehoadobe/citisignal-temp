@@ -27,7 +27,7 @@ export function decorateRichtext(container = document) {
     let sibling = element;
     while (sibling = sibling.nextElementSibling) {
       if (sibling.dataset.richtextResource === richtextResource
-          && sibling.dataset.richtextProp === richtextProp) {
+        && sibling.dataset.richtextProp === richtextProp) {
         deleteInstrumentation(sibling);
         siblings.push(sibling);
       } else break;
@@ -48,7 +48,7 @@ export function decorateRichtext(container = document) {
 
     if (orphanElements.length) {
       console.warn('Found orphan elements of a richtext, that were not consecutive siblings of '
-          + 'the first paragraph', orphanElements);
+        + 'the first paragraph', orphanElements);
       orphanElements.forEach((orphanElement) => deleteInstrumentation(orphanElement));
     } else {
       const group = document.createElement('div');
