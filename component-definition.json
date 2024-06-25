@@ -152,8 +152,7 @@
                     "name": "Simple Logo",
                     "model": "simple-logo",
                     "icon": ":footer-logo:",
-                    "iconAlt": "Simple Logo Placeholder",
-                    "iconTitle": "Simple Logo Title Placeholder"
+                    "iconAlt": "Simple Logo Placeholder"
                   }
                 }
               }
