@@ -3,10 +3,19 @@ export default async function decorate(block) {
     const iconName = child.querySelector('img').getAttribute('data-icon-name');
     child.querySelector('a').title = iconName;
     child.querySelector('img').alt = iconName;
+    // add for xwalk
     const spanTag = child.querySelector('span');
     const anchorTag = child.querySelector('a');
-    spanTag.parentNode.removeChild(spanTag);
-    anchorTag.textContent = '';
-    anchorTag.appendChild(spanTag);
+    if (anchorTag.querySelector('span')) {
+      // do not do anything
+    } else {
+      if (spanTag && spanTag.parentElement.tagName.toLowerCase() === 'p') {
+        const parentPTag = spanTag.parentNode;
+        parentPTag.parentNode.removeChild(parentPTag);
+        // spanTag.parentNode.removeChild(spanTag);
+      }
+      anchorTag.textContent = '';
+      anchorTag.appendChild(spanTag);
+    }
   });
 }
