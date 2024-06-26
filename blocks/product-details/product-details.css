@@ -143,3 +143,7 @@
 .dropin-design .pdp-product__quantity .quantity-label {
   font-weight: 900;
 }
+
+.dropin-design .pdp-product__description .accordion h2 {
+  font-size: var(--heading-font-size-xs);
+}
