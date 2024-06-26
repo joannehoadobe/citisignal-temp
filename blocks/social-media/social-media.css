@@ -19,7 +19,7 @@ footer .wrapper .section.social-media-container img {
 }
 
 /* Media Queries */
-@media (max-width: 900px) {
+@media (width <= 900px) {
   footer .wrapper .section.social-media-container {
     flex: unset;
     margin-left: auto;
