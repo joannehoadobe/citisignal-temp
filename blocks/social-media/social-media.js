@@ -9,10 +9,10 @@ export default async function decorate(block) {
     if (anchorTag.querySelector('span')) {
       // do not do anything since span already inside anchor in doc-based
     } else {
+      // in x-walk, move the span tag inside the anchor a tag and delete the outside span tag
       if (spanTag && spanTag.parentElement.tagName.toLowerCase() === 'p') {
         const parentPTag = spanTag.parentNode;
         parentPTag.parentNode.removeChild(parentPTag);
-        // spanTag.parentNode.removeChild(spanTag);
       }
       anchorTag.textContent = '';
       anchorTag.appendChild(spanTag);
