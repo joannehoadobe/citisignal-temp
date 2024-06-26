@@ -4,18 +4,18 @@ export default async function decorate(block) {
     child.querySelector('a').title = iconName;
     child.querySelector('img').alt = iconName;
     // add for xwalk
-    const spanTag = child.querySelector('span');
-    const anchorTag = child.querySelector('a');
-    if (anchorTag.querySelector('span')) {
-      // do not do anything since span already inside anchor
-    } else {
-      if (spanTag && spanTag.parentElement.tagName.toLowerCase() === 'p') {
-        const parentPTag = spanTag.parentNode;
-        parentPTag.parentNode.removeChild(parentPTag);
-        // spanTag.parentNode.removeChild(spanTag);
-      }
-      anchorTag.textContent = '';
-      anchorTag.appendChild(spanTag);
-    }
+    // const spanTag = child.querySelector('span');
+    // const anchorTag = child.querySelector('a');
+    // if (anchorTag.querySelector('span')) {
+    //   // do not do anything since span already inside anchor in doc-based
+    // } else {
+    //   if (spanTag && spanTag.parentElement.tagName.toLowerCase() === 'p') {
+    //     const parentPTag = spanTag.parentNode;
+    //     parentPTag.parentNode.removeChild(parentPTag);
+    //     // spanTag.parentNode.removeChild(spanTag);
+    //   }
+    //   anchorTag.textContent = '';
+    //   anchorTag.appendChild(spanTag);
+    // }
   });
 }
