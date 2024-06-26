@@ -271,7 +271,7 @@
         },
         {
           "component": "richtext",
-          "name": "main_text",
+          "name": "hero_text",
           "value": "",
           "label": "Description",
           "valueType": "string"
@@ -279,20 +279,20 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "main_linkTitle",
+          "name": "hero_linkTitle",
           "label": "Button Title Attribute",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "main_linkText",
+          "name": "hero_linkText",
           "label": "Button Text",
           "value": ""
         },
         {
           "component": "aem-content",
-          "name": "main_link",
+          "name": "hero_link",
           "value": "",
           "label": "Button Link",
           "valueType": "string"
