@@ -7,7 +7,8 @@ import { setEndpoint } from './__dropins__/tools/fetch-graphql.js';
 import { initializers } from './__dropins__/tools/initializer.js';
 
 // Drop-ins
-import * as cart from './__dropins__/storefront-cart/api.js';
+import * as cart from '@dropins/storefront-cart/api.js';
+import { setFetchGraphQlHeader as setCartDropinRequestHeader } from '@dropins/storefront-cart/api.js';
 
 // Libs
 import { getConfigValue } from './configs.js';
@@ -18,6 +19,7 @@ export default async function initializeDropins() {
 
   // Initializers (Global)
   initializers.register(cart.initialize, {});
+  setCartDropinRequestHeader('store', await getConfigValue('store'));
 
   // Cache cartId in session storage
   events.on('cart/data', (data) => {

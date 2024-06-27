@@ -76,3 +76,16 @@ select:-webkit-autofill:focus ~ label {
   letter-spacing:var(--type-body-2-default-letter-spacing);
   border: 1px solid green;
 }
+
+.dropin-design .checkout-title {
+  border-bottom: 0;
+}
+
+.dropin-design .checkout-title::after {
+  border-bottom: 2px solid var(--color-brand-500);
+  content: "";
+  display: block;
+  padding-top: 8px;
+  min-width: 84px;
+  width: fit-content;
+}

@@ -457,7 +457,6 @@ function setup() {
 function init() {
   console.log('got here');
   setup();
-  console.log('after set up in init in aem.js');
   sampleRUM('top');
 
   window.addEventListener('load', () => sampleRUM('load'));
@@ -469,7 +468,6 @@ function init() {
   window.addEventListener('error', (event) => {
     sampleRUM('error', { source: event.filename, target: event.lineno });
   });
-  console.log('end init in aem.js');
 }
 
 /**
@@ -522,7 +520,7 @@ function readBlockConfig(block) {
  */
 function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent;
+    a.title = a.title.trim() || a.textContent.trim();
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
