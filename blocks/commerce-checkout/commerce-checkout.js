@@ -29,7 +29,7 @@ export default async function decorate(block) {
 
   // Listen for order confirmation and redirect to order confirmation page
   events.on('checkout/order', (data) => {
-    window.location.replace(`/order-confirmation?orderRef=${data.masked_order_id}`);
+    window.location.replace(`/order-confirmation?orderRef=${data.number}`);
   });
 
   return provider.render(Checkout, {
