@@ -34,8 +34,8 @@
   flex-basis: 100%;
 }
 
-.dropin-design .dropin-button--primary,
-.dropin-design .dropin-button--secondary {
+.dropin-design .pdp-product__buttons .dropin-button--primary,
+.dropin-design .pdp-product__buttons .dropin-button--secondary {
   width: min-content;
   flex: auto;
   border-radius: 20px;
