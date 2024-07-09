@@ -419,7 +419,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "icon",
+          "name": "simple_icon",
           "value": "",
           "label": "Logo/Icon",
           "valueType": "string",
@@ -436,7 +436,7 @@
         },
         {
           "component": "aem-content",
-          "name": "iconLink",
+          "name": "simple_iconLink",
           "value": "",
           "label": "Link",
           "valueType": "string"
