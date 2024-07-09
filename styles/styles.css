@@ -646,7 +646,6 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
 .dropin-design .dropin-button--primary:focus,
 .dropin-design .dropin-button--primary:focus:hover {
   border: none;
-  border-radius: 0;
   text-transform: uppercase;
   font-weight: 900;
   background: var(--color-brand-500);
@@ -664,7 +663,6 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
 .dropin-design .dropin-button--secondary:focus,
 .dropin-design .dropin-button--secondary:focus:hover {
   border: none;
-  border-radius: 0;
   text-transform: uppercase;
   font-weight: 900;
   background: var(--color-black-100);
