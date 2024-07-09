@@ -13,6 +13,7 @@ export default async function decorate(block) {
       }
       anchorTag.textContent = '';
       anchorTag.appendChild(spanTag);
+      anchorTag.title = iconName;
     }
   });
 }

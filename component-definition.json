@@ -151,8 +151,7 @@
                   "template": {
                     "name": "Simple Logo",
                     "model": "simple-logo",
-                    "icon": ":footer-logo:",
-                    "iconAlt": "Simple Logo Placeholder"
+                    "simple_icon": ":footer-logo:"
                   }
                 }
               }
