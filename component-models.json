@@ -435,11 +435,11 @@
           ]
         },
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "iconAlt",
-          "label": "Logo Alt Text",
-          "value": ""
+          "component": "aem-content",
+          "name": "iconLink",
+          "value": "",
+          "label": "Link",
+          "valueType": "string"
         }
       ]
     }
