@@ -427,6 +427,10 @@
             {
               "name": "Footer",
               "value": ":footer-logo:"
+            },
+            {
+              "name": "Header",
+              "value": ":citisignal-header-logo:"
             }
           ]
         },
