@@ -651,6 +651,7 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
   font-weight: 900;
   background: var(--color-brand-500);
   color: var(--color-neutral-50);
+  border-radius: 20px;
 }
 
 /* Secondary Buttons */
@@ -668,6 +669,7 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
   font-weight: 900;
   background: var(--color-black-100);
   color: var(--color-neutral-50);
+  border-radius: 20px;
 }
 
 .dropin-design .dropin-button--tertiary,
@@ -675,6 +677,7 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
 .dropin-design .dropin-iconButton--tertiary {
   color: var(--color-black-100);
   padding: 0;
+  border-radius: 20px;
 }
 
 .dropin-design .dropin-button--tertiary:hover,
