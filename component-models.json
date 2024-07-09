@@ -419,7 +419,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "icon",
+          "name": "iconText",
           "value": "",
           "label": "Logo/Icon",
           "valueType": "string",
