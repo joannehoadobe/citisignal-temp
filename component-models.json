@@ -449,16 +449,30 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "category",
-          "label": "Category",
+          "name": "categoryText",
+          "label": "Category Text",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "urlPath",
-          "label": "URL Path",
+          "name": "categoryValue",
+          "label": "Category Value",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "urlPathText",
+          "label": "URL Path Text",
           "value": "" 
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "urlPathValue",
+          "label": "URL Path Value",
+          "value": ""
         }
       ]
     }
