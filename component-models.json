@@ -449,28 +449,28 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "categoryText",
+          "name": "category_text",
           "label": "Category Text",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "categoryValue",
+          "name": "category_textValue",
           "label": "Category Value",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "urlPathText",
+          "name": "urlPath_text",
           "label": "URL Path Text",
           "value": "" 
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "urlPathValue",
+          "name": "urlPath_value",
           "label": "URL Path Value",
           "value": ""
         }
