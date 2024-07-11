@@ -442,5 +442,24 @@
           "valueType": "string"
         }
       ]
+    },
+    {
+      "id": "product-list-page",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "category",
+          "label": "Category",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "urlPath",
+          "label": "URL Path",
+          "value": "" 
+        }
+      ]
     }
   ]
