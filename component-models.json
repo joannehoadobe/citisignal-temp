@@ -4,8 +4,18 @@
       "fields": [
         {
           "component": "text",
-          "name": "testTheme",
-          "label": "TEST Theme"
+          "name": "title",
+          "label": "Title"
+        },
+        {
+          "component": "text",
+          "name": "description",
+          "label": "Description"
+        },
+        {
+          "component": "text",
+          "name": "robots",
+          "label": "Robots"
         }
       ]
     },
