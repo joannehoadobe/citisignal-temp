@@ -4,6 +4,6 @@
       "/content/citisignal-edge-delivery/configuration:/.helix/config.json",
       "/content/citisignal-edge-delivery/metadata:/metadata.json",
       "/content/citisignal-edge-delivery/configs:/configs.json",
-      "/content/citisignal-edge-delivery/redirects:/redirects.json"
+      "/content/citisignal-edge-delivery/redirects.json:/redirects.json"
     ]
 }
