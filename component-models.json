@@ -1,5 +1,15 @@
 [
     {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "testTheme",
+          "label": "TEST Theme"
+        }
+      ]
+    },
+    {
       "id": "title",
       "fields": [
         {
@@ -449,40 +459,18 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "category_text",
-          "label": "Category Text",
+          "key-value": true,
+          "name": "category",
+          "label": "Category",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "category_textValue",
-          "label": "Category Value",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "urlPath_text",
-          "label": "URL Path Text",
+          "key-value": true,
+          "name": "urlPath",
+          "label": "URL Path",
           "value": "" 
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "urlPath_value",
-          "label": "URL Path Value",
-          "value": ""
-        }
-      ]
-    },
-    {
-      "id": "page-metadata",
-      "fields": [
-        {
-          "component": "text",
-          "name": "theme",
-          "label": "TEST Theme"
         }
       ]
     }
