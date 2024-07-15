@@ -13,7 +13,10 @@ export const calcEnvironment = () => {
   if (href.includes('.hlx.page')) {
     environment = 'stage';
   }
-  if (href.includes('localhost')) {
+  const aemEnv = /.+author-(p\d{1,6})-(e\d{1,6}).+/;
+  const result = aemEnv.test(href);
+  console.log(result);
+  if (href.includes('localhost') || aemEnv.test(href)) {
     environment = 'dev';
   }
 
