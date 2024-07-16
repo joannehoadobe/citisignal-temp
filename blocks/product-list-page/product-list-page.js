@@ -4,9 +4,9 @@ import { getConfigValue } from '../../scripts/configs.js';
 export default async function decorate(block) {
   block.textContent = 'NOT FUN TIMES';
   console.log(`in plp block, window =  ${window.location}`);
-  const { plpAttributes } = block.attributes;
+  const plpAttributes = block.attributes;
   console.log(plpAttributes);
-  if (plpAttributes.includes('data-aue-resource')) {
+  if (plpAttributes.getNamedItem('data-aue-resource')) {
     console.log('contains the data attribute data-aue-resource');
   }
   const { urlpath, category, type } = readBlockConfig(block);
