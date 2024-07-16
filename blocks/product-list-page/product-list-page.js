@@ -8,7 +8,8 @@ export default async function decorate(block) {
   if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && getAemAuthorEnv) {
     console.log('contains the data attribute data-aue-resource');
     // block.textContent = block.dataset.aueLabel || 'Product List Page Config';
-    const pElem = document.createElement('div');
+    const pElem = document.createElement('p');
+    pElem.className = 'test-wandering-block';
     pElem.textContent = block.dataset.aueLabel;
     block.appendChild(pElem);
   }
