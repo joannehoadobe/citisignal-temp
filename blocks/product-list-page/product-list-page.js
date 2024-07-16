@@ -5,7 +5,8 @@ export default async function decorate(block) {
   console.log(`in plp block, window =  ${window.location}`);
   const plpAttributes = block.attributes;
   console.log(plpAttributes);
-  if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && getAemAuthorEnv) {
+  const isAemAuthor = getAemAuthorEnv();
+  if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && isAemAuthor) {
     console.log('contains the data attribute data-aue-resource');
     // block.textContent = block.dataset.aueLabel || 'Product List Page Config';
     // const pElem = document.createElement('p');
@@ -15,7 +16,7 @@ export default async function decorate(block) {
   }
   const { urlpath, category, type } = readBlockConfig(block);
   // block.textContent = '';
-  if (!getAemAuthorEnv) {
+  if (!isAemAuthor) {
     block.textContent = '';
   }
 
