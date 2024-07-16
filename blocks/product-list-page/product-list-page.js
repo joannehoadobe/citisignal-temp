@@ -2,16 +2,18 @@ import { loadScript, readBlockConfig } from '../../scripts/aem.js';
 import { getConfigValue, getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
-  // block.textContent = 'NOT FUN TIMES';
-  // console.log(`in plp block, window =  ${window.location}`);
-  // const plpAttributes = block.attributes;
-  // console.log(plpAttributes);
-  // if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && getAemAuthorEnv) {
-  //   console.log('contains the data attribute data-aue-resource');
-  //   block.textContent = block.dataset.aueLabel || 'Product List Page Config';
-  // } else {
-  //   block.textContent = '';
-  // }
+  console.log(`in plp block, window =  ${window.location}`);
+  const plpAttributes = block.attributes;
+  console.log(plpAttributes);
+  if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && getAemAuthorEnv) {
+    console.log('contains the data attribute data-aue-resource');
+    // block.textContent = block.dataset.aueLabel || 'Product List Page Config';
+    const pElem = document.createElement('p');
+    pElem.textContent = block.dataset.aueLabel;
+    block.appendChild(pElem);
+  } else {
+    // block.textContent = '';
+  }
   const { urlpath, category, type } = readBlockConfig(block);
   block.textContent = '';
 
