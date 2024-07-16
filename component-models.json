@@ -505,13 +505,6 @@
               "value": "streaming"
             }
           ]
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "placeholder",
-          "label": "Placeholder",
-          "value": "Placeholder"
         }
       ]
     }
