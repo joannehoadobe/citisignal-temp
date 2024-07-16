@@ -178,7 +178,7 @@ export default async function decorate(block) {
   const excludeMiniCartFromPaths = ['/checkout', '/order-confirmation'];
 
   const minicart = document.createRange().createContextualFragment(`
-     <div class="minicart-wrapper nav-tools-wrapper">
+     <div class="minicart-wrapper">
        <button type="button" class="nav-cart-button" aria-label="Cart"></button>
        <div class="minicart-panel nav-panel"></div>
      </div>
@@ -187,7 +187,6 @@ export default async function decorate(block) {
   navTools.append(minicart);
 
   const minicartPanel = navTools.querySelector('.minicart-panel');
-
   const cartButton = navTools.querySelector('.nav-cart-button');
 
   if (excludeMiniCartFromPaths.includes(window.location.pathname)) {

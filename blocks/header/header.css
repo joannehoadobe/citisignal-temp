@@ -331,7 +331,7 @@ header nav .nav-sections ul > li > a:hover {
 }
 
 /* tools */
-header nav .nav-tools-panel {
+header nav .nav-panel {
   z-index: 100;
   position: absolute;
   box-shadow: var(--shape-shadow-2);
@@ -343,7 +343,7 @@ header nav .nav-tools-panel {
   box-sizing: border-box;
 }
 
-header nav .nav-tools-panel--show {
+header nav .nav-panel--show {
   display: block;
 }
 
