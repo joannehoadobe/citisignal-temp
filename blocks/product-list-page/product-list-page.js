@@ -12,9 +12,11 @@ export default async function decorate(block) {
     pElem.className = 'test-wandering-block';
     pElem.textContent = block.dataset.aueLabel;
     block.appendChild(pElem);
+  } else {
+    block.textContent = '';
   }
   const { urlpath, category, type } = readBlockConfig(block);
-  block.textContent = '';
+  // block.textContent = '';
 
   const widgetProd = '/scripts/widgets/search.js';
   await loadScript(widgetProd);
