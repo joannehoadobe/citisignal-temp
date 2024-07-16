@@ -2,8 +2,9 @@ import { loadScript, readBlockConfig } from '../../scripts/aem.js';
 import { getConfigValue } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
+  block.textContent = 'NOT FUN TIMES';
   const { urlpath, category, type } = readBlockConfig(block);
-  block.textContent = '';
+  // block.textContent = '';
 
   const widgetProd = '/scripts/widgets/search.js';
   await loadScript(widgetProd);
