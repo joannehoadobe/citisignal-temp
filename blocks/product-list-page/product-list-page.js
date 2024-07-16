@@ -3,6 +3,7 @@ import { getConfigValue } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
   block.textContent = 'NOT FUN TIMES';
+  console.log(`in plp block, window =  ${window.location}`);
   const { urlpath, category, type } = readBlockConfig(block);
   // block.textContent = '';
 
