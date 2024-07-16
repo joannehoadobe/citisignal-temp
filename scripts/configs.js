@@ -13,7 +13,7 @@ export const calcEnvironment = () => {
   if (href.includes('.hlx.page')) {
     environment = 'stage';
   }
-  const aemEnv = /.+author-(p\d{1,6})-(e\d{1,6}).+/;
+  const aemEnv = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
   const result = aemEnv.test(href);
   console.log(result);
   if (href.includes('localhost') || aemEnv.test(href)) {
@@ -33,6 +33,9 @@ function buildConfigURL(environment) {
   let fileName = 'configs.json?sheet=prod';
   if (env !== 'prod') {
     fileName = `configs-${env}.json`;
+  }
+  if (env === 'dev') {
+    fileName = `content/citisignal-edge-delivery/configs-${env}.json`;
   }
   const configURL = new URL(`${window.location.origin}/${fileName}`);
   return configURL;
