@@ -13,10 +13,7 @@ export const calcEnvironment = () => {
   if (href.includes('.hlx.page')) {
     environment = 'stage';
   }
-  const aemEnv = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
-  const result = aemEnv.test(href);
-  console.log(result);
-  if (href.includes('localhost') || aemEnv.test(href)) {
+  if (href.includes('localhost')) {
     environment = 'dev';
   }
 
@@ -67,4 +64,12 @@ export const getConfigValue = async (configParam, environment) => {
   const configJSON = await getConfigForEnvironment(env);
   const configElements = JSON.parse(configJSON).data;
   return configElements.find((c) => c.key === configParam)?.value;
+};
+
+export const getAemAuthorEnv = () => {
+  const { href } = window.location;
+  const aemEnv = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
+  const result = aemEnv.test(href);
+  console.log(result);
+  return aemEnv.test(href);
 };
