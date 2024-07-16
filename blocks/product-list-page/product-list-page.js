@@ -10,9 +10,7 @@ export default async function decorate(block) {
     // block.textContent = block.dataset.aueLabel || 'Product List Page Config';
     const pElem = document.createElement('p');
     pElem.textContent = block.dataset.aueLabel;
-    block.appendChild(pElem);
-  } else {
-    // block.textContent = '';
+    block.parentElement.appendChild(pElem);
   }
   const { urlpath, category, type } = readBlockConfig(block);
   block.textContent = '';
