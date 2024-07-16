@@ -2,17 +2,10 @@ import { loadScript, readBlockConfig } from '../../scripts/aem.js';
 import { getConfigValue, getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
-  console.log(`in plp block, window =  ${window.location}`);
   const plpAttributes = block.attributes;
-  console.log(plpAttributes);
   const isAemAuthor = getAemAuthorEnv();
   if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && isAemAuthor) {
-    console.log('contains the data attribute data-aue-resource');
-    // block.textContent = block.dataset.aueLabel || 'Product List Page Config';
-    // const pElem = document.createElement('p');
-    // pElem.className = 'test-wandering-block';
-    // pElem.textContent = block.dataset.aueLabel;
-    // block.appendChild(pElem);
+    console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
   }
   const { urlpath, category, type } = readBlockConfig(block);
   // block.textContent = '';

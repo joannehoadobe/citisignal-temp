@@ -68,8 +68,8 @@ export const getConfigValue = async (configParam, environment) => {
 
 export const getAemAuthorEnv = () => {
   const { href } = window.location;
-  const aemEnv = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
-  const result = aemEnv.test(href);
-  console.log(result);
-  return aemEnv.test(href);
+  const aemEnvReg = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
+  const isAemAuthorEnv = aemEnvReg.test(href);
+  console.log(`In configs.js, is in AEM author env: ${isAemAuthorEnv}`);
+  return isAemAuthorEnv;
 };
