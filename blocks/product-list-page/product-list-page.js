@@ -4,13 +4,12 @@ import { getConfigValue, getAemAuthorEnv } from '../../scripts/configs.js';
 export default async function decorate(block) {
   const plpAttributes = block.attributes;
   const isAemAuthor = getAemAuthorEnv();
-  if (plpAttributes && plpAttributes.getNamedItem('data-aue-resource') && isAemAuthor) {
-    console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
-  }
   const { urlpath, category, type } = readBlockConfig(block);
   // block.textContent = '';
   if (!isAemAuthor) {
     block.textContent = '';
+  } else if (isAemAuthor && plpAttributes && plpAttributes.getNamedItem('data-aue-resource')) {
+    console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
   }
 
   const widgetProd = '/scripts/widgets/search.js';
