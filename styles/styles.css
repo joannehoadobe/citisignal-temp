@@ -475,6 +475,18 @@ main .section {
   padding: 2rem 15px
 }
 
+main .section.extra-width > div {
+  max-width: 1600px;
+}
+
+main .section.white-text {
+  color: #fff;
+}
+
+main .section.black-text {
+  color: #000;
+}
+
 @media (width <= 768px) {
   main .section {
     padding: 1.5rem 15px

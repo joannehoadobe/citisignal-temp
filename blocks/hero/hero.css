@@ -16,7 +16,6 @@ main .hero-container > div {
   background: linear-gradient(180deg, #8821F4 0%, #3C1268 80.5%);
   border-radius: 18px;
   box-sizing: border-box;
-  color: #fff;
   z-index: 0;
 }
 
