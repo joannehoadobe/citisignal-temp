@@ -16,11 +16,13 @@ main .hero-container > div {
   background: linear-gradient(180deg, #8821F4 0%, #3C1268 80.5%);
   border-radius: 18px;
   box-sizing: border-box;
+  color: #fff;
   z-index: 0;
 }
 
 .hero > div:nth-child(2),
 .hero > div:nth-child(3) {
+  flex: 1 1 50%;
   padding-top: 8%;
 }
 
@@ -167,6 +169,7 @@ main .hero-container > div {
   background: unset;
   min-height: 500px;
   overflow: hidden;
+  color: inherit;
 }
 
 .hero.wireless picture {
