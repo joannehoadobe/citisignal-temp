@@ -1,0 +1,51 @@
+
+.article-wrapper > .article {
+  padding: 5rem 1rem;
+}
+
+.section.article-container  .article-wrapper {
+  width: 60%;
+}
+
+.article-content-wrapper > div h2 {
+  margin: 0 0 2rem 0;
+  color: var(--text-color);
+  line-height: 48px;
+  font-size: 4.2rem;
+  font-weight: 800;
+  letter-spacing: normal;
+}
+
+.article-content-wrapper > div a {
+	text-decoration: underline;
+	text-underline-position: under;
+	color: #0057b8;
+	font-weight: 400;
+}
+
+.article-content-wrapper > div a:hover {
+	text-decoration: none;
+}
+
+.article-content-wrapper > div p,
+.article-content-wrapper > div ul {
+  line-height: 1.6;
+  letter-spacing: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.article-content-wrapper > div p:last-of-type {
+	margin-bottom: 64px;
+}
+
+
+@media (width <= 900px) {
+	.article-wrapper > .article {
+		padding: 40px 0 1rem;
+	}
+
+  .section.article-container .article-wrapper {
+    width: 100%;
+  }
+}
