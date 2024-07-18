@@ -1,0 +1,52 @@
+.columns > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns img {
+  width: 100%;
+}
+
+.columns > div > div {
+  order: 1;
+}
+
+.columns > div > .columns-img-col {
+  order: 0;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.columns > div > .columns-img-col img {
+  display: block;
+  border-radius: 20px;
+  transition: transform 1s ease 0s;
+}
+
+.columns > div > .columns-img-col img:hover {
+  transform: scale(1.03);
+}
+
+.columns h2 {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1.44px;
+  line-height: 55.2px;
+}
+
+@media (width >= 900px) {
+  .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 12rem;
+  }
+
+  .columns > div > div {
+    flex: 1;
+    order: unset;
+  }
+
+  .columns > div > .columns-img-col {
+    margin-bottom: 0;
+  }
+}

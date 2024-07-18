@@ -506,6 +506,18 @@ main .section.highlight {
   background-color: var(--color-neutral-500);
 }
 
+main .section .default-content-wrapper {
+  max-width: 60%;
+  padding: 2rem 0;
+  margin: auto;
+}
+
+@media (width <= 768px) {
+  main .section .default-content-wrapper {
+    max-width: 100%;
+  }
+}
+
 main .section.default-width {
   max-width: var(--med-grid-layout);
   margin: 0 auto;
@@ -530,10 +542,6 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
   padding-top: 8px;
   min-width: 84px;
   width: fit-content;
-}
-
-main .section.author {
-  margin-bottom: 2rem;
 }
 
 main .section.author .default-content-wrapper {
