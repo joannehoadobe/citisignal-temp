@@ -49,4 +49,9 @@
   .section.article-container .article-wrapper {
     width: 100%;
   }
+
+  .article-content-wrapper > div h2 {
+    font-size: 32px;
+    line-height: normal;
+  }
 }
