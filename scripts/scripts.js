@@ -5,6 +5,7 @@ import {
   decorateButtons,
   decorateIcons,
   decorateSections,
+  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
   getMetadata,
   loadBlock,
@@ -173,6 +174,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateSectionFromMetadata(main); // custom
 }
 
 /**
