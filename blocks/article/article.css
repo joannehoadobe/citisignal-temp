@@ -9,7 +9,7 @@
 }
 
 .article-content-wrapper > div h2 {
-  margin: 0 0 2rem 0;
+  margin-bottom: 2rem;
   color: var(--text-color);
   line-height: 48px;
   font-size: 4.2rem;
@@ -48,5 +48,10 @@
 
   .section.article-container .article-wrapper {
     width: 100%;
+  }
+
+  .article-content-wrapper > div h2 {
+    font-size: 32px;
+    line-height: normal;
   }
 }
