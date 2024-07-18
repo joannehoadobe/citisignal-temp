@@ -627,7 +627,7 @@ function decorateSections(main) {
 function decorateSectionFromMetadata(main) {
   const authorSection = main.querySelector('.section.author');
   if (authorSection) {
-    const wrapper = document.querySelector('.default-content-wrapper');
+    const wrapper = authorSection.querySelector('.default-content-wrapper');
     const newDiv = document.createElement('div');
     newDiv.classList.add('content-wrapper');
 

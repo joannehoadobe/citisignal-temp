@@ -15,6 +15,7 @@
   order: 0;
   overflow: hidden;
   margin-bottom: 2rem;
+  border-radius: 20px;
 }
 
 .columns > div > .columns-img-col img {
@@ -28,10 +29,14 @@
 }
 
 .columns h2 {
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 800;
   letter-spacing: -1.44px;
-  line-height: 55.2px;
+  line-height: 36.8px
+}
+
+.columns a {
+  text-decoration: underline;
 }
 
 @media (width >= 900px) {
@@ -48,5 +53,10 @@
 
   .columns > div > .columns-img-col {
     margin-bottom: 0;
+  }
+
+  .columns h2 {
+    font-size: 48px;
+    line-height: 55.2px;
   }
 }

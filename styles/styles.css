@@ -512,9 +512,18 @@ main .section .default-content-wrapper {
   margin: auto;
 }
 
+main .section .default-content-wrapper a {
+  text-decoration: underline;
+  color: inherit;
+}
+
 @media (width <= 768px) {
   main .section .default-content-wrapper {
     max-width: 100%;
+  }
+
+  main .section .default-content-wrapper h3 {
+    font-size: 24px;
   }
 }
 
