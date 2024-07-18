@@ -4,7 +4,8 @@
 }
 
 .section.article-container  .article-wrapper {
-  width: 60%;
+  width: 65%;
+  margin: auto;
 }
 
 .article-content-wrapper > div h2 {
