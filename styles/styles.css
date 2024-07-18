@@ -475,6 +475,18 @@ main .section {
   padding: 2rem 15px
 }
 
+main .section.extra-width > div {
+  max-width: 1600px;
+}
+
+main .section.white-text {
+  color: #fff;
+}
+
+main .section.black-text {
+  color: #000;
+}
+
 @media (width <= 768px) {
   main .section {
     padding: 1.5rem 15px
@@ -494,6 +506,27 @@ main .section.highlight {
   background-color: var(--color-neutral-500);
 }
 
+main .section .default-content-wrapper {
+  max-width: 60%;
+  padding: 2rem 0;
+  margin: auto;
+}
+
+main .section .default-content-wrapper a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+@media (width <= 768px) {
+  main .section .default-content-wrapper {
+    max-width: 100%;
+  }
+
+  main .section .default-content-wrapper h3 {
+    font-size: 24px;
+  }
+}
+
 main .section.default-width {
   max-width: var(--med-grid-layout);
   margin: 0 auto;
@@ -502,18 +535,6 @@ main .section.default-width {
 main .section.max-width {
   max-width: var(--large-grid-layout);
   margin: 0 auto;
-}
-
-main .section.bottom-divider {
-  padding: 2rem 2rem 4rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--color-neutral-300);
-}
-
-main .section.top-divider {
-  padding: 4rem 2rem 2rem;
-  margin-top: 2rem;
-  border-top:  1px solid var(--color-neutral-300);
 }
 
 main .section.section-title .default-content-wrapper:first-of-type p {
@@ -531,6 +552,38 @@ main .section.section-title .default-content-wrapper:first-of-type p::after {
   min-width: 84px;
   width: fit-content;
 }
+
+main .section.author .default-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+main .section.author img {
+  max-width: 96px;
+  height: auto;
+  border-radius: 50%;
+}
+
+main .section.author p {
+  margin: 0;
+}
+
+main .section.author .content-wrapper p:nth-child(2) {
+  font-size: 26px;
+  margin-top: 1rem;
+}
+
+main .section.author .content-wrapper p:last-of-type {
+  margin-top: 3rem;
+}
+
+@media (width <= 768px) {
+  main .section.author .default-content-wrapper {
+    flex-direction: column;
+  }
+}
+
 
 /* Breadcrumb */
 .breadcrumb-wrapper {

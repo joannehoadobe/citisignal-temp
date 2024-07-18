@@ -176,19 +176,23 @@ export default async function decorate(block) {
   const navTools = nav.querySelector('.nav-tools');
 
   /** Mini Cart */
+  const excludeMiniCartFromPaths = ['/checkout', '/order-confirmation'];
+
   const minicart = document.createRange().createContextualFragment(`
-    <div class="minicart-wrapper">
-      <button type="button" class="button nav-cart-button"></button>
-      <div class="minicart-panel nav-panel"></div>
-    </div>
-  `);
+     <div class="minicart-wrapper">
+       <button type="button" class="nav-cart-button" aria-label="Cart"></button>
+       <div class="minicart-panel nav-panel"></div>
+     </div>
+   `);
 
   navTools.append(minicart);
 
   const minicartPanel = navTools.querySelector('.minicart-panel');
-
   const cartButton = navTools.querySelector('.nav-cart-button');
-  cartButton.setAttribute('aria-label', 'Cart');
+
+  if (excludeMiniCartFromPaths.includes(window.location.pathname)) {
+    cartButton.style.display = 'none';
+  }
 
   async function toggleMiniCart(state) {
     const show = state ?? !minicartPanel.classList.contains('nav-panel--show');
@@ -201,7 +205,7 @@ export default async function decorate(block) {
         routeCheckout: () => '/checkout',
       })(minicartPanel);
     } else {
-      minicartPanel.innerHTML = '';
+      cartProvider.unmount(minicartPanel);
     }
 
     minicartPanel.classList.toggle('nav-panel--show', show);
