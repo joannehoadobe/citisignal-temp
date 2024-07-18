@@ -623,6 +623,24 @@ function decorateSections(main) {
   });
 }
 
+/* custom function if section metadata has "author" style class */
+function decorateSectionFromMetadata(main) {
+  const authorSection = main.querySelector('.section.author');
+  if (authorSection) {
+    const wrapper = document.querySelector('.default-content-wrapper');
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('content-wrapper');
+
+    const paragraphs = wrapper.querySelectorAll('p');
+    paragraphs.forEach((paragraph) => {
+      if (!paragraph.querySelector('picture') && !paragraph.querySelector('img')) {
+        newDiv.appendChild(paragraph);
+      }
+    });
+    wrapper.appendChild(newDiv);
+  }
+}
+
 /**
  * Gets placeholders object.
  * @param {string} [prefix] Location of placeholders
@@ -848,6 +866,7 @@ export {
   decorateButtons,
   decorateIcons,
   decorateSections,
+  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
   fetchPlaceholders,
   getMetadata,
