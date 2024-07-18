@@ -702,7 +702,6 @@ main .section.author .content-wrapper p:last-of-type {
 .dropin-design .dropin-button--primary:focus,
 .dropin-design .dropin-button--primary:focus:hover {
   border: none;
-  border-radius: 0;
   text-transform: uppercase;
   font-weight: 900;
   background: var(--color-brand-500);
@@ -720,7 +719,6 @@ main .section.author .content-wrapper p:last-of-type {
 .dropin-design .dropin-button--secondary:focus,
 .dropin-design .dropin-button--secondary:focus:hover {
   border: none;
-  border-radius: 0;
   text-transform: uppercase;
   font-weight: 900;
   background: var(--color-black-100);
