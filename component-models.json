@@ -8,7 +8,7 @@
           "label": "Title"
         },
         {
-          "component": "text",
+          "component": "text-area",
           "name": "description",
           "label": "Description"
         },
@@ -505,6 +505,25 @@
               "value": "streaming"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "enrichment",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "type",
+          "label": "Type",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "position",
+          "label": "Position",
+          "value": ""
         }
       ]
     }
