@@ -557,6 +557,9 @@ main .section.author .default-content-wrapper {
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+  border-radius: 18px;
+  background: #F7F7F7;
+  padding: 4rem;
 }
 
 main .section.author img {
