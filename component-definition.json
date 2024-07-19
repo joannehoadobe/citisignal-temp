@@ -217,7 +217,6 @@
                   "template": {
                     "name": "Product Details Item",
                     "model": "product-details-item",
-                    "key-value": true,
                     "text": "Add To Cart"
                   }
                 }
