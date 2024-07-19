@@ -1,5 +1,10 @@
 mountpoints:
-  /:
-    url: "https://author-p53852-e347001.adobeaemcloud.com/bin/franklin.delivery/AdobeDevXSC/citisignal/main"
-    type: "markup"
-    suffix: ".html"
+  /: https://adobe.sharepoint.com/:w:/r/sites/CitiSignal/Shared%20Documents/CitiSignal-Storefront
+
+folders:
+  /products/: /products/default
+#mountpoints:
+#  /:
+#    url: "https://author-p53852-e347001.adobeaemcloud.com/bin/franklin.delivery/AdobeDevXSC/citisignal/main"
+#    type: "markup"
+#    suffix: ".html"
