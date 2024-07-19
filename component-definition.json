@@ -201,8 +201,9 @@
                   "template": {
                     "name": "Product Details",
                     "model": "product-details",
-                    "filter": "Add-To-Cart-Button",
-                    "text": "Product Details"
+                    "key-value": true,
+                    "text": "Add-To-Cart-Button",
+                    "filter": "product-details"
                   }
                 }
               }
