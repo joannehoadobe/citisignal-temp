@@ -543,6 +543,13 @@
         {
           "component": "text",
           "valueType": "string",
+          "name": "",
+          "label": "Section",
+          "value": "Add-To-Cart-Button"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
           "name": "text",
           "label": "Text",
           "value": ""
