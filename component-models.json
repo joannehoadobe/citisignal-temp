@@ -538,6 +538,25 @@
       ]
     },
     {
+      "id": "product-details",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "textType",
+          "label": "Text Type",
+          "value": "strong"
+        }
+      ]
+    },
+    {
       "id": "product-details-item",
       "fields": [
         {
