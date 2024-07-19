@@ -538,12 +538,19 @@
       ]
     },
     {
-      "id": "product-details",
+      "id": "product-details-item",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
-          "name": "",
+          "name": "what",
+          "label": "Section",
+          "value": "Add-To-Cart-Button"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "whatType",
           "label": "Section",
           "value": "Add-To-Cart-Button"
         },
