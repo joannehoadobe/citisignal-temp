@@ -507,27 +507,6 @@ main .section.highlight {
   background-color: var(--color-neutral-500);
 }
 
-main .section .default-content-wrapper {
-  max-width: 60%;
-  padding: 2rem 0;
-  margin: auto;
-}
-
-main .section .default-content-wrapper a {
-  text-decoration: underline;
-  color: inherit;
-}
-
-@media (width <= 768px) {
-  main .section .default-content-wrapper {
-    max-width: 100%;
-  }
-
-  main .section .default-content-wrapper h3 {
-    font-size: 24px;
-  }
-}
-
 main .section.default-width {
   max-width: var(--med-grid-layout);
   margin: 0 auto;
