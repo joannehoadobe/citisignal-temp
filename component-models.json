@@ -543,6 +543,7 @@
         {
           "component": "text",
           "valueType": "string",
+          "key-value": true,
           "name": "text",
           "label": "Text",
           "value": ""
@@ -550,6 +551,7 @@
         {
           "component": "text",
           "valueType": "string",
+          "key-value": true,
           "name": "loadingText",
           "label": "Loading Text",
           "value": ""
