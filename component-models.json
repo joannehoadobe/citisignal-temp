@@ -595,5 +595,45 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "product-details-alt",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "loadingText",
+          "label": "Loading Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "icon",
+          "label": "Icon",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "variant",
+          "label": "Variant",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "layout",
+          "label": "Layout",
+          "value": ""
+        }
+      ]
     }
   ]
