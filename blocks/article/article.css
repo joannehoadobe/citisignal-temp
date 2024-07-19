@@ -1,20 +1,23 @@
 
 .article-wrapper > .article {
-  padding: 5rem 1rem;
+  padding: 1rem;
 }
 
 .section.article-container  .article-wrapper {
-  width: 65%;
+  max-width: var(--article-width);
   margin: auto;
 }
 
 .article-content-wrapper > div h2 {
-  margin-bottom: 2rem;
   color: var(--text-color);
-  line-height: 48px;
-  font-size: 4.2rem;
-  font-weight: 800;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
   letter-spacing: normal;
+  margin-bottom: 0;
+  margin-top: 2rem;
+  display: inline-block;
 }
 
 .article-content-wrapper > div a {
@@ -36,16 +39,12 @@
   font-size: 18px;
 }
 
-.article-content-wrapper > div p:last-of-type {
-	margin-bottom: 64px;
+.article-content-wrapper ol,
+.article-content-wrapper ul {
+  padding-left: 1.5em;
 }
 
-
 @media (width <= 900px) {
-	.article-wrapper > .article {
-		padding: 40px 0 1rem;
-	}
-
   .section.article-container .article-wrapper {
     width: 100%;
   }
