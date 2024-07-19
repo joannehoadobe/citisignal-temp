@@ -543,20 +543,6 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "what",
-          "label": "Section",
-          "value": "Add-To-Cart-Button"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "whatType",
-          "label": "Section",
-          "value": "strong"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
           "name": "text",
           "label": "Text",
           "value": ""
