@@ -552,14 +552,15 @@
           "valueType": "string",
           "name": "whatType",
           "label": "Section",
-          "value": "Add-To-Cart-Button"
+          "value": "strong"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "text",
           "label": "Text",
-          "value": ""
+          "value": "",
+          "key-value": true
         },
         {
           "component": "text",
