@@ -559,8 +559,7 @@
           "valueType": "string",
           "name": "text",
           "label": "Text",
-          "value": "",
-          "key-value": true
+          "value": ""
         },
         {
           "component": "text",
