@@ -227,6 +227,23 @@
             }
           },
           {
+            "title": "Product Details Alt",
+            "id": "product-details-alt",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Product Details Alt",
+                    "model": "product-details-alt",
+                    "key-value": true,
+                    "text": "Add To Cart"
+                  }
+                }
+              }
+            }
+          },
+          {
             "title": "Cards",
             "id": "cards",
             "plugins": {
