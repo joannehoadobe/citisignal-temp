@@ -35,6 +35,12 @@
       ]
     },
     {
+      "id": "product-details",
+      "components": [
+        "product-details-item"
+      ]
+    },
+    {
       "id": "accordion",
       "components": [
         "accordion-item"
