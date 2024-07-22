@@ -543,14 +543,14 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "text",
-          "label": "Text",
+          "name": "sectionText",
+          "label": "Section Text",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "textType",
+          "name": "sectionTextType",
           "label": "Text Type",
           "value": "strong"
         }
@@ -559,6 +559,13 @@
     {
       "id": "product-details-item",
       "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        },
         {
           "component": "text",
           "valueType": "string",
