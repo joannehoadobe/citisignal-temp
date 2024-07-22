@@ -41,7 +41,7 @@ previewWithDateButton.replaceWith(
     .createContextualFragment(`<input class="date-selection" type="date" id="date" name="preview-start" value=${current} required pattern="\\d{4}-\\d{2}-\\d{2}" />`),
 );
 
-sidekick.shadowRoot.querySelector('.date-selection').addEventListener('change', (event) => {
+sidekick.shadowRoot.querySelector('.date-selection').addEventListener('change', (event) => {  
   const newValue = event.target.value.trim();
   if (newValue) {
     window.sessionStorage.setItem('preview-date', event.target.value);

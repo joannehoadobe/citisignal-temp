@@ -358,6 +358,11 @@ async function loadLazy(doc) {
     const { loadLazy: runLazy } = await import('../plugins/experimentation/src/index.js');
     await runLazy(document, { audiences: AUDIENCES }, pluginContext);
   }
+
+  if (window.location.hostname === 'localhost' || window.location.hostname.endsWith('.hlx.page')) {
+    // Load scheduling sidekick extension
+    import('./scheduling/scheduling.js');
+  }
 }
 
 /**
