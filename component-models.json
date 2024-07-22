@@ -562,9 +562,10 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "text",
-          "label": "Text",
-          "value": ""
+          "name": "loading",
+          "label": "Loading (Hidden)",
+          "hidden": true,
+          "value": "loadingText"
         },
         {
           "component": "text",
