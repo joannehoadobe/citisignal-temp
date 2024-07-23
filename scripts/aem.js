@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-/* eslint-disable max-classes-per-file */
 /* eslint-env browser */
 
 /**
@@ -173,6 +172,44 @@ function toCamelCase(name) {
  * @param {Element} block The block element
  * @returns {object} The block config
  */
+// eslint-disable-next-line import/prefer-default-export
+function readBlockConfig(block) {
+  const config = {};
+  block.querySelectorAll(':scope > div').forEach((row) => {
+    if (row.children) {
+      const cols = [...row.children];
+      if (cols[1]) {
+        const col = cols[1];
+        const name = toClassName(cols[0].textContent);
+        let value = '';
+        if (col.querySelector('a')) {
+          const as = [...col.querySelectorAll('a')];
+          if (as.length === 1) {
+            value = as[0].href;
+          } else {
+            value = as.map((a) => a.href);
+          }
+        } else if (col.querySelector('img')) {
+          const imgs = [...col.querySelectorAll('img')];
+          if (imgs.length === 1) {
+            value = imgs[0].src;
+          } else {
+            value = imgs.map((img) => img.src);
+          }
+        } else if (col.querySelector('p')) {
+          const ps = [...col.querySelectorAll('p')];
+          if (ps.length === 1) {
+            value = ps[0].textContent;
+          } else {
+            value = ps.map((p) => p.textContent);
+          }
+        } else value = row.children[1].textContent;
+        config[name] = value;
+      }
+    }
+  });
+  return config;
+}
 
 /**
  * Loads a CSS file.
@@ -216,33 +253,6 @@ async function loadScript(src, attrs) {
       resolve();
     }
   });
-}
-
-/**
- * Loads JS and CSS for a module and executes it's default export.
- * @param {string} jsPath The JS file to load
- * @param {string} [cssPath] An optional CSS file to load
- * @param {object[]} [args] Parameters to be passed to the default export when it is called
- */
-async function loadModule(jsPath, cssPath, ...args) {
-  const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
-  const decorationComplete = jsPath
-    ? new Promise((resolve, reject) => {
-      (async () => {
-        let mod;
-        try {
-          mod = await import(jsPath);
-          if (mod.default) {
-            await mod.default.apply(null, args);
-          }
-        } catch (error) {
-          reject(error);
-        }
-        resolve(mod);
-      })();
-    })
-    : Promise.resolve();
-  return Promise.all([cssLoaded, decorationComplete]).then(([, api]) => api);
 }
 
 /**
@@ -369,7 +379,7 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title.trim() || a.textContent.trim();
+    a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
@@ -473,24 +483,6 @@ function decorateSections(main) {
   });
 }
 
-/* custom function if section metadata has "author" style class */
-function decorateSectionFromMetadata(main) {
-  const authorSection = main.querySelector('.section.author');
-  if (authorSection) {
-    const wrapper = authorSection.querySelector('.default-content-wrapper');
-    const newDiv = document.createElement('div');
-    newDiv.classList.add('content-wrapper');
-
-    const paragraphs = wrapper.querySelectorAll('p');
-    paragraphs.forEach((paragraph) => {
-      if (!paragraph.querySelector('picture') && !paragraph.querySelector('img')) {
-        newDiv.appendChild(paragraph);
-      }
-    });
-    wrapper.appendChild(newDiv);
-  }
-}
-
 /**
  * Gets placeholders object.
  * @param {string} [prefix] Location of placeholders
@@ -584,23 +576,6 @@ function buildBlock(blockName, content) {
 }
 
 /**
- * Gets the configuration for the given block, and also passes
- * the config through all custom patching helpers added to the project.
- *
- * @param {Element} block The block element
- * @returns {Object} The block config (blockName, cssPath and jsPath)
- */
-function getBlockConfig(block) {
-  const { blockName } = block.dataset;
-  const cssPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`;
-  const jsPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`;
-  const original = { blockName, cssPath, jsPath };
-  return (window.hlx.patchBlockConfig || [])
-    .filter((fn) => typeof fn === 'function')
-    .reduce((config, fn) => fn(config, original), { blockName, cssPath, jsPath });
-}
-
-/**
  * Loads JS and CSS for a block.
  * @param {Element} block The block element
  */
@@ -608,9 +583,26 @@ async function loadBlock(block) {
   const status = block.dataset.blockStatus;
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
-    const { blockName, cssPath, jsPath } = getBlockConfig(block);
+    const { blockName } = block.dataset;
     try {
-      await loadModule(jsPath, cssPath, block);
+      const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
+      const decorationComplete = new Promise((resolve) => {
+        (async () => {
+          try {
+            const mod = await import(
+              `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
+            );
+            if (mod.default) {
+              await mod.default(block);
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(`failed to load module for ${blockName}`, error);
+          }
+          resolve();
+        })();
+      });
+      await Promise.all([cssLoaded, decorationComplete]);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
@@ -716,7 +708,6 @@ export {
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
   fetchPlaceholders,
   getMetadata,

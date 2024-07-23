@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-extraneous-dependencies */
+
 // Drop-in Providers
 import { render as cartProvider } from '@dropins/storefront-cart/render.js';
 
@@ -8,6 +8,7 @@ import MiniCart from '@dropins/storefront-cart/containers/MiniCart.js';
 
 // Drop-in Tools
 import { events } from '@dropins/tools/event-bus.js';
+
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
@@ -102,74 +103,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-function addAnimation() {
-  window.addEventListener('scroll', () => {
-    const header = document.getElementsByClassName('header-nav-wrapper')[0];
-    const scrollPosition = window.scrollY;
-    const viewportWidth = window.innerWidth;
-
-    if (viewportWidth > 900) {
-      if (scrollPosition > 168) {
-        header.classList.add('minimized');
-      } else {
-        header.classList.remove('minimized');
-      }
-    } else {
-      header.classList.remove('minimized');
-    }
-  });
-}
-
-function setActiveTab() {
-  const currentPath = window.location.pathname;
-  const matchResult = currentPath.match(/^\/([^/]+)/);
-  const path = matchResult ? matchResult[1] : null;
-  const navTabLinks = document.querySelector('.nav-sections ul');
-
-  [...navTabLinks.children].forEach((tab) => {
-    const link = tab.querySelector('a');
-    const linkTitle = link.title.toLowerCase();
-
-    if (linkTitle === path || (linkTitle === 'shop' && ['products', 'equipment', 'search'].includes(path))) {
-      link.classList.add('active');
-    }
-  });
-}
-
-function addAnimation() {
-  window.addEventListener('scroll', () => {
-    const header = document.getElementsByClassName('header-nav-wrapper')[0];
-    const scrollPosition = window.scrollY;
-    const viewportWidth = window.innerWidth;
-
-    if (viewportWidth > 900) {
-      if (scrollPosition > 168) {
-        header.classList.add('minimized');
-      } else {
-        header.classList.remove('minimized');
-      }
-    } else {
-      header.classList.remove('minimized');
-    }
-  });
-}
-
-function setActiveTab() {
-  const currentPath = window.location.pathname;
-  const matchResult = currentPath.match(/^\/([^/]+)/);
-  const path = matchResult ? matchResult[1] : null;
-  const navTabLinks = document.querySelector('.nav-sections ul');
-
-  [...navTabLinks.children].forEach((tab) => {
-    const link = tab.querySelector('a');
-    const linkTitle = link.title.toLowerCase();
-
-    if (linkTitle === path || (linkTitle === 'shop' && ['products', 'equipment', 'search'].includes(path))) {
-      link.classList.add('active');
-    }
-  });
-}
-
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -221,15 +154,16 @@ export default async function decorate(block) {
   const excludeMiniCartFromPaths = ['/checkout', '/order-confirmation'];
 
   const minicart = document.createRange().createContextualFragment(`
-     <div class="minicart-wrapper">
+     <div class="minicart-wrapper nav-tools-wrapper">
        <button type="button" class="nav-cart-button" aria-label="Cart"></button>
-       <div class="minicart-panel nav-panel"></div>
+       <div class="minicart-panel nav-tools-panel"></div>
      </div>
    `);
 
   navTools.append(minicart);
 
   const minicartPanel = navTools.querySelector('.minicart-panel');
+
   const cartButton = navTools.querySelector('.nav-cart-button');
 
   if (excludeMiniCartFromPaths.includes(window.location.pathname)) {
@@ -237,7 +171,7 @@ export default async function decorate(block) {
   }
 
   async function toggleMiniCart(state) {
-    const show = state ?? !minicartPanel.classList.contains('nav-panel--show');
+    const show = state ?? !minicartPanel.classList.contains('nav-tools-panel--show');
 
     if (show) {
       await cartProvider.render(MiniCart, {
@@ -250,26 +184,32 @@ export default async function decorate(block) {
       cartProvider.unmount(minicartPanel);
     }
 
-    minicartPanel.classList.toggle('nav-panel--show', show);
+    minicartPanel.classList.toggle('nav-tools-panel--show', show);
   }
 
   cartButton.addEventListener('click', () => toggleMiniCart());
 
   // Cart Item Counter
-  events.on('cart/data', (data) => {
-    if (data?.totalQuantity) {
-      cartButton.setAttribute('data-count', data.totalQuantity);
-    } else {
-      cartButton.removeAttribute('data-count');
-    }
-  }, { eager: true });
+  events.on(
+    'cart/data',
+    (data) => {
+      if (data?.totalQuantity) {
+        cartButton.setAttribute('data-count', data.totalQuantity);
+      } else {
+        cartButton.removeAttribute('data-count');
+      }
+    },
+    { eager: true },
+  );
 
   /** Search */
+
+  // TODO
   const search = document.createRange().createContextualFragment(`
-  <div class="search-wrapper">
-    <button type="button" class="button nav-search-button">Search</button>
-    <div class="nav-search-input nav-search-panel nav-panel hidden">
-      <form id="search_mini_form" action="/search" method="GET">
+  <div class="search-wrapper nav-tools-wrapper">
+    <button type="button" class="nav-search-button">Search</button>
+    <div class="nav-search-input nav-search-panel nav-tools-panel">
+      <form action="/search" method="GET">
         <input id="search" type="search" name="q" placeholder="Search" />
         <div id="search_autocomplete" class="search-autocomplete"></div>
       </form>
@@ -280,20 +220,23 @@ export default async function decorate(block) {
   navTools.append(search);
 
   const searchPanel = navTools.querySelector('.nav-search-panel');
+
   const searchButton = navTools.querySelector('.nav-search-button');
+
   const searchInput = searchPanel.querySelector('input');
 
-  function toggleSearch(state) {
-    const show = state ?? !searchPanel.classList.contains('nav-panel--show');
-    searchPanel.classList.toggle('nav-panel--show', show);
-    if (show) searchInput.focus();
+  async function toggleSearch(state) {
+    const show = state ?? !searchPanel.classList.contains('nav-tools-panel--show');
+
+    searchPanel.classList.toggle('nav-tools-panel--show', show);
+
+    if (show) {
+      await import('./searchbar.js');
+      searchInput.focus();
+    }
   }
 
-  navTools.querySelector('.nav-search-button').addEventListener('click', async () => {
-    await import('./searchbar.js');
-    document.querySelector('header .nav-search-input').classList.toggle('hidden');
-    toggleSearch();
-  });
+  navTools.querySelector('.nav-search-button').addEventListener('click', () => toggleSearch());
 
   // Close panels when clicking outside
   document.addEventListener('click', (e) => {
@@ -320,13 +263,11 @@ export default async function decorate(block) {
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
-  navWrapper.className = 'header-nav-wrapper';
+  navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
-
-  const topNav = navWrapper.querySelector('.nav-tools .default-content-wrapper');
-  block.prepend(topNav);
   block.append(navWrapper);
 
-  addAnimation();
-  setActiveTab();
+  // TODO: Following statements added for demo purpose (Auth Drop-In)
+  renderAuthCombine(navSections);
+  renderAuthDropdown(navTools);
 }

@@ -1,23 +1,17 @@
 /* eslint-disable import/no-cycle */
 import { events } from '@dropins/tools/event-bus.js';
 import {
-  decorateBlock,
+  buildBlock,
   decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
-  getMetadata,
-  loadBlock,
   loadBlocks,
   loadCSS,
   loadFooter,
   loadHeader,
-  loadScript,
   sampleRUM,
-  toCamelCase,
-  toClassName,
   waitForLCP,
   getMetadata,
   loadScript,
@@ -28,17 +22,6 @@ import {
 import { getProduct, getSkuFromUrl, trackHistory } from './commerce.js';
 import initializeDropins from './dropins.js';
 
-// Define an execution context
-const pluginContext = {
-  getAllMetadata,
-  getMetadata,
-  loadCSS,
-  loadScript,
-  sampleRUM,
-  toCamelCase,
-  toClassName,
-};
-
 const LCP_BLOCKS = [
   'product-list-page',
   'product-list-page-custom',
@@ -47,7 +30,6 @@ const LCP_BLOCKS = [
   'commerce-checkout',
   'commerce-account',
   'commerce-login',
-  'adventure-details',
 ]; // add your LCP blocks to the list
 
 const AUDIENCES = {
@@ -122,130 +104,18 @@ function autolinkModals(element) {
   });
 }
 
-function autolinkModals(element) {
-  element.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
-
-    if (origin && origin.href && origin.href.includes('/modals/')) {
-      e.preventDefault();
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal(origin.href);
-    }
-  });
-}
-
 /**
- * Remove scheduled blocks that should not be displayed.
+ * Builds all synthetic blocks in a container element.
+ * @param {Element} main The container element
  */
-function scheduleBlocks(main) {
-  const blocks = main.querySelectorAll('div.section > div > div');
-  blocks.forEach((block) => {
-    let date;
-    const rows = block.querySelectorAll(':scope > div');
-    rows.forEach((row) => {
-      const cols = [...row.children];
-      if (cols.length > 1) {
-        if (cols[0].textContent.toLowerCase() === 'date') {
-          date = cols[1].textContent;
-          row.remove();
-        }
-      }
-    });
-    if (date && !shouldBeDisplayed(date)) {
-      block.remove();
-    }
-  });
-}
-
-/**
- * Remove scheduled sections that should not be displayed.
- */
-function scheduleSections(main) {
-  const sections = main.querySelectorAll('div.section');
-  sections.forEach((section) => {
-    const { date } = section.dataset;
-    if (date && !shouldBeDisplayed(date)) {
-      section.remove();
-    }
-  });
-}
-
-const tabElementMap = {};
-
-function calculateTabSectionCoordinate(main, lastTabBeginningIndex, targetTabSourceSection) {
-  if (!tabElementMap[lastTabBeginningIndex]) {
-    tabElementMap[lastTabBeginningIndex] = [];
+function buildAutoBlocks(main) {
+  try {
+    buildHeroBlock(main);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Blocking failed', error);
   }
-  tabElementMap[lastTabBeginningIndex].push(targetTabSourceSection);
 }
-
-function calculateTabSectionCoordinates(main) {
-  let lastTabIndex = -1;
-  let foldedTabsCounter = 0;
-  const mainSections = [...main.childNodes];
-  main
-    .querySelectorAll('div.section[data-tab-title]')
-    .forEach((section) => {
-      const currentSectionIndex = mainSections.indexOf(section);
-
-      if (lastTabIndex < 0 || (currentSectionIndex - foldedTabsCounter) !== lastTabIndex) {
-        // we construct a new tabs component, at the currentSectionIndex
-        lastTabIndex = currentSectionIndex;
-        foldedTabsCounter = 0;
-      }
-
-      foldedTabsCounter += 2;
-      calculateTabSectionCoordinate(main, lastTabIndex, section);
-    });
-}
-
-async function autoBlockTabComponent(main, targetIndex, tabSections) {
-  // the display none will prevent a major CLS penalty.
-  // franklin will remove this once the blocks are loaded.
-  const section = document.createElement('div');
-  section.setAttribute('class', 'section');
-  section.setAttribute('style', 'display:none');
-  section.dataset.sectionStatus = 'loading';
-  const tabsBlock = document.createElement('div');
-  tabsBlock.setAttribute('class', 'tabs');
-
-  const tabContentsWrapper = document.createElement('div');
-  tabContentsWrapper.setAttribute('class', 'contents-wrapper');
-
-  tabsBlock.appendChild(tabContentsWrapper);
-
-  tabSections.forEach((tabSection) => {
-    tabSection.classList.remove('section');
-    tabSection.classList.add('contents');
-    // remove display: none
-    tabContentsWrapper.appendChild(tabSection);
-    tabSection.style.display = null;
-  });
-  main.insertBefore(section, main.childNodes[targetIndex]);
-  section.append(tabsBlock);
-  decorateBlock(tabsBlock);
-  //await loadBlock(tabsBlock);
-  // unset display none manually.
-  // somehow in some race conditions it won't be picked up by lib-franklin.
-  // CLS is not affected
-  //section.style.display = null;
-}
-
-function aggregateTabSectionsIntoComponents(main) {
-  calculateTabSectionCoordinates(main);
-
-  // when we aggregate tab sections into a tab autoblock, the index get's lower.
-  // say we have 3 tabs starting at index 10, 12 and 14. and then 3 tabs at 18, 20 and 22.
-  // when we fold the first 3 into 1, those will start at index 10. But the other 3 should now
-  // start at 6 instead of 18 because 'removed' 2 sections.
-  let sectionIndexDelta = 0;
-  Object.keys(tabElementMap).map(async (tabComponentIndex) => {
-    const tabSections = tabElementMap[tabComponentIndex];
-    await autoBlockTabComponent(main, tabComponentIndex - sectionIndexDelta, tabSections);
-    sectionIndexDelta = tabSections.length - 1;
-  });
-}
-
 
 /**
  * Decorates the main element.
@@ -256,9 +126,8 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
+  buildAutoBlocks(main);
   decorateSections(main);
-  scheduleSections(main);
-  scheduleBlocks(main);
   decorateBlocks(main);
 }
 
@@ -354,8 +223,6 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    aggregateTabSectionsIntoComponents(main);
-    await decorateTemplates(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
@@ -475,9 +342,7 @@ export function getConsent(topic) {
 }
 
 async function loadPage() {
-  await window.hlx.plugins.load('eager', pluginContext);
   await loadEager(document);
-  await window.hlx.plugins.load('lazy', pluginContext);
   await loadLazy(document);
   loadDelayed();
 }
