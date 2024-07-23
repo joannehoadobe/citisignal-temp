@@ -574,15 +574,22 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "button",
+          "name": "image",
           "label": "Key",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "buttonText",
+          "name": "imageAlt",
           "label": "Key Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link",
+          "label": "Same here",
           "value": ""
         },
         {
