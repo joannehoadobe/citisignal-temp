@@ -31,7 +31,14 @@
         "simple-logo",
         "product-list-page",
         "enrichment",
+        "product-details",
         "product-details-xwalk"
+      ]
+    },
+    {
+      "id": "product-details",
+      "components": [
+        "product-details-item"
       ]
     },
     {
