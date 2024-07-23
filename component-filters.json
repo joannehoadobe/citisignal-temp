@@ -2,8 +2,7 @@
     {
       "id": "main",
       "components": [
-        "section",
-        "product-details"
+        "section"
       ]
     },
     {
@@ -32,12 +31,11 @@
         "simple-logo",
         "product-list-page",
         "enrichment",
-        "product-details",
-        "product-details-alt"
+        "product-details-xwalk"
       ]
     },
     {
-      "id": "product-details",
+      "id": "product-details-xwalk",
       "components": [
         "product-details-item"
       ]

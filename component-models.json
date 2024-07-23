@@ -538,7 +538,7 @@
       ]
     },
     {
-      "id": "product-details",
+      "id": "product-details-xwalk",
       "fields": [
         {
           "component": "text",
