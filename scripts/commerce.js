@@ -1,9 +1,10 @@
 /* eslint-disable import/prefer-default-export, import/no-cycle */
 import { getConfigValue } from './configs.js';
+import { getConsent } from './scripts.js';
 
 /* Common query fragments */
-
-const priceFieldsFragment = `fragment priceFields on ProductViewPrice {
+export const priceFieldsFragment = `fragment priceFields on ProductViewPrice {
+  roles
   regular {
       amount {
           currency
@@ -31,34 +32,30 @@ export const refineProductQuery = `query RefineProductQuery($sku: String!, $vari
     }
     ... on SimpleProductView {
       price {
-        final {
-          amount {
-            currency
-            value
-          }
-        }
-        regular {
-          amount {
-            currency
-            value
-          }
-        }
+        ...priceFields
       }
     }
     addToCartAllowed
   }
-}`;
+}
+${priceFieldsFragment}`;
 
 export const productDetailQuery = `query ProductQuery($sku: String!) {
   products(skus: [$sku]) {
     __typename
     id
+    externalId
     sku
     name
     description
     shortDescription
+    url
     urlKey
     inStock
+    metaTitle
+    metaKeyword
+    metaDescription
+    addToCartAllowed
     images(roles: []) {
       url
       label
@@ -99,89 +96,6 @@ export const productDetailQuery = `query ProductQuery($sku: String!) {
         }
       }
     }
-  }
-}
-${priceFieldsFragment}`;
-
-/* Queries PLP */
-
-export const productSearchQuery = (addCategory = false) => `query ProductSearch(
-  $currentPage: Int = 1
-  $pageSize: Int = 20
-  $phrase: String = ""
-  $sort: [ProductSearchSortInput!] = []
-  $filter: [SearchClauseInput!] = []
-  ${addCategory ? '$categoryId: String!' : ''}
-) {
-  ${addCategory ? `categories(ids: [$categoryId]) {
-      name
-      urlKey
-      urlPath
-  }` : ''}
-  productSearch(
-      current_page: $currentPage
-      page_size: $pageSize
-      phrase: $phrase
-      sort: $sort
-      filter: $filter
-  ) {
-      facets {
-          title
-          type
-          attribute
-          buckets {
-              title
-              __typename
-              ... on RangeBucket {
-                  count
-                  from
-                  to
-              }
-              ... on ScalarBucket {
-                  count
-                  id
-              }
-              ... on StatsBucket {
-                  max
-                  min
-              }
-          }
-      }
-      items {
-          product {
-            id
-          }
-          productView {
-              name
-              sku
-              urlKey
-              images(roles: "thumbnail") {
-                url
-              }
-              __typename
-              ... on SimpleProductView {
-                  price {
-                      ...priceFields
-                  }
-              }
-              ... on ComplexProductView {
-                  priceRange {
-                      minimum {
-                          ...priceFields
-                      }
-                      maximum {
-                          ...priceFields
-                      }
-                  }
-              }
-          }
-      }
-      page_info {
-          current_page
-          total_pages
-          page_size
-      }
-      total_count
   }
 }
 ${priceFieldsFragment}`;
@@ -253,12 +167,11 @@ export async function performMonolithGraphQLQuery(query, variables, GET = true, 
       }),
     });
   } else {
-    const params = new URLSearchParams({
-      query: query.replace(/(?:\r\n|\r|\n|\t|[\s]{4})/g, ' ').replace(/\s\s+/g, ' '),
-      variables: JSON.stringify(variables),
-    });
+    const endpoint = new URL(GRAPHQL_ENDPOINT);
+    endpoint.searchParams.set('query', query.replace(/(?:\r\n|\r|\n|\t|[\s]{4})/g, ' ').replace(/\s\s+/g, ' '));
+    endpoint.searchParams.set('variables', JSON.stringify(variables));
     response = await fetch(
-      `${GRAPHQL_ENDPOINT}?${params.toString()}`,
+      endpoint.toString(),
       { headers },
     );
   }
@@ -297,7 +210,7 @@ export function renderPrice(product, format, html = (strings, ...values) => stri
 
     if (finalMin.amount.value !== regularMin.amount.value) {
       return html`<${Fragment}>
-      <span class="price-final">${format(finalMin.amount.value)} - ${format(regularMin.amount.value)}</span> 
+      <span class="price-final">${format(finalMin.amount.value)} - ${format(regularMin.amount.value)}</span>
     </${Fragment}>`;
     }
 
@@ -349,125 +262,35 @@ export async function getProduct(sku) {
   return productPromise;
 }
 
-/* PLP specific functionality */
-
-// TODO
-// You can get this list via attributeMetadata query
-export const ALLOWED_FILTER_PARAMETERS = ['page', 'pageSize', 'sort', 'sortDirection', 'q', 'price', 'size', 'color_family'];
-
-export async function loadCategory(state) {
-  try {
-    // TODO: Be careful if query exceeds GET size limits, then switch to POST
-    const variables = {
-      pageSize: state.currentPageSize,
-      currentPage: state.currentPage,
-      sort: [{
-        attribute: state.sort,
-        direction: state.sortDirection === 'desc' ? 'DESC' : 'ASC',
-      }],
-    };
-
-    variables.phrase = state.type === 'search' ? state.searchTerm : '';
-
-    if (Object.keys(state.filters).length > 0) {
-      variables.filter = [];
-      Object.keys(state.filters).forEach((key) => {
-        if (key === 'price') {
-          const [from, to] = state.filters[key];
-          if (from && to) {
-            variables.filter.push({ attribute: key, range: { from, to } });
-          }
-        } else if (state.filters[key].length > 1) {
-          variables.filter.push({ attribute: key, in: state.filters[key] });
-        } else if (state.filters[key].length === 1) {
-          variables.filter.push({ attribute: key, eq: state.filters[key][0] });
-        }
-      });
-    }
-
-    if (state.type === 'category' && state.category.id) {
-      variables.categoryId = state.category.id;
-      variables.filter = variables.filter || [];
-      variables.filter.push({ attribute: 'categoryIds', eq: state.category.id });
-    }
-
-    window.adobeDataLayer.push((dl) => {
-      const requestId = crypto.randomUUID();
-      window.sessionStorage.setItem('searchRequestId', requestId);
-      const searchInputContext = dl.getState('searchInputContext') ?? { units: [] };
-      const searchUnitId = 'livesearch-plp';
-      const unit = {
-        searchUnitId,
-        searchRequestId: requestId,
-        queryTypes: ['products', 'suggestions'],
-        ...variables,
-      };
-      const index = searchInputContext.units.findIndex((u) => u.searchUnitId === searchUnitId);
-      if (index < 0) {
-        searchInputContext.units.push(unit);
-      } else {
-        searchInputContext.units[index] = unit;
-      }
-      dl.push({ searchInputContext }, { event: 'search-request-sent', eventInfo: { searchUnitId } });
-    });
-
-    const response = await performCatalogServiceQuery(productSearchQuery(state.type === 'category'), variables);
-
-    // Parse response into state
-    return {
-      pages: Math.max(response.productSearch.page_info.total_pages, 1),
-      products: {
-        items: response.productSearch.items
-          .map((product) => ({ ...product.productView, ...product.product }))
-          .filter((product) => product !== null),
-        total: response.productSearch.total_count,
-      },
-      category: response.categories?.[0] ?? {},
-      facets: response.productSearch.facets.filter((facet) => facet.attribute !== 'categories'),
-    };
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('Error loading products', e);
-    return {
-      pages: 1,
-      products: {
-        items: [],
-        total: 0,
-      },
-      facets: [],
-    };
+export async function trackHistory() {
+  if (!getConsent('commerce-recommendations')) {
+    return;
   }
-}
-
-export function parseQueryParams() {
-  const params = new URLSearchParams(window.location.search);
-  const newState = {
-    filters: {
-      inStock: ['true'],
-    },
-  };
-  params.forEach((value, key) => {
-    if (!ALLOWED_FILTER_PARAMETERS.includes(key)) {
-      return;
-    }
-
-    if (key === 'page') {
-      newState.currentPage = parseInt(value, 10) || 1;
-    } else if (key === 'pageSize') {
-      newState.currentPageSize = parseInt(value, 10) || 10;
-    } else if (key === 'sort') {
-      newState.sort = value;
-    } else if (key === 'sortDirection') {
-      newState.sortDirection = value === 'desc' ? 'desc' : 'asc';
-    } else if (key === 'q') {
-      newState.searchTerm = value;
-    } else if (key === 'price') {
-      newState.filters[key] = value.split(',').map((v) => parseInt(v, 10) || 0);
-    } else {
-      newState.filters[key] = value.split(',');
-    }
+  // Store product view history in session storage
+  const storeViewCode = await getConfigValue('commerce-store-view-code');
+  window.adobeDataLayer.push((dl) => {
+    dl.addEventListener('adobeDataLayer:change', (event) => {
+      if (!event.productContext) {
+        return;
+      }
+      const key = `${storeViewCode}:productViewHistory`;
+      let viewHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
+      viewHistory = viewHistory.filter((item) => item.sku !== event.productContext.sku);
+      viewHistory.push({ date: new Date().toISOString(), sku: event.productContext.sku });
+      window.localStorage.setItem(key, JSON.stringify(viewHistory.slice(-10)));
+    }, { path: 'productContext' });
+    dl.addEventListener('place-order', () => {
+      const shoppingCartContext = dl.getState('shoppingCartContext');
+      if (!shoppingCartContext) {
+        return;
+      }
+      const key = `${storeViewCode}:purchaseHistory`;
+      const purchasedProducts = shoppingCartContext.items.map((item) => item.product.sku);
+      const purchaseHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
+      purchaseHistory.push({ date: new Date().toISOString(), items: purchasedProducts });
+      window.localStorage.setItem(key, JSON.stringify(purchaseHistory.slice(-5)));
+    });
   });
-  return newState;
 }
 
 export function setJsonLd(data, name) {
