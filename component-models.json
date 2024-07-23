@@ -565,6 +565,13 @@
           "name": "sectionText",
           "label": "Section Text",
           "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "sectionType",
+          "label": "Section Type",
+          "value": "strong"
         }
       ]
     },
