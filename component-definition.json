@@ -201,7 +201,7 @@
                   "template": {
                     "name": "Product Details",
                     "model": "product-details-xwalk",
-                    "filter": "product-details",
+                    "filter": "product-details-xwalk",
                     "key-value": false,
                     "sectionText": "Add-To-Cart-Button"
                   }
