@@ -25,7 +25,7 @@ export default async function decorate(block) {
 
   const placeholderObject = getBlockPlaceholderInfo(block);
   const carouselControl = placeholderObject['Carousel-Controls'].layout;
-//   block.innerHTML = '';
+  // block.innerHTML = '';
 
   // Initialize Drop-ins
   initializers.register(product.initialize, {});
