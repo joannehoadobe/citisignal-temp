@@ -557,8 +557,34 @@
       ]
     },
     {
+      "id": "product-details",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "sectionText",
+          "label": "Section Text",
+          "value": ""
+        }
+      ]
+    },
+    {
       "id": "product-details-item",
       "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "button",
+          "label": "Key",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "buttonText",
+          "label": "Key Text",
+          "value": ""
+        },
         {
           "component": "text",
           "valueType": "string",
