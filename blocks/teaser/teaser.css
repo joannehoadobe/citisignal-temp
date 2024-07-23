@@ -42,6 +42,14 @@
   width: 100%;
 }
 
+.teaser > div:not(.teaser-img-col) h3 a {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
+}
+
 .teaser > div:not(.teaser-img-col) p {
   font-size: 14px;
   font-style: normal;
