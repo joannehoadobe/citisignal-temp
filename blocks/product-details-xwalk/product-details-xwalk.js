@@ -21,8 +21,7 @@ import { getSkuFromUrl } from '../../scripts/commerce.js';
 import { createAccordion, generateListHTML, getBlockPlaceholderInfo } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  block.innerHTML = '<div><div><strong>Add-To-Cart-Button</strong></div></div><div><div>text</div><div>Add To Cart</div></div><div><div>loadingText</div><div>Adding To Cart</div></div><div><div>icon</div><div>Cart</div></div><div><div>variant</div><div>primary</div></div>';
-
+  block.innerHTML = '<div><div><strong>Add-To-Cart-Button</strong></div></div><div><div>text</div><div>Add To Cart</div></div><div><div>loadingText</div><div>Adding To Cart</div></div><div><div>icon</div><div>Cart</div></div><div><div>variant</div><div>primary</div></div><div><div><strong>Carousel-Controls</strong></div></div><div><div>layout</div><div>column</div></div>';
   const placeholderObject = getBlockPlaceholderInfo(block);
   const carouselControl = placeholderObject['Carousel-Controls'].layout;
   // block.innerHTML = '';
