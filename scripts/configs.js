@@ -64,10 +64,25 @@ export const getConfigValue = async (configParam, environment) => {
   return configElements.find((c) => c.key === configParam)?.value;
 };
 
+export const getCookie = (cookieName) => {
+  const cookies = document.cookie.split(';');
+  let foundValue;
+
+  cookies.forEach((cookie) => {
+    const [name, value] = cookie.trim().split('=');
+    if (name === cookieName) {
+      foundValue = decodeURIComponent(value);
+    }
+  });
+
+  return foundValue;
+};
+
 export const getAemAuthorEnv = () => {
   const { href } = window.location;
   const aemEnvReg = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
   const isAemAuthorEnv = aemEnvReg.test(href);
+  /* eslint-disable-next-line no-console */
   console.log(`In configs.js, is in AEM author env: ${isAemAuthorEnv}`);
   return isAemAuthorEnv;
 };

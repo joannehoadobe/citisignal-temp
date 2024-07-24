@@ -42,6 +42,14 @@
   width: 100%;
 }
 
+.teaser > div:not(.teaser-img-col) h3 a {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
+}
+
 .teaser > div:not(.teaser-img-col) p {
   font-size: 14px;
   font-style: normal;
@@ -60,43 +68,5 @@
   .teaser > div:not(.teaser-img-col) > div {
     text-align: center;
     padding: 5rem 7rem;
-  }
-}
-
-/* teaser wireless variation */
-.section.teaser-wireless .teaser {
-  background-color: #f8fcfc;
-  border-radius: 0;
-  max-height: 450px;
-}
-
-.section.teaser-wireless .teaser > div:not(.teaser-img-col) {
-  color: #000;
-}
-
-.section.teaser-wireless .teaser h2 {
-  font-size: 48px;
-  font-weight: 800;
-  letter-spacing: -1.44px;
-  line-height: 55.2px;
-  margin-bottom: 1.5rem;;
-}
-
-.section.teaser-wireless .teaser p {
-  font-size: 18px;
-}
-
-@media (width <= 900px) {
-  .section.teaser-wireless .teaser {
-    max-height: unset;
-  }
-
-  .section.teaser-wireless .teaser > div:not(.teaser-img-col) > div {
-    padding: 2rem 1rem;
-    text-align: left;
-  }
-
-  .section.teaser-wireless .teaser h2 {
-    font-size: 32px;
   }
 }

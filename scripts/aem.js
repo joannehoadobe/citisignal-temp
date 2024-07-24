@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Adobe. All rights reserved.
+ * Copyright 2024 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-/* eslint-disable max-classes-per-file */
 /* eslint-env browser */
 
 /**
@@ -23,9 +22,11 @@
  * for instance the href of a link, or a search term
  */
 function sampleRUM(checkpoint, data = {}) {
+  sampleRUM.baseURL = sampleRUM.baseURL || new URL(window.RUM_BASE == null ? 'https://rum.hlx.page' : window.RUM_BASE, window.location);
   sampleRUM.defer = sampleRUM.defer || [];
   const defer = (fnname) => {
-    sampleRUM[fnname] = sampleRUM[fnname] || ((...args) => sampleRUM.defer.push({ fnname, args }));
+    sampleRUM[fnname] = sampleRUM[fnname]
+      || ((...args) => sampleRUM.defer.push({ fnname, args }));
   };
   sampleRUM.drain = sampleRUM.drain
     || ((dfnname, fn) => {
@@ -47,61 +48,29 @@ function sampleRUM(checkpoint, data = {}) {
     window.hlx = window.hlx || {};
     if (!window.hlx.rum) {
       const usp = new URLSearchParams(window.location.search);
-      const weight = usp.get('rum') === 'on' ? 1 : 100; // with parameter, weight is 1. Defaults to 100.
-      const id = Array.from({ length: 75 }, (_, i) => String.fromCharCode(48 + i))
-        .filter((a) => /\d|[A-Z]/i.test(a))
-        .filter(() => Math.random() * 75 > 70)
-        .join('');
+      const weight = (usp.get('rum') === 'on') ? 1 : 100; // with parameter, weight is 1. Defaults to 100.
+      const id = Math.random().toString(36).slice(-4);
       const random = Math.random();
-      const isSelected = random * weight < 1;
-      const firstReadTime = Date.now();
+      const isSelected = (random * weight < 1);
+      const firstReadTime = window.performance ? window.performance.timeOrigin : Date.now();
       const urlSanitizers = {
         full: () => window.location.href,
         origin: () => window.location.origin,
         path: () => window.location.href.replace(/\?.*$/, ''),
       };
       // eslint-disable-next-line object-curly-newline, max-len
-      window.hlx.rum = {
-        weight,
-        id,
-        random,
-        isSelected,
-        firstReadTime,
-        sampleRUM,
-        sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'path'],
-      };
+      window.hlx.rum = { weight, id, random, isSelected, firstReadTime, sampleRUM, sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'path'] };
     }
+
     const { weight, id, firstReadTime } = window.hlx.rum;
     if (window.hlx && window.hlx.rum && window.hlx.rum.isSelected) {
-      const knownProperties = [
-        'weight',
-        'id',
-        'referer',
-        'checkpoint',
-        't',
-        'source',
-        'target',
-        'cwv',
-        'CLS',
-        'FID',
-        'LCP',
-        'INP',
-      ];
+      const knownProperties = ['weight', 'id', 'referer', 'checkpoint', 't', 'source', 'target', 'cwv', 'CLS', 'FID', 'LCP', 'INP', 'TTFB'];
       const sendPing = (pdata = data) => {
+        // eslint-disable-next-line max-len
+        const t = Math.round(window.performance ? window.performance.now() : (Date.now() - firstReadTime));
         // eslint-disable-next-line object-curly-newline, max-len, no-use-before-define
-        const body = JSON.stringify(
-          {
-            weight,
-            id,
-            referer: window.hlx.rum.sanitizeURL(),
-            checkpoint,
-            t: Date.now() - firstReadTime,
-            ...data,
-          },
-          knownProperties,
-        );
-        const url = `https://rum.hlx.page/.rum/${weight}`;
-        // eslint-disable-next-line no-unused-expressions
+        const body = JSON.stringify({ weight, id, referer: window.hlx.rum.sanitizeURL(), checkpoint, t, ...data }, knownProperties);
+        const url = new URL(`.rum/${weight}`, sampleRUM.baseURL).href;
         navigator.sendBeacon(url, body);
         // eslint-disable-next-line no-console
         console.debug(`ping:${checkpoint}`, pdata);
@@ -111,7 +80,7 @@ function sampleRUM(checkpoint, data = {}) {
         lazy: () => {
           // use classic script to avoid CORS issues
           const script = document.createElement('script');
-          script.src = 'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
+          script.src = new URL('.rum/@adobe/helix-rum-enhancer@^1/src/index.js', sampleRUM.baseURL).href;
           document.head.appendChild(script);
           return true;
         },
@@ -127,6 +96,51 @@ function sampleRUM(checkpoint, data = {}) {
   } catch (error) {
     // something went wrong
   }
+}
+
+/**
+ * Setup block utils.
+ */
+function setup() {
+  window.hlx = window.hlx || {};
+  window.hlx.RUM_MASK_URL = 'full';
+  window.hlx.codeBasePath = '';
+  window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
+
+  const scriptEl = document.querySelector('script[src$="/scripts/scripts.js"]');
+  if (scriptEl) {
+    try {
+      [window.hlx.codeBasePath] = new URL(scriptEl.src).pathname.split('/scripts/scripts.js');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }
+}
+
+/**
+ * Auto initializiation.
+ */
+
+function init() {
+  setup();
+  sampleRUM('top');
+
+  window.addEventListener('load', () => sampleRUM('load'));
+
+  ['error', 'unhandledrejection'].forEach((event) => {
+    window.addEventListener(event, ({ reason, error }) => {
+      const errData = { source: 'undefined error' };
+      try {
+        errData.target = (reason || error).toString();
+        errData.source = (reason || error).stack.split('\n')
+          .filter((line) => line.match(/https?:\/\//)).shift()
+          .replace(/at ([^ ]+) \((.+)\)/, '$1@$2')
+          .trim();
+      } catch (err) { /* error structure was not as expected */ }
+      sampleRUM('error', errData);
+    });
+  });
 }
 
 /**
@@ -158,6 +172,44 @@ function toCamelCase(name) {
  * @param {Element} block The block element
  * @returns {object} The block config
  */
+// eslint-disable-next-line import/prefer-default-export
+function readBlockConfig(block) {
+  const config = {};
+  block.querySelectorAll(':scope > div').forEach((row) => {
+    if (row.children) {
+      const cols = [...row.children];
+      if (cols[1]) {
+        const col = cols[1];
+        const name = toClassName(cols[0].textContent);
+        let value = '';
+        if (col.querySelector('a')) {
+          const as = [...col.querySelectorAll('a')];
+          if (as.length === 1) {
+            value = as[0].href;
+          } else {
+            value = as.map((a) => a.href);
+          }
+        } else if (col.querySelector('img')) {
+          const imgs = [...col.querySelectorAll('img')];
+          if (imgs.length === 1) {
+            value = imgs[0].src;
+          } else {
+            value = imgs.map((img) => img.src);
+          }
+        } else if (col.querySelector('p')) {
+          const ps = [...col.querySelectorAll('p')];
+          if (ps.length === 1) {
+            value = ps[0].textContent;
+          } else {
+            value = ps.map((p) => p.textContent);
+          }
+        } else value = row.children[1].textContent;
+        config[name] = value;
+      }
+    }
+  });
+  return config;
+}
 
 /**
  * Loads a CSS file.
@@ -201,33 +253,6 @@ async function loadScript(src, attrs) {
       resolve();
     }
   });
-}
-
-/**
- * Loads JS and CSS for a module and executes it's default export.
- * @param {string} jsPath The JS file to load
- * @param {string} [cssPath] An optional CSS file to load
- * @param {object[]} [args] Parameters to be passed to the default export when it is called
- */
-async function loadModule(jsPath, cssPath, ...args) {
-  const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
-  const decorationComplete = jsPath
-    ? new Promise((resolve, reject) => {
-      (async () => {
-        let mod;
-        try {
-          mod = await import(jsPath);
-          if (mod.default) {
-            await mod.default.apply(null, args);
-          }
-        } catch (error) {
-          reject(error);
-        }
-        resolve(mod);
-      })();
-    })
-    : Promise.resolve();
-  return Promise.all([cssLoaded, decorationComplete]).then(([, api]) => api);
 }
 
 /**
@@ -306,212 +331,46 @@ function decorateTemplateAndTheme() {
   if (theme) addClasses(document.body, theme);
 }
 
-class PluginsRegistry {
-  #plugins;
-
-  static parsePluginParams(id, config) {
-    const pluginId = !config
-      ? id
-        .split('/')
-        .splice(id.endsWith('/') ? -2 : -1, 1)[0]
-        .replace(/\.js/, '')
-      : id;
-    const pluginConfig = {
-      load: 'eager',
-      ...(typeof config === 'string' || !config
-        ? { url: (config || id).replace(/\/$/, '') }
-        : config),
-    };
-    pluginConfig.options ||= {};
-    return { id: pluginId, config: pluginConfig };
-  }
-
-  constructor() {
-    this.#plugins = new Map();
-  }
-
-  // Register a new plugin
-  add(id, config) {
-    const { id: pluginId, config: pluginConfig } = PluginsRegistry.parsePluginParams(id, config);
-    this.#plugins.set(pluginId, pluginConfig);
-  }
-
-  // Get the plugin
-  get(id) {
-    return this.#plugins.get(id);
-  }
-
-  // Check if the plugin exists
-  includes(id) {
-    return !!this.#plugins.has(id);
-  }
-
-  // Load all plugins that are referenced by URL, and updated their configuration with the
-  // actual API they expose
-  async load(phase, context) {
-    [...this.#plugins.entries()]
-      .filter(
-        ([, plugin]) => plugin.condition && !plugin.condition(document, plugin.options, context),
-      )
-      .map(([id]) => this.#plugins.delete(id));
-    return Promise.all(
-      [...this.#plugins.entries()]
-        // Filter plugins that don't match the execution conditions
-        .filter(
-          ([, plugin]) => (!plugin.condition || plugin.condition(document, plugin.options, context))
-            && phase === plugin.load
-            && plugin.url,
-        )
-        .map(async ([key, plugin]) => {
-          try {
-            // If the plugin has a default export, it will be executed immediately
-            const pluginApi = (await loadModule(
-              !plugin.url.endsWith('.js')
-                ? `${plugin.url}/${plugin.url.split('/').pop()}.js`
-                : plugin.url,
-              !plugin.url.endsWith('.js')
-                ? `${plugin.url}/${plugin.url.split('/').pop()}.css`
-                : null,
-              document,
-              plugin.options,
-              context,
-            )) || {};
-            this.#plugins.set(key, { ...plugin, ...pluginApi });
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.error('Could not load specified plugin', key);
-            this.#plugins.delete(key);
-          }
-        }),
-    );
-  }
-
-  // Run a specific phase in the plugin
-  async run(phase, context) {
-    return [...this.#plugins.values()].reduce(
-      (
-        promise,
-        p, // Using reduce to execute plugins sequencially
-      ) => (p[phase] && (!p.condition || p.condition(document, p.options, context))
-        ? promise.then(() => p[phase](document, p.options, context))
-        : promise),
-      Promise.resolve(),
-    );
-  }
-}
-
-class TemplatesRegistry {
-  // Register a new template
-  // eslint-disable-next-line class-methods-use-this
-  add(id, url) {
-    if (Array.isArray(id)) {
-      id.forEach((i) => this.add(i));
-      return;
-    }
-    const { id: templateId, config: templateConfig } = PluginsRegistry.parsePluginParams(id, url);
-    templateConfig.condition = () => toClassName(getMetadata('template')) === templateId;
-    window.hlx.plugins.add(templateId, templateConfig);
-  }
-
-  // Get the template
-  // eslint-disable-next-line class-methods-use-this
-  get(id) {
-    return window.hlx.plugins.get(id);
-  }
-
-  // Check if the template exists
-  // eslint-disable-next-line class-methods-use-this
-  includes(id) {
-    return window.hlx.plugins.includes(id);
-  }
-}
-
 /**
- * Setup block utils.
+ * Wrap inline text content of block cells within a <p> tag.
+ * @param {Element} block the block element
  */
-function setup() {
-  window.hlx = window.hlx || {};
-  window.hlx.RUM_MASK_URL = 'full';
-  window.hlx.codeBasePath = '';
-  window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
-  window.hlx.patchBlockConfig = [];
-  window.hlx.plugins = new PluginsRegistry();
-  window.hlx.templates = new TemplatesRegistry();
+function wrapTextNodes(block) {
+  const validWrappers = [
+    'P',
+    'PRE',
+    'UL',
+    'OL',
+    'PICTURE',
+    'TABLE',
+    'H1',
+    'H2',
+    'H3',
+    'H4',
+    'H5',
+    'H6',
+  ];
 
-  const scriptEl = document.querySelector('script[src$="/scripts/scripts.js"]');
+  const wrap = (el) => {
+    const wrapper = document.createElement('p');
+    wrapper.append(...el.childNodes);
+    el.append(wrapper);
+  };
 
-  if (scriptEl) {
-    try {
-      [window.hlx.codeBasePath] = new URL(scriptEl.src).pathname.split('/scripts/scripts.js');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  }
-}
-
-/**
- * Auto initializiation.
- */
-
-function init() {
-  console.log('got here');
-  setup();
-  sampleRUM('top');
-
-  window.addEventListener('load', () => sampleRUM('load'));
-
-  window.addEventListener('unhandledrejection', (event) => {
-    sampleRUM('error', { source: event.reason.sourceURL, target: event.reason.line });
-  });
-
-  window.addEventListener('error', (event) => {
-    sampleRUM('error', { source: event.filename, target: event.lineno });
-  });
-}
-
-/**
- * Extracts the config from a block.
- * @param {Element} block The block element
- * @returns {object} The block config
- */
-// eslint-disable-next-line import/prefer-default-export
-function readBlockConfig(block) {
-  const config = {};
-  block.querySelectorAll(':scope > div').forEach((row) => {
-    if (row.children) {
-      const cols = [...row.children];
-      if (cols[1]) {
-        const col = cols[1];
-        const name = toClassName(cols[0].textContent);
-        let value = '';
-        if (col.querySelector('a')) {
-          const as = [...col.querySelectorAll('a')];
-          if (as.length === 1) {
-            value = as[0].href;
-          } else {
-            value = as.map((a) => a.href);
-          }
-        } else if (col.querySelector('img')) {
-          const imgs = [...col.querySelectorAll('img')];
-          if (imgs.length === 1) {
-            value = imgs[0].src;
-          } else {
-            value = imgs.map((img) => img.src);
-          }
-        } else if (col.querySelector('p')) {
-          const ps = [...col.querySelectorAll('p')];
-          if (ps.length === 1) {
-            value = ps[0].textContent;
-          } else {
-            value = ps.map((p) => p.textContent);
-          }
-        } else value = row.children[1].textContent;
-        config[name] = value;
+  block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
+    if (blockColumn.hasChildNodes()) {
+      const hasWrapper = !!blockColumn.firstElementChild
+        && validWrappers.some((tagName) => blockColumn.firstElementChild.tagName === tagName);
+      if (!hasWrapper) {
+        wrap(blockColumn);
+      } else if (
+        blockColumn.firstElementChild.tagName === 'PICTURE'
+        && (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
+      ) {
+        wrap(blockColumn);
       }
     }
   });
-  return config;
 }
 
 /**
@@ -602,7 +461,7 @@ function decorateSections(main) {
     wrappers.forEach((wrapper) => section.append(wrapper));
     section.classList.add('section');
     section.dataset.sectionStatus = 'initialized';
-    section.style.display = 'none';
+    section.style.visibility = 'hidden';
 
     // Process section metadata
     const sectionMeta = section.querySelector('div.section-metadata');
@@ -622,24 +481,6 @@ function decorateSections(main) {
       sectionMeta.parentNode.remove();
     }
   });
-}
-
-/* custom function if section metadata has "author" style class */
-function decorateSectionFromMetadata(main) {
-  const authorSection = main.querySelector('.section.author');
-  if (authorSection) {
-    const wrapper = authorSection.querySelector('.default-content-wrapper');
-    const newDiv = document.createElement('div');
-    newDiv.classList.add('content-wrapper');
-
-    const paragraphs = wrapper.querySelectorAll('p');
-    paragraphs.forEach((paragraph) => {
-      if (!paragraph.querySelector('picture') && !paragraph.querySelector('img')) {
-        newDiv.appendChild(paragraph);
-      }
-    });
-    wrapper.appendChild(newDiv);
-  }
 }
 
 /**
@@ -697,7 +538,7 @@ function updateSectionsStatus(main) {
         break;
       } else {
         section.dataset.sectionStatus = 'loaded';
-        section.style.display = null;
+        section.style.visibility = null;
       }
     }
   }
@@ -735,23 +576,6 @@ function buildBlock(blockName, content) {
 }
 
 /**
- * Gets the configuration for the given block, and also passes
- * the config through all custom patching helpers added to the project.
- *
- * @param {Element} block The block element
- * @returns {Object} The block config (blockName, cssPath and jsPath)
- */
-function getBlockConfig(block) {
-  const { blockName } = block.dataset;
-  const cssPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`;
-  const jsPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`;
-  const original = { blockName, cssPath, jsPath };
-  return (window.hlx.patchBlockConfig || [])
-    .filter((fn) => typeof fn === 'function')
-    .reduce((config, fn) => fn(config, original), { blockName, cssPath, jsPath });
-}
-
-/**
  * Loads JS and CSS for a block.
  * @param {Element} block The block element
  */
@@ -759,9 +583,26 @@ async function loadBlock(block) {
   const status = block.dataset.blockStatus;
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
-    const { blockName, cssPath, jsPath } = getBlockConfig(block);
+    const { blockName } = block.dataset;
     try {
-      await loadModule(jsPath, cssPath, block);
+      const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
+      const decorationComplete = new Promise((resolve) => {
+        (async () => {
+          try {
+            const mod = await import(
+              `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
+            );
+            if (mod.default) {
+              await mod.default(block);
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(`failed to load module for ${blockName}`, error);
+          }
+          resolve();
+        })();
+      });
+      await Promise.all([cssLoaded, decorationComplete]);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
@@ -795,6 +636,7 @@ function decorateBlock(block) {
     block.classList.add('block');
     block.dataset.blockName = shortBlockName;
     block.dataset.blockStatus = 'initialized';
+    wrapTextNodes(block);
     const blockWrapper = block.parentElement;
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
@@ -843,7 +685,6 @@ async function waitForLCP(lcpBlocks) {
   const hasLCPBlock = block && lcpBlocks.includes(block.dataset.blockName);
   if (hasLCPBlock) await loadBlock(block);
 
-  document.body.style.display = null;
   const lcpCandidate = document.querySelector('main img');
 
   await new Promise((resolve) => {
@@ -867,7 +708,6 @@ export {
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
   fetchPlaceholders,
   getMetadata,
@@ -884,4 +724,5 @@ export {
   toClassName,
   updateSectionsStatus,
   waitForLCP,
+  wrapTextNodes,
 };

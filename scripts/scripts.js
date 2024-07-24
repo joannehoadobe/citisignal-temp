@@ -1,48 +1,35 @@
-/* eslint-disable */
+/* eslint-disable import/no-cycle */
+import { events } from '@dropins/tools/event-bus.js';
 import {
-  decorateBlock,
   decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateSectionFromMetadata,
   decorateTemplateAndTheme,
-  getMetadata,
-  loadBlock,
   loadBlocks,
   loadCSS,
   loadFooter,
   loadHeader,
-  loadScript,
   sampleRUM,
-  toCamelCase,
-  toClassName,
   waitForLCP,
-} from './aem.js';
-import initializeDropins from './dropins.js';
-
-// Define an execution context
-const pluginContext = {
-  getAllMetadata,
   getMetadata,
-  loadCSS,
   loadScript,
-  sampleRUM,
   toCamelCase,
   toClassName,
-};
+  readBlockConfig,
+} from './aem.js';
+import { getProduct, getSkuFromUrl, trackHistory } from './commerce.js';
+import initializeDropins from './dropins.js';
 
 const LCP_BLOCKS = [
   'product-list-page',
+  'product-list-page-custom',
   'product-details',
   'commerce-cart',
   'commerce-checkout',
   'commerce-account',
   'commerce-login',
-  'adventure-details',
-  'product-details-xwalk',
 ]; // add your LCP blocks to the list
-
 
 const AUDIENCES = {
   mobile: () => window.innerWidth < 600,
@@ -55,7 +42,6 @@ const AUDIENCES = {
  * @param {String} scope The scope/prefix for the metadata
  * @returns an array of HTMLElement nodes that match the given scope
  */
-
 export function getAllMetadata(scope) {
   return [...document.head.querySelectorAll(`meta[property^="${scope}:"],meta[name^="${scope}-"]`)]
     .reduce((res, meta) => {
@@ -67,13 +53,16 @@ export function getAllMetadata(scope) {
     }, {});
 }
 
-window.hlx.plugins.add('experimentation', {
-  condition: () => getMetadata('experiment')
-    || Object.keys(getAllMetadata('campaign')).length
-    || Object.keys(getAllMetadata('audience')).length,
-  options: { audiences: AUDIENCES },
-  url: '/plugins/experimentation/src/index.js',
-});
+// Define an execution context
+const pluginContext = {
+  getAllMetadata,
+  getMetadata,
+  loadCSS,
+  loadScript,
+  sampleRUM,
+  toCamelCase,
+  toClassName,
+};
 
 /**
  * load fonts.css and set a session storage flag
@@ -87,82 +76,17 @@ async function loadFonts() {
   }
 }
 
-const tabElementMap = {};
+function autolinkModals(element) {
+  element.addEventListener('click', async (e) => {
+    const origin = e.target.closest('a');
 
-function calculateTabSectionCoordinate(main, lastTabBeginningIndex, targetTabSourceSection) {
-  if (!tabElementMap[lastTabBeginningIndex]) {
-    tabElementMap[lastTabBeginningIndex] = [];
-  }
-  tabElementMap[lastTabBeginningIndex].push(targetTabSourceSection);
-}
-
-function calculateTabSectionCoordinates(main) {
-  let lastTabIndex = -1;
-  let foldedTabsCounter = 0;
-  const mainSections = [...main.childNodes];
-  main
-    .querySelectorAll('div.section[data-tab-title]')
-    .forEach((section) => {
-      const currentSectionIndex = mainSections.indexOf(section);
-
-      if (lastTabIndex < 0 || (currentSectionIndex - foldedTabsCounter) !== lastTabIndex) {
-        // we construct a new tabs component, at the currentSectionIndex
-        lastTabIndex = currentSectionIndex;
-        foldedTabsCounter = 0;
-      }
-
-      foldedTabsCounter += 2;
-      calculateTabSectionCoordinate(main, lastTabIndex, section);
-    });
-}
-
-async function autoBlockTabComponent(main, targetIndex, tabSections) {
-  // the display none will prevent a major CLS penalty.
-  // franklin will remove this once the blocks are loaded.
-  const section = document.createElement('div');
-  section.setAttribute('class', 'section');
-  section.setAttribute('style', 'display:none');
-  section.dataset.sectionStatus = 'loading';
-  const tabsBlock = document.createElement('div');
-  tabsBlock.setAttribute('class', 'tabs');
-
-  const tabContentsWrapper = document.createElement('div');
-  tabContentsWrapper.setAttribute('class', 'contents-wrapper');
-
-  tabsBlock.appendChild(tabContentsWrapper);
-
-  tabSections.forEach((tabSection) => {
-    tabSection.classList.remove('section');
-    tabSection.classList.add('contents');
-    // remove display: none
-    tabContentsWrapper.appendChild(tabSection);
-    tabSection.style.display = null;
-  });
-  main.insertBefore(section, main.childNodes[targetIndex]);
-  section.append(tabsBlock);
-  decorateBlock(tabsBlock);
-  //await loadBlock(tabsBlock);
-  // unset display none manually.
-  // somehow in some race conditions it won't be picked up by lib-franklin.
-  // CLS is not affected
-  //section.style.display = null;
-}
-
-function aggregateTabSectionsIntoComponents(main) {
-  calculateTabSectionCoordinates(main);
-
-  // when we aggregate tab sections into a tab autoblock, the index get's lower.
-  // say we have 3 tabs starting at index 10, 12 and 14. and then 3 tabs at 18, 20 and 22.
-  // when we fold the first 3 into 1, those will start at index 10. But the other 3 should now
-  // start at 6 instead of 18 because 'removed' 2 sections.
-  let sectionIndexDelta = 0;
-  Object.keys(tabElementMap).map(async (tabComponentIndex) => {
-    const tabSections = tabElementMap[tabComponentIndex];
-    await autoBlockTabComponent(main, tabComponentIndex - sectionIndexDelta, tabSections);
-    sectionIndexDelta = tabSections.length - 1;
+    if (origin && origin.href && origin.href.includes('/modals/')) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal(origin.href);
+    }
   });
 }
-
 
 /**
  * Decorates the main element.
@@ -175,35 +99,16 @@ export function decorateMain(main) {
   decorateIcons(main);
   decorateSections(main);
   decorateBlocks(main);
-  decorateSectionFromMetadata(main); // custom
 }
 
-/**
- * to add/remove a template, just add/remove it in the list below
- */
-const TEMPLATE_LIST = [];
-
-/**
- * Run template specific decoration code.
- * @param {Element} main The container element
- */
-async function decorateTemplates(main) {
-  try {
-    const template = getMetadata('template');
-    const templates = TEMPLATE_LIST;
-    if (templates.includes(template)) {
-      const mod = await import(`../templates/${template}/${template}.js`);
-      loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
-      if (mod.default) {
-        await mod.default(main);
-      }
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Auto Blocking failed', error);
-  }
+function preloadFile(href, as) {
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = as;
+  link.crossOrigin = 'anonymous';
+  link.href = href;
+  document.head.appendChild(link);
 }
-
 
 /**
  * Loads everything needed to get to LCP.
@@ -211,27 +116,63 @@ async function decorateTemplates(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  initializeDropins();
+  await initializeDropins();
   decorateTemplateAndTheme();
 
-  if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
-    doc.body.classList.add('has-breadcrumb');
+  // Instrument experimentation plugin
+  if (getMetadata('experiment')
+    || Object.keys(getAllMetadata('campaign')).length
+    || Object.keys(getAllMetadata('audience')).length) {
+    // eslint-disable-next-line import/no-relative-packages
+    const { loadEager: runEager } = await import('../plugins/experimentation/src/index.js');
+    await runEager(document, { audiences: AUDIENCES }, pluginContext);
   }
-
-  await window.hlx.plugins.run('loadEager', pluginContext);
 
   window.adobeDataLayer = window.adobeDataLayer || [];
 
   let pageType = 'CMS';
   if (document.body.querySelector('main .product-details')) {
     pageType = 'Product';
+    const sku = getSkuFromUrl();
+    window.getProductPromise = getProduct(sku);
+
+    preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductDetails.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/api.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/render.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/chunks/initialize.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/chunks/getRefinedProduct.js', 'script');
+  } else if (document.body.querySelector('main .product-details-custom')) {
+    pageType = 'Product';
+    preloadFile('/scripts/preact.js', 'script');
+    preloadFile('/scripts/htm.js', 'script');
+    preloadFile('/blocks/product-details-custom/ProductDetailsCarousel.js', 'script');
+    preloadFile('/blocks/product-details-custom/ProductDetailsSidebar.js', 'script');
+    preloadFile('/blocks/product-details-custom/ProductDetailsShimmer.js', 'script');
+    preloadFile('/blocks/product-details-custom/Icon.js', 'script');
+
+    const blockConfig = readBlockConfig(document.body.querySelector('main .product-details-custom'));
+    const sku = getSkuFromUrl() || blockConfig.sku;
+    window.getProductPromise = getProduct(sku);
   } else if (document.body.querySelector('main .product-list-page')) {
     pageType = 'Category';
+    preloadFile('/scripts/widgets/search.js', 'script');
+  } else if (document.body.querySelector('main .product-list-page-custom')) {
+    // TODO Remove this bracket if not using custom PLP
+    pageType = 'Category';
+    const plpBlock = document.body.querySelector('main .product-list-page-custom');
+    const { category, urlpath } = readBlockConfig(plpBlock);
+
+    if (category && urlpath) {
+      // eslint-disable-next-line import/no-unresolved, import/no-absolute-path
+      const { preloadCategory } = await import('/blocks/product-list-page-custom/product-list-page-custom.js');
+      preloadCategory({ id: category, urlPath: urlpath });
+    }
   } else if (document.body.querySelector('main .commerce-cart')) {
     pageType = 'Cart';
   } else if (document.body.querySelector('main .commerce-checkout')) {
     pageType = 'Checkout';
   }
+
   window.adobeDataLayer.push({
     pageContext: {
       pageType,
@@ -243,16 +184,21 @@ async function loadEager(doc) {
       minYOffset: 0,
     },
   });
+  if (pageType !== 'Product') {
+    window.adobeDataLayer.push((dl) => {
+      dl.push({ event: 'page-view', eventInfo: { ...dl.getState() } });
+    });
+  }
 
   const main = doc.querySelector('main');
   console.log(main);
   if (main) {
     decorateMain(main);
-    aggregateTabSectionsIntoComponents(main);
-    await decorateTemplates(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
+
+  events.emit('eds/lcp', true);
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
@@ -269,6 +215,8 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
+  autolinkModals(doc);
+
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
@@ -276,16 +224,25 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  await Promise.all([
+    loadHeader(doc.querySelector('header')),
+    loadFooter(doc.querySelector('footer')),
+    loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`),
+    loadFonts(),
+    import('./acdl/adobe-client-data-layer.min.js'),
+  ]);
 
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
+  if (sessionStorage.getItem('acdl:debug')) {
+    import('./acdl/validate.js');
+  }
+
+  trackHistory();
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
+  // Implement experimentation preview pill
   if ((getMetadata('experiment')
     || Object.keys(getAllMetadata('campaign')).length
     || Object.keys(getAllMetadata('audience')).length)) {
@@ -300,14 +257,8 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  window.setTimeout(() => {
-    window.hlx.plugins.load('delayed', pluginContext);
-    window.hlx.plugins.run('loadDelayed', pluginContext);
-    // eslint-disable-next-line import/no-cycle
-    return import('./delayed.js');
-  }, 3000);
-  // load anything that can be postponed to the latest here; load sidekick if needed for x-walk
-  // import('./sidekick.js').then(({ initSidekick }) => initSidekick());
+  window.setTimeout(() => import('./delayed.js'), 3000);
+  // load anything that can be postponed to the latest here
 }
 
 export async function fetchIndex(indexFile, pageSize = 500) {
@@ -350,118 +301,25 @@ export async function fetchIndex(indexFile, pageSize = 500) {
   return newIndex;
 }
 
-/**
- * Loads a fragment.
- * @param {string} path The path to the fragment
- * @returns {HTMLElement} The root element of the fragment
- */
-export async function loadFragment(path) {
-  if (path && path.startsWith('/')) {
-    const resp = await fetch(`${path}.plain.html`);
-    if (resp.ok) {
-      const main = document.createElement('main');
-      main.innerHTML = await resp.text();
-      decorateMain(main);
-      await loadBlocks(main);
-      return main;
-    }
-  }
-  return null;
-}
-
-export function addElement(type, attributes, values = {}) {
-  const element = document.createElement(type);
-
-  Object.keys(attributes).forEach((attribute) => {
-    element.setAttribute(attribute, attributes[attribute]);
-  });
-
-  Object.keys(values).forEach((val) => {
-    element[val] = values[val];
-  });
-
-  return element;
-}
-
 export function jsx(html, ...args) {
   return html.slice(1).reduce((str, elem, i) => str + args[i] + elem, html[0]);
 }
 
-export function createAccordion(header, content, expanded = false) {
-  // Create a container for the accordion
-  const container = document.createElement('div');
-  container.classList.add('accordion');
-  const accordionContainer = document.createElement('details');
-  accordionContainer.classList.add('accordion-item');
-
-  // Create the accordion header
-  const accordionHeader = document.createElement('summary');
-  accordionHeader.classList.add('accordion-item-label');
-  accordionHeader.innerHTML = `<div>${header}</div>`;
-
-  // Create the accordion content
-  const accordionContent = document.createElement('div');
-  accordionContent.classList.add('accordion-item-body');
-  accordionContent.innerHTML = content;
-
-  accordionContainer.append(accordionHeader, accordionContent);
-  container.append(accordionContainer);
-
-
-  if (expanded) {
-    accordionContent.classList.toggle('active');
-    accordionHeader.classList.add('open-default');
-    accordionContainer.setAttribute('open', true);
-  }
-
-  function updateContent(newContent) {
-    accordionContent.innerHTML = newContent;
-  }
-
-  return [container, updateContent];
-}
-
-export function generateListHTML(data) {
-  let html = '<ul>';
-  data.forEach(item => {
-      html += `<li>${item.label}: <span>${item.value}</span></li>`;
-  });
-  html += '</ul>';
-  return html;
-}
-
-export function getBlockPlaceholderInfo(block) {
-  const object = {};
-  let currentKey = null;
-
-  block.childNodes.forEach((child) => {
-    if (child.nodeType === Node.ELEMENT_NODE) {
-      const key = child.querySelector('strong');
-      if (key) {
-        currentKey = key.textContent.trim();
-        object[currentKey] = {};
-      } else if (currentKey) {
-        const divs = child.querySelectorAll('div');
-        if (divs.length === 2) {
-          const [keyDiv, valueDiv] = divs;
-          const keyValue = keyDiv.textContent.trim();
-          const value = valueDiv.textContent.trim();
-          object[currentKey][keyValue] = value;
-        }
-      }
-    }
-  });
-
-  return object;
+/**
+ * Check if consent was given for a specific topic.
+ * @param {*} topic Topic identifier
+ * @returns {boolean} True if consent was given
+ */
+// eslint-disable-next-line no-unused-vars
+export function getConsent(topic) {
+  console.warn('getConsent not implemented');
+  return true;
 }
 
 async function loadPage() {
-  await window.hlx.plugins.load('eager', pluginContext);
   await loadEager(document);
-  await window.hlx.plugins.load('lazy', pluginContext);
   await loadLazy(document);
   loadDelayed();
-  console.log('end load page in scripts.js');
 }
 
 loadPage();

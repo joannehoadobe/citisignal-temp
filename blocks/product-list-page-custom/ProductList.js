@@ -47,10 +47,15 @@ class ProductCard extends Component {
   }
 
   onProductClick(product) {
-    window.adobeDataLayer.push({ event: 'search-product-click', eventInfo: { searchUnitId: 'searchUnitId', sku: product.sku } });
+    window.adobeDataLayer.push((dl) => {
+      // TODO: Remove eventInfo once collector is updated
+      dl.push({ event: 'search-product-click', eventInfo: { ...dl.getState(), searchUnitId: 'searchUnitId', sku: product.sku } });
+    });
   }
 
-  render({ product, loading, index }) {
+  render({
+    product, loading, index, secondLastProduct,
+  }) {
     if (loading) {
       return html`
       <li>
@@ -71,7 +76,7 @@ class ProductCard extends Component {
     const numberOfEagerImages = isMobile ? 2 : 4;
 
     return html`
-      <li index=${index}>
+      <li index=${index} ref=${secondLastProduct}>
         <div class="picture">
           <a onClick=${() => this.onProductClick(product)} href="/products/${product.urlKey}/${product.sku.toLowerCase()}">
             ${this.renderImage(index < numberOfEagerImages ? 'eager' : 'lazy')}
@@ -86,7 +91,7 @@ class ProductCard extends Component {
 }
 
 const ProductList = ({
-  products, loading, currentPageSize,
+  products, loading, currentPageSize, secondLastProduct,
 }) => {
   if (loading) {
     return html`<div class="list">
@@ -102,7 +107,7 @@ const ProductList = ({
     </div>`;
   }
 
-  const gridItems = products.items.map((product, index) => html`<${ProductCard} key=${product.sku} product=${product} index=${index} />`);
+  const gridItems = products.items.map((product, index) => html`<${ProductCard} key=${product.sku} product=${product} index=${index} secondLastProduct=${index === products.items.length - 2 ? secondLastProduct : null} />`);
   return html`<div class="list">
     <ol>
         ${gridItems}
