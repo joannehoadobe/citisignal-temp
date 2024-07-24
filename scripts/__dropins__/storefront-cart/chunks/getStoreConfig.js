@@ -24,7 +24,7 @@ import{events as e}from"@dropins/tools/event-bus.js";import{s as a,e as y,i as f
   ${l}
 `,_=async()=>{const t=a.authenticated,r=a.cartId;if(t)return s(I,{method:"POST"}).then(({errors:i,data:n})=>{if(i)return o(i);const g={...n.cart,...n.customer};return p(g)});if(!r)throw new Error("No cart ID found");return s(x,{method:"POST",cache:"no-cache",variables:{cartId:r}}).then(({errors:i,data:n})=>i?o(i):p(n.cart))},E=`
   mutation MERGE_CARTS_MUTATION(
-      $guestCartId: String!,
+      $guestCartId: String!, 
       $customerCartId: String!,
       ${u}
     ) {
@@ -32,7 +32,7 @@ import{events as e}from"@dropins/tools/event-bus.js";import{s as a,e as y,i as f
       source_cart_id: $guestCartId,
       destination_cart_id: $customerCartId
     ) {
-      ...CartFragment
+      ...CartFragment 
     }
   }
 
@@ -40,9 +40,9 @@ import{events as e}from"@dropins/tools/event-bus.js";import{s as a,e as y,i as f
 `,c=async()=>{if(a.initializing)return null;a.initializing=!0,a.config=await A();const t=a.authenticated?await S():await R();return e.emit("cart/initialized",t),e.emit("cart/data",t),a.initializing=!1,t};async function S(){const t=a.cartId,r=await _();return r?(a.cartId=r.id,!t||r.id===t?r:await s(E,{variables:{guestCartId:t,customerCartId:r.id}}).then(()=>_()).then(i=>{const n={oldCartItems:r.items,newCart:i};return e.emit("cart/merged",n),i}).catch(()=>(console.error("Could not merge carts"),r))):null}async function R(){if(h.getConfig().disableGuestCart===!0||!a.cartId)return null;try{return await _()}catch(t){return console.error(t),null}}const G=`
 query STORE_CONFIG_QUERY {
   storeConfig {
-    minicart_display
+    minicart_display 
     minicart_max_items
-    cart_expires_in_days
+    cart_expires_in_days 
     cart_summary_display_quantity
     default_country
     category_fixed_product_tax_display_setting
