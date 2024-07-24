@@ -25,6 +25,7 @@ export default async function initializeDropins() {
 
   // Set Fetch Endpoint (Global)
   setEndpoint(await getConfigValue('commerce-core-endpoint'));
+  setFetchGraphQlHeader('store', await getConfigValue('store'));
 
   // Initializers (Global)
   initializers.register(authApi.initialize, {});
