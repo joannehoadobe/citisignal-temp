@@ -124,37 +124,37 @@ export default async function decorate(block) {
     default: {
       PDP: {
         Product: {
-          Incrementer: { label: placeholders.pdpProductIncrementer },
-          OutOfStock: { label: placeholders.pdpProductOutofstock },
-          AddToCart: { label: placeholders.pdpProductAddtocart },
-          Details: { label: placeholders.pdpProductDetails },
-          RegularPrice: { label: placeholders.pdpProductRegularprice },
-          SpecialPrice: { label: placeholders.pdpProductSpecialprice },
+          Incrementer: { label: 'Item Quantity' },
+          OutOfStock: { label: 'out of stock' },
+          AddToCart: { label: 'add to cart' },
+          Details: { label: 'details' },
+          RegularPrice: { label: 'regular price' },
+          SpecialPrice: { label: 'special price' },
           PriceRange: {
-            From: { label: placeholders.pdpProductPricerangeFrom },
-            To: { label: placeholders.pdpProductPricerangeTo },
+            From: { label: 'from' },
+            To: { label: 'to' },
           },
-          Image: { label: placeholders.pdpProductImage },
+          Image: { label: 'image' },
         },
         Swatches: {
-          Required: { label: placeholders.pdpSwatchesRequired },
+          Required: { label: 'required' },
         },
         Carousel: {
-          label: placeholders.pdpCarousel,
-          Next: { label: placeholders.pdpCarouselNext },
-          Previous: { label: placeholders.pdpCarouselPrevious },
-          Slide: { label: placeholders.pdpCarouselSlide },
+          label: 'carousel',
+          Next: { label: 'next' },
+          Previous: { label: 'previous' },
+          Slide: { label: 'slide' },
           Controls: {
-            label: placeholders.pdpCarouselControls,
-            Button: { label: placeholders.pdpCarouselControlsButton },
+            label:  'controls',
+            Button: { label: 'button' },
           },
         },
         Overlay: {
-          Close: { label: placeholders.pdpOverlayClose },
+          Close: { label: 'close' },
         },
       },
       Custom: {
-        AddingToCart: { label: placeholders.pdpCustomAddingtocart },
+        AddingToCart: { label: 'adding to cart' },
       },
     },
   };
