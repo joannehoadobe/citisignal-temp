@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 

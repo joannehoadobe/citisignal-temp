@@ -319,7 +319,6 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-  console.log('end load page in scripts.js');
 }
 
 loadPage();

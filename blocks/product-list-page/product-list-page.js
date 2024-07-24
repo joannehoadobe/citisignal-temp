@@ -14,6 +14,7 @@ export default async function decorate(block) {
   if (!isAemAuthor) {
     block.textContent = '';
   } else if (isAemAuthor && plpAttributes && plpAttributes.getNamedItem('data-aue-resource')) {
+    /* eslint-disable-next-line no-console */
     console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
   }
 
