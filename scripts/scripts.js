@@ -191,7 +191,6 @@ async function loadEager(doc) {
   }
 
   const main = doc.querySelector('main');
-  console.log(main);
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');

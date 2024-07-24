@@ -18,7 +18,6 @@ import {
  * @returns {HTMLElement} The root element of the fragment
  */
 export async function loadFragment(path) {
-  console.log(path);
   if (path && path.startsWith('/')) {
     const resp = await fetch(`${path}.plain.html`);
     if (resp.ok) {
@@ -43,7 +42,6 @@ export async function loadFragment(path) {
 }
 
 export default async function decorate(block) {
-  console.log(block);
   const link = block.querySelector('a');
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
