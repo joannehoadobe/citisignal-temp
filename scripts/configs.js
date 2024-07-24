@@ -32,8 +32,8 @@ function buildConfigURL(environment) {
   if (env !== 'prod') {
     fileName = `configs-${env}.json`;
   }
-  // const configURL = new URL(`${window.location.origin}/${fileName}`);
-  const configURL = new URL(`${window.location.origin}/content/citisignal-edge-delivery/${fileName}`);
+  const configURL = new URL(`${window.location.origin}/${fileName}`);
+  // const configURL = new URL(`${window.location.origin}/content/citisignal-edge-delivery/${fileName}`);
   return configURL;
 }
 
