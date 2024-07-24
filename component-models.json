@@ -581,7 +581,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "image",
+          "name": "fred",
           "label": "Key",
           "value": ""
         },
