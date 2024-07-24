@@ -245,9 +245,8 @@ export function getSkuFromUrl() {
 const productsCache = {};
 export async function getProduct(sku) {
   // eslint-disable-next-line no-param-reassign
-  const skuCacheKey = sku.toUpperCase();
-  if (productsCache[skuCacheKey]) {
-    return productsCache[skuCacheKey];
+  if (productsCache[sku]) {
+    return productsCache[sku];
   }
   const rawProductPromise = performCatalogServiceQuery(productDetailQuery, { sku });
   const productPromise = rawProductPromise.then((productData) => {
@@ -258,7 +257,7 @@ export async function getProduct(sku) {
     return productData?.products?.[0];
   });
 
-  productsCache[skuCacheKey] = productPromise;
+  productsCache[sku] = productPromise;
   return productPromise;
 }
 
