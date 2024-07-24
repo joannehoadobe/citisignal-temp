@@ -300,6 +300,10 @@ export async function fetchIndex(indexFile, pageSize = 500) {
   return newIndex;
 }
 
+export function jsx(html, ...args) {
+  return html.slice(1).reduce((str, elem, i) => str + args[i] + elem, html[0]);
+}
+
 /**
  * Check if consent was given for a specific topic.
  * @param {*} topic Topic identifier

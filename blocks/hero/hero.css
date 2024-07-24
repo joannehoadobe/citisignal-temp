@@ -7,11 +7,6 @@ main .hero-container > div {
   max-width: var(--large-grid-layout);
 }
 
-main .hero-container {
-  padding: 0;
-}
-
-
 /* Hero Section Styles */
 .hero {
   position: relative;

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {
   h, Component, Fragment, render, createRef,
 } from '../../scripts/preact.js';
