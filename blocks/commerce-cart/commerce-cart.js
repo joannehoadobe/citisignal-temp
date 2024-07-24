@@ -1,11 +1,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 
-// Drop-in Providers
+// Dropin Providers
 import { render as provider } from '@dropins/storefront-cart/render.js';
 import { setFetchGraphQlHeader as setCartDropinRequestHeader } from '@dropins/storefront-cart/api.js';
 
-// Drop-in Containers
+// Dropin Containers
 import Cart from '@dropins/storefront-cart/containers/Cart.js';
 
 // Libs

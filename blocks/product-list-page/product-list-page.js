@@ -1,7 +1,12 @@
-import { loadScript, readBlockConfig } from '../../scripts/aem.js';
+import { readBlockConfig } from '../../scripts/aem.js';
 import { getConfigValue, getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
+  // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
+  await import('/scripts/widgets/search.js');
+
+  // const { category, urlpath, type } = readBlockConfig(block);
+  // block.textContent = '';
   const plpAttributes = block.attributes;
   const isAemAuthor = getAemAuthorEnv();
   const { urlpath, category, type } = readBlockConfig(block);
@@ -11,9 +16,6 @@ export default async function decorate(block) {
   } else if (isAemAuthor && plpAttributes && plpAttributes.getNamedItem('data-aue-resource')) {
     console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
   }
-
-  const widgetProd = '/scripts/widgets/search.js';
-  await loadScript(widgetProd);
 
   const storeDetails = {
     environmentId: await getConfigValue('commerce-environment-id'),
@@ -26,7 +28,7 @@ export default async function decorate(block) {
       pageSize: 8,
       perPageConfig: {
         pageSizeOptions: '12,24,36',
-        defaultPageSizeOption: '24',
+        defaultPageSizeOption: '12',
       },
       minQueryLength: '2',
       currencySymbol: '$',
@@ -39,8 +41,12 @@ export default async function decorate(block) {
       listview: true,
       displayMode: '', // "" for plp || "PAGE" for category/catalog
       addToCart: async (...args) => {
-        const { cartApi } = await import('../../scripts/minicart/api.js');
-        return cartApi.addToCart(...args);
+        const { addProductsToCart } = await import('../../scripts/__dropins__/storefront-cart/api.js');
+        await addProductsToCart([{
+          sku: args[0],
+          options: args[1],
+          quantity: args[2],
+        }]);
       },
     },
     context: {
@@ -50,9 +56,8 @@ export default async function decorate(block) {
   };
 
   if (type !== 'search') {
-    const categoryName = urlpath[0].toUpperCase() + urlpath.slice(1);
-
-    storeDetails.config.categoryName = categoryName;
+    storeDetails.config.categoryName = document.querySelector('.default-content-wrapper > h1')?.innerText;
+    storeDetails.config.currentCategoryId = category;
     storeDetails.config.currentCategoryUrlPath = urlpath;
 
     // Enable enrichment
@@ -68,11 +73,5 @@ export default async function decorate(block) {
     }, 200);
   });
 
-  window.LiveSearchPLP({ storeDetails, root: block });
-
-  // Add custom title
-  const resultsHeaderTitle = block.querySelector('.ds-widgets_results > div:first-of-type > div > div:first-of-type');
-  const formattedUrlPath = urlpath.replace('-', ' ');
-  resultsHeaderTitle.classList.add('results-header-title');
-  resultsHeaderTitle.textContent = `Shop ${formattedUrlPath}`;
+  return window.LiveSearchPLP({ storeDetails, root: block });
 }
