@@ -114,3 +114,7 @@
   line-height: 20px;
   letter-spacing: 0.56px;
 }
+
+.product-list-page .ds-sdk-product-item__image {
+  margin-bottom: 1rem;
+}
