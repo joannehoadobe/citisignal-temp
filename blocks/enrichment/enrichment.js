@@ -72,6 +72,6 @@ export default async function decorate(block) {
   } catch (error) {
     console.error(error);
   } finally {
-    block.closest('.enrichment-wrapper')?.remove();
+    // block.closest('.enrichment-wrapper')?.remove();
   }
 }
