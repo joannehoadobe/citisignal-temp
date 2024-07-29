@@ -185,7 +185,7 @@
                     "name": "Enrichment",
                     "model": "enrichment",
                     "key-value": true,
-                    "type": "category"
+                    "type": "Enter the type here"
                   }
                 }
               }
