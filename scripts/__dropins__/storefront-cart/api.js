@@ -1,6 +1,6 @@
 import{C,a as T,s as n,f as m,h as u,t as l}from"./chunks/resetCart.js";import{g as b,r as D,e as F,b as y,c as $,d as v}from"./chunks/resetCart.js";import{events as d}from"@dropins/tools/event-bus.js";import{p as I,a as f}from"./chunks/updateProductsFromCart.js";import{u as x}from"./chunks/updateProductsFromCart.js";import{c as g}from"./chunks/getStoreConfig.js";import{g as H,b as k,i as z,a as Y}from"./chunks/getStoreConfig.js";import{a as q,g as B,c as J,b as K}from"./chunks/getEstimatedTotals.js";import"@dropins/tools/fetch-graphql.js";import"@dropins/tools/lib.js";const E=`
   mutation ADD_PRODUCTS_TO_CART_MUTATION(
-      $cartId: String!,
+      $cartId: String!, 
       $cartItems: [CartItemInput!]!,
       ${C}
     ) {
