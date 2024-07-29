@@ -33,6 +33,11 @@ function buildConfigURL(environment) {
     fileName = `configs-${env}.json`;
   }
   const configURL = new URL(`${window.location.origin}/${fileName}`);
+  /* eslint-disable-next-line no-use-before-define */
+  if (getAemAuthorEnv()) {
+    const authorPath = window.hlx && window.hlx.codeBasePath ? window.hlx.codeBasePath.match(/^[^.]+/)[0] : '/content/citisignal';
+    return new URL(`${window.location.origin}${authorPath}/${fileName}`);
+  }
   return configURL;
 }
 
