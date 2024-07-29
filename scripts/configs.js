@@ -33,12 +33,6 @@ function buildConfigURL(environment) {
     fileName = `configs-${env}.json`;
   }
   const configURL = new URL(`${window.location.origin}/${fileName}`);
-  /* eslint-disable-next-line max-len */
-  // const configURL = new URL(`${window.location.origin}/content/citisignal-edge-delivery/${fileName}`);
-  /* eslint-disable-next-line no-use-before-define */
-  if (getAemAuthorEnv()) {
-    return new URL(`${window.location.origin}/content/citisignal-edge-delivery/${fileName}`);
-  }
   return configURL;
 }
 
