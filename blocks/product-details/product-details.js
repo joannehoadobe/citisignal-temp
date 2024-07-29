@@ -11,6 +11,7 @@ import ProductDetails from '@dropins/storefront-pdp/containers/ProductDetails.js
 import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js';
 import { getConfigValue } from '../../scripts/configs.js';
 import { fetchPlaceholders } from '../../scripts/aem.js';
+import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
 
 // Error Handling (404)
 async function errorGettingProduct(code = 404) {
@@ -212,6 +213,12 @@ export default async function decorate(block) {
             gap: 'small',
           },
           slots: {
+            Quantity: (ctx) => {
+              const label = document.createElement('div');
+              label.className = 'quantity-label';
+              label.textContent = 'Quantity';
+              ctx.prependChild(label);
+            },
             Actions: (ctx) => {
               // Add to Cart Button
               ctx.appendButton((next, state) => {
@@ -241,6 +248,57 @@ export default async function decorate(block) {
                     }
                   },
                 };
+              });
+              // Add To Wishlist Button
+              ctx.appendButton(() => ({
+                text: 'Add To List',
+                icon: 'Heart',
+                variant: 'secondary',
+                onClick: () => console.debug('Add to Wishlist', ctx.data),
+              }));
+
+              // Share Button
+              ctx.appendButton(() => ({
+                text: 'Share',
+                icon: 'Share',
+                variant: 'secondary',
+                onClick: () => console.debug('Share Button', ctx.data),
+              }));
+            },
+            Description: (ctx) => {
+              const defaultContent = ctx?.data?.description;
+              if (!defaultContent) return;
+
+              const [html, updateContent] = createAccordion('Overview', defaultContent, true);
+              ctx.replaceWith(html);
+
+              ctx.onChange((next) => {
+                updateContent(next?.data?.description);
+              });
+            },
+            ShortDescription: (ctx) => {
+              const shortDescContent = ctx?.data?.shortDescription;
+              if (!shortDescContent) return;
+
+              const [html, updateContent] = createAccordion('Short description', shortDescContent, false);
+              ctx.replaceWith(html);
+
+              ctx.onChange((next) => {
+                updateContent(next?.data?.shortDescription);
+              });
+            },
+            Attributes: (ctx) => {
+              const attributes = ctx?.data?.attributes;
+              if (!attributes) return;
+
+              let list;
+              list = generateListHTML(attributes);
+              const [html, updateContent] = createAccordion('Product specs', list, false);
+              ctx.replaceWith(html);
+
+              ctx.onChange((next) => {
+                list = generateListHTML(next?.data?.attributes);
+                updateContent(list);
               });
             },
           },

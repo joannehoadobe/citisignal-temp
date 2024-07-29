@@ -53,6 +53,71 @@ export function getAllMetadata(scope) {
     }, {});
 }
 
+/**
+ * Returns the current timestamp used for scheduling content.
+ */
+export function getTimestamp() {
+  if ((window.location.hostname === 'localhost' || window.location.hostname.endsWith('.hlx.page')) && window.sessionStorage.getItem('preview-date')) {
+    return Date.parse(window.sessionStorage.getItem('preview-date'));
+  }
+  return Date.now();
+}
+
+/**
+ * Determines whether scheduled content with a given date string should be displayed.
+ */
+export function shouldBeDisplayed(date) {
+  const now = getTimestamp();
+
+  const split = date.split('-');
+  if (split.length === 2) {
+    const from = Date.parse(split[0].trim());
+    const to = Date.parse(split[1].trim());
+    return now >= from && now <= to;
+  }
+  if (date !== '') {
+    const from = Date.parse(date.trim());
+    return now >= from;
+  }
+  return false;
+}
+
+/**
+ * Remove scheduled blocks that should not be displayed.
+ */
+function scheduleBlocks(main) {
+  const blocks = main.querySelectorAll('div.section > div > div');
+  blocks.forEach((block) => {
+    let date;
+    const rows = block.querySelectorAll(':scope > div');
+    rows.forEach((row) => {
+      const cols = [...row.children];
+      if (cols.length > 1) {
+        if (cols[0].textContent.toLowerCase() === 'date') {
+          date = cols[1].textContent;
+          row.remove();
+        }
+      }
+    });
+    if (date && !shouldBeDisplayed(date)) {
+      block.remove();
+    }
+  });
+}
+
+/**
+ * Remove scheduled sections that should not be displayed.
+ */
+function scheduleSections(main) {
+  const sections = main.querySelectorAll('div.section');
+  sections.forEach((section) => {
+    const { date } = section.dataset;
+    if (date && !shouldBeDisplayed(date)) {
+      section.remove();
+    }
+  });
+}
+
 // Define an execution context
 const pluginContext = {
   getAllMetadata,
@@ -98,6 +163,8 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   decorateSections(main);
+  scheduleSections(main);
+  scheduleBlocks(main);
   decorateBlocks(main);
 }
 
@@ -249,6 +316,9 @@ async function loadLazy(doc) {
     const { loadLazy: runLazy } = await import('../plugins/experimentation/src/index.js');
     await runLazy(document, { audiences: AUDIENCES }, pluginContext);
   }
+
+  // Load scheduling sidekick extension
+  import('./scheduling/scheduling.js');
 }
 
 /**
@@ -302,6 +372,49 @@ export async function fetchIndex(indexFile, pageSize = 500) {
 
 export function jsx(html, ...args) {
   return html.slice(1).reduce((str, elem, i) => str + args[i] + elem, html[0]);
+}
+
+export function createAccordion(header, content, expanded = false) {
+  // Create a container for the accordion
+  const container = document.createElement('div');
+  container.classList.add('accordion');
+  const accordionContainer = document.createElement('details');
+  accordionContainer.classList.add('accordion-item');
+
+  // Create the accordion header
+  const accordionHeader = document.createElement('summary');
+  accordionHeader.classList.add('accordion-item-label');
+  accordionHeader.innerHTML = `<div>${header}</div>`;
+
+  // Create the accordion content
+  const accordionContent = document.createElement('div');
+  accordionContent.classList.add('accordion-item-body');
+  accordionContent.innerHTML = content;
+
+  accordionContainer.append(accordionHeader, accordionContent);
+  container.append(accordionContainer);
+
+  if (expanded) {
+    accordionContent.classList.toggle('active');
+    accordionHeader.classList.add('open-default');
+    accordionContainer.setAttribute('open', true);
+  }
+
+  function updateContent(newContent) {
+    accordionContent.innerHTML = newContent;
+    // accordionContent.innerHTML = '<p>Hello world</p>';
+  }
+
+  return [container, updateContent];
+}
+
+export function generateListHTML(data) {
+  let html = '<ul>';
+  data.forEach((item) => {
+    html += `<li>${item.label}: <span>${item.value}</span></li>`;
+  });
+  html += '</ul>';
+  return html;
 }
 
 /**
