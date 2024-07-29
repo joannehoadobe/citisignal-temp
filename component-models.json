@@ -529,11 +529,21 @@
           "value": ""
         },
         {
-          "component": "text",
+          "component": "select",
           "valueType": "string",
           "name": "position",
           "label": "Position",
-          "value": ""
+          "value": "",
+          "options": [
+            {
+              "name": "Below Category (Category Page)",
+              "value": "below-category"
+            },
+            {
+              "name": "Below Product (Product Page)",
+              "value": "below-product"
+            }
+          ]
         }
       ]
     },
