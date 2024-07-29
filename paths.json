@@ -6,6 +6,7 @@
       "/content/citisignal-edge-delivery/configs:/configs.json",
       "/content/citisignal-edge-delivery/configs-stage:/configs-stage.json",
       "/content/citisignal-edge-delivery/configs-dev:/configs-dev.json",
-      "/content/citisignal-edge-delivery/redirects:/redirects.json"
+      "/content/citisignal-edge-delivery/redirects:/redirects.json",
+      "/content/citisignal-edge-delivery/placeholders:/placeholders.json"
     ]
 }
