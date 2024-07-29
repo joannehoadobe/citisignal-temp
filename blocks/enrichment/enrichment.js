@@ -7,6 +7,7 @@ import { getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
   const { type, position } = readBlockConfig(block);
+  const isAemAuthor = getAemAuthorEnv();
 
   try {
     const filters = {};
@@ -39,7 +40,6 @@ export default async function decorate(block) {
     }
 
     const index = await fetchIndex('enrichment/enrichment');
-    const isAemAuthor = getAemAuthorEnv();
     if (!isAemAuthor) {
       const matchingFragments = index.data
         .filter((fragment) => Object.keys(filters).every((filterKey) => {
@@ -72,6 +72,8 @@ export default async function decorate(block) {
   } catch (error) {
     console.error(error);
   } finally {
-    // block.closest('.enrichment-wrapper')?.remove();
+    if (!isAemAuthor) {
+      block.closest('.enrichment-wrapper')?.remove();
+    }
   }
 }
