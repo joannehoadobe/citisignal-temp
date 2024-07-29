@@ -6,6 +6,14 @@
   object-fit: contain;
 }
 
+.product-list-page .ds-sdk-sort-dropdown > button span {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.56px;
+}
+
 .product-list-page .ds-widgets_actions_header > span:first-child {
   font-size: var(--heading-font-size-md);
 }
@@ -32,6 +40,15 @@
   padding: 1rem 1.5rem;
 }
 
+.product-list-page .ds-sdk-sort-dropdown > button {
+  border-radius: unset;
+  padding: 0.5rem 1.5rem;
+}
+
+.product-list-page .ds-sdk-per-page-picker > button {
+  border-radius: 50%;
+}
+
 .product-list-page .ds-sdk-filter-button-desktop button:active,
 .product-list-page .ds-sdk-sort-dropdown button:active {
   border: 1px solid var(--color-neutral-500);
@@ -41,34 +58,22 @@
   height: unset;
 }
 
-.product-list-page .ds-sdk-sort-dropdown > button {
-  border-radius: unset;
-  padding: 0.5rem 1.5rem;
-}
-
-.product-list-page .ds-sdk-sort-dropdown > button span {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.56px;
-}
-
 /* Product Item */
 .product-list-page .ds-sdk-product-item {
   padding: 0 0.75rem;
   border-radius: 0.375rem;
-  border: 1px solid transparent;
   transition: transform 0.25s ease;
-}
-
-.product-list-page .ds-sdk-product-item a {
-  padding: 0.5rem 0.75rem;
+  border: none;
+  border-color: white !important;
 }
 
 .product-list-page .ds-sdk-product-item:hover {
   border: 1px solid var(--color-neutral-300);
   box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+}
+
+.product-list-page .ds-sdk-product-item a {
+  padding: 0.5rem 0.75rem;
 }
 
 .product-list-page .ds-sdk-product-item:hover img {
@@ -85,9 +90,8 @@
 }
 
 /* Custom Styling */
-.product-list-page .ds-sdk-product-item {
-  border: none;
-  border-color: white !important;
+.product-list-page .ds-sdk-product-image-carousel > div {
+  justify-content: center;
 }
 
 .product-list-page .ds-sdk-product-item > div:last-of-type {
@@ -110,14 +114,6 @@
 
 .product-list-page .ds-sdk-product-item__main .ds-sdk-product-price p {
   margin-top: 0;
-}
-
-.product-list-page .ds-sdk-product-image-carousel > div {
-  justify-content: center;
-}
-
-.product-list-page .ds-sdk-per-page-picker > button {
-  border-radius: 50%;
 }
 
 .product-list-page .ds-sdk-product-item__image {
