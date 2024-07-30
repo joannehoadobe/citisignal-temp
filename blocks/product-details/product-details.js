@@ -12,6 +12,7 @@ import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js'
 import { getConfigValue } from '../../scripts/configs.js';
 import { fetchPlaceholders } from '../../scripts/aem.js';
 import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
+import initModal from './modal.js';
 
 // Error Handling (404)
 async function errorGettingProduct(code = 404) {
@@ -241,6 +242,11 @@ export default async function decorate(block) {
                   disabled: adding || !next.data.inStock,
                   onClick: async () => {
                     try {
+                      // Plans flow
+                      if (isPlanProduct) {
+                        initModal(next, state);
+                      }
+
                       state.set('adding', true);
                       if (!next.valid) {
                         // eslint-disable-next-line no-console
