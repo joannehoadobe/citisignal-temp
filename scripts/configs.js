@@ -64,7 +64,7 @@ function getAemContentPath() {
     let pathComponents = window.location.pathname.split('/');
     pathComponents = pathComponents.filter((component) => component !== '');
     const firstTwoElements = pathComponents.slice(0, 2).join('/');
-    authorContentPath = '/'.join(firstTwoElements);
+    authorContentPath = `/${firstTwoElements}`;
     /* eslint-disable-next-line no-console */
     console.log(`In configs.js, is in AEM author env, so determine content path via location: ${authorContentPath}`);
   }
