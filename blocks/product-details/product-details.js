@@ -129,8 +129,6 @@ export default async function decorate(block) {
     if (attr) isPlanProduct = true;
   }
 
-  console.log("isPlanProduct: ", isPlanProduct);
-
   const langDefinitions = {
     default: {
       PDP: {
