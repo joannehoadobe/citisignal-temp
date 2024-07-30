@@ -33,14 +33,13 @@ function buildConfigURL(environment) {
     fileName = `configs-${env}.json`;
   }
   const configURL = new URL(`${window.location.origin}/${fileName}`);
-  // /* eslint-disable-next-line no-use-before-define */
-  // if (getAemAuthorEnv()) {
-  // eslint-disable-next-line max-len
-  //   const authorPath = window.hlx && window.hlx.codeBasePath ? window.hlx.codeBasePath.match(/^[^.]+/)[0] : '/content/citisignal';
-  //   /* eslint-disable-next-line no-console */
-  //   console.log(`In configs.js, is in AEM author env, so determine content path: ${authorPath}`);
-  //   return new URL(`${window.location.origin}${authorPath}/${fileName}`);
-  // }
+  /* eslint-disable-next-line no-use-before-define */
+  if (getAemAuthorEnv()) {
+    const authorPath = window.hlx && window.hlx.codeBasePath ? window.hlx.codeBasePath.match(/^[^.]+/)[0] : '/content/citisignal';
+    /* eslint-disable-next-line no-console */
+    console.log(`In configs.js, is in AEM author env, so determine content path: ${authorPath}`);
+    return new URL(`${window.location.origin}${authorPath}/${fileName}`);
+  }
   return configURL;
 }
 
@@ -49,16 +48,11 @@ const getConfigForEnvironment = async (environment) => {
   let configJSON = window.sessionStorage.getItem(`config:${env}`);
   if (!configJSON) {
     configJSON = await fetch(buildConfigURL(env));
-    /* eslint-disable-next-line no-use-before-define */
-    if (!configJSON.ok && !getAemAuthorEnv()) {
+    if (!configJSON.ok) {
       throw new Error(`Failed to fetch config for ${env}`);
     }
     configJSON = await configJSON.text();
     window.sessionStorage.setItem(`config:${env}`, configJSON);
-  }
-  /* eslint-disable-next-line no-use-before-define */
-  if (getAemAuthorEnv()) {
-    configJSON = '{}';
   }
   return configJSON;
 };
