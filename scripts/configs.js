@@ -87,7 +87,7 @@ export const getCookie = (cookieName) => {
 
 export const getAemAuthorEnv = () => {
   const { href } = window.location;
-  const aemEnvReg = /.+author-(p\d{1,8})-(e\d{1,8}).+/;
+  const aemEnvReg = /https?:\/\/author-(p\d{3,8})-(e\d{3,8}).+/i;
   const isAemAuthorEnv = aemEnvReg.test(href);
   /* eslint-disable-next-line no-console */
   console.log(`In configs.js, is in AEM author env: ${isAemAuthorEnv}`);
