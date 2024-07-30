@@ -41,7 +41,7 @@ function buildConfigURL(environment) {
     // console.log(`In configs.js, is in AEM author env, so determine content path: ${authorPath}`);
     // return new URL(`${window.location.origin}${authorPath}/${fileName}`);
     const aemContentPath = getAemContentPath();
-    return aemContentPath;
+    return new URL(`${window.location.origin}${aemContentPath}/${fileName}`);
   }
   return configURL;
 }
