@@ -3555,6 +3555,6 @@ items:structuredClone(n.items),categories:structuredClone(n.categories),block:e,
                     </ul>
                 </td>
             </tr>
-        </table>`,selection:"multiple",type:"folder"}},getCategories:yf,getItems:yp,configFile:" https://main--xsc-wknd-commerce--hlxsites.hlx.live/configs.json",defaultConfig:"prod"}),ym);//# sourceMappingURL=index.1010c95c.js.map
+        </table>`,selection:"multiple",type:"folder"}},getCategories:yf,getItems:yp,configFile:" https://main--citisignal--adobedevxsc.hlx.live/configs.json",defaultConfig:"prod"}),ym);//# sourceMappingURL=index.1010c95c.js.map
 
 //# sourceMappingURL=index.1010c95c.js.map
