@@ -58,7 +58,7 @@ const getConfigForEnvironment = async (environment) => {
   }
   /* eslint-disable-next-line no-use-before-define */
   if (getAemAuthorEnv()) {
-    configJSON = {};
+    configJSON = '{}';
   }
   return configJSON;
 };
