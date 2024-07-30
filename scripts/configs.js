@@ -54,11 +54,11 @@ const getConfigForEnvironment = async (environment) => {
       throw new Error(`Failed to fetch config for ${env}`);
     }
     configJSON = await configJSON.text();
-    /* eslint-disable-next-line no-use-before-define */
-    if (getAemAuthorEnv()) {
-      configJSON = {};
-    }
     window.sessionStorage.setItem(`config:${env}`, configJSON);
+  }
+  /* eslint-disable-next-line no-use-before-define */
+  if (getAemAuthorEnv()) {
+    configJSON = {};
   }
   return configJSON;
 };
