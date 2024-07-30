@@ -53,9 +53,10 @@ const getConfigForEnvironment = async (environment) => {
     if (!configJSON.ok && !getAemAuthorEnv()) {
       throw new Error(`Failed to fetch config for ${env}`);
     }
+    configJSON = await configJSON.text();
     /* eslint-disable-next-line no-use-before-define */
-    if (!getAemAuthorEnv()) {
-      configJSON = await configJSON.text();
+    if (getAemAuthorEnv()) {
+      configJSON = {};
     }
     window.sessionStorage.setItem(`config:${env}`, configJSON);
   }
