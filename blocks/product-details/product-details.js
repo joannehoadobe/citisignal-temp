@@ -109,6 +109,8 @@ function setMetaTags(product) {
 }
 
 export default async function decorate(block) {
+  let isPlanProduct = false;
+
   if (!window.getProductPromise) {
     window.getProductPromise = getProduct(this.props.sku);
   }
@@ -120,6 +122,13 @@ export default async function decorate(block) {
     await errorGettingProduct();
     return Promise.reject();
   }
+
+  if (product) {
+    const attr = [...product.attributes].find((item) => item.name === 'cs_product_family' && item.value === 'Plans');
+    if (attr) isPlanProduct = true;
+  }
+
+  console.log("isPlanProduct: ", isPlanProduct);
 
   const langDefinitions = {
     default: {
