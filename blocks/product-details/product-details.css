@@ -43,6 +43,10 @@
   font-weight: 500;
 }
 
+.dropin-design .pdp-product__buttons button span {
+  text-align: center;
+}
+
 .dropin-design .dropin-button--primary:hover,
 .dropin-design .dropin-button--secondary:hover,
 .dropin-design .dropin-button--primary:focus,

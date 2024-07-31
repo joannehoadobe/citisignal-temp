@@ -194,30 +194,33 @@ body {
   margin: 0;
   color: var(--color-black-100);
   background-color: var(--background-color);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  /* display: grid; */
+  /* grid-template-rows: auto 1fr auto; */
+  display: flex;
+  flex-direction: column;
 }
 
-body.appear {
+/* body.appear {
   display: block;
-}
+} */
 
 body:not(.appear) {
   visibility: hidden;
 }
 
-header {
+/* header {
   height: var(--nav-height);
-}
+} */
 
 /* Need to adjust main because of positioning of the fixed header */
 main {
-  margin-top: 105px;
+  margin-top: 170px;
+  flex: 1;
 }
 
 @media (width < 768px) {
   main {
-    margin-top: 40px;
+    margin-top: 105px;
   }
 }
 
