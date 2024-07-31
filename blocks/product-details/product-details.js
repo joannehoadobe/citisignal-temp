@@ -13,6 +13,7 @@ import { getConfigValue } from '../../scripts/configs.js';
 import { fetchPlaceholders } from '../../scripts/aem.js';
 import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
 import initModal from './modal.js';
+import initToast from './toast.js';
 
 // Error Handling (404)
 async function errorGettingProduct(code = 404) {
@@ -252,7 +253,13 @@ export default async function decorate(block) {
                         return;
                       }
 
-                      await addProductsToCart([{ ...next.values }]);
+                      const addToCartResponse = await addProductsToCart([{ ...next.values }]);
+
+                      if (next.valid && !addToCartResponse.errors) {
+                        const { quantity } = next.values;
+                        const productMetaDescription = next.data.metaDescription;
+                        initToast(quantity, productMetaDescription);
+                      }
                     } catch (error) {
                       // eslint-disable-next-line no-console
                       console.warn('Error adding product to cart', error);

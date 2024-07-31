@@ -194,8 +194,6 @@ body {
   margin: 0;
   color: var(--color-black-100);
   background-color: var(--background-color);
-  /* display: grid; */
-  /* grid-template-rows: auto 1fr auto; */
   display: flex;
   flex-direction: column;
 }
@@ -212,7 +210,6 @@ body:not(.appear) {
   height: var(--nav-height);
 } */
 
-/* Need to adjust main because of positioning of the fixed header */
 main {
   margin-top: 170px;
   flex: 1;
