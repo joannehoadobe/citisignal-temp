@@ -15,9 +15,9 @@ export default function initToast(quantity, productMetaDescription) {
   toast.className = 'toast';
   toast.innerHTML = `
     <div class="toast-wrapper">
-      <span><img src="/icons/close-x.svg" title="close"></img></span>
-      <div>
-        <img src="/icons/checkmark.svg" title="checkmark"></img>
+      <span class="close-icon"><img src="/icons/close-x.svg" title="close"></span>
+      <div class="toast-content">
+        <img src="/icons/checkmark.svg" title="checkmark">
         <div>Success</div>
       </div>
       <p><strong>(${quantity}) ${productMetaDescription}</strong> was added to your cart</p>
@@ -32,11 +32,18 @@ export default function initToast(quantity, productMetaDescription) {
     toast.classList.add('show');
   }, 100);
 
-  // Hide the toast after 3 seconds
-  setTimeout(() => {
+  // Hide the toast after 5 seconds
+  const hideToast = () => {
     toast.classList.remove('show');
     setTimeout(() => {
       toastContainer.removeChild(toast);
     }, 500); // Match this to the CSS transition duration
-  }, 4000);
+  };
+
+  // Hide toast on close icon click
+  const closeIcon = toast.querySelector('.close-icon');
+  closeIcon.addEventListener('click', hideToast);
+
+  // Automatically hide the toast after 5 seconds
+  setTimeout(hideToast, 5000);
 }

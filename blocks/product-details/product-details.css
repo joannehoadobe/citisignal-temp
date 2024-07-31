@@ -270,7 +270,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border-left: 4px solid #53824C;
 }
 
 .toast {
@@ -279,6 +278,7 @@
   min-height: 120px;
   width: 100%;
   background-color: #EFF5EF;
+  border-left: 4px solid #53824C;
   color: #000;
   text-align: left;
   padding: 16px;
