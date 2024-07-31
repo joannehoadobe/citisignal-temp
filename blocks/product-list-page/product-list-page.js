@@ -5,12 +5,10 @@ export default async function decorate(block) {
   // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
   await import('/scripts/widgets/search.js');
 
-  // const { category, urlpath, type } = readBlockConfig(block);
+  const { category, urlpath, type } = readBlockConfig(block);
   // block.textContent = '';
   const plpAttributes = block.attributes;
   const isAemAuthor = getAemAuthorEnv();
-  const { urlpath, category, type } = readBlockConfig(block);
-  // block.textContent = '';
   if (!isAemAuthor) {
     block.textContent = '';
   } else if (isAemAuthor && plpAttributes && plpAttributes.getNamedItem('data-aue-resource')) {
