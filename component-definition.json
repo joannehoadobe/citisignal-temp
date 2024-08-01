@@ -219,7 +219,7 @@
                     "name": "Recommended Products",
                     "model": "recommended-products",
                     "key-value": true,
-                    "Service": "Enter the service path here"
+                    "link": "Enter the service path here"
                   }
                 }
               }
