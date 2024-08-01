@@ -548,140 +548,25 @@
       ]
     },
     {
-      "id": "product-details-xwalk",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "sectionText",
-          "label": "Section Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "sectionTextType",
-          "label": "Text Type",
-          "value": "strong"
-        }
-      ]
-    },
-    {
       "id": "product-details",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
-          "name": "sectionText",
-          "label": "Section Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "sectionType",
-          "label": "Section Type",
-          "value": "strong"
-        }
-      ]
-    },
-    {
-      "id": "product-details-item",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "fred",
-          "label": "Key",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageAlt",
-          "label": "Key Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "link",
-          "label": "Same here",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "text",
-          "label": "Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "loadingText",
-          "label": "Loading Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "icon",
-          "label": "Icon",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "variant",
-          "label": "Variant",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "layout",
-          "label": "Layout",
+          "name": "date",
+          "label": "Date",
           "value": ""
         }
       ]
     },
     {
-      "id": "product-details-alt",
+      "id": "recommended-products",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
-          "name": "text",
-          "label": "Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "loadingText",
-          "label": "Loading Text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "icon",
-          "label": "Icon",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "variant",
-          "label": "Variant",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "layout",
-          "label": "Layout",
+          "name": "Service",
+          "label": "Service",
           "value": ""
         }
       ]

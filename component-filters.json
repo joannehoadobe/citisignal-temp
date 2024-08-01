@@ -32,19 +32,7 @@
         "product-list-page",
         "enrichment",
         "product-details",
-        "product-details-xwalk"
-      ]
-    },
-    {
-      "id": "product-details",
-      "components": [
-        "product-details-item"
-      ]
-    },
-    {
-      "id": "product-details-xwalk",
-      "components": [
-        "product-details-item"
+        "recommended-products"
       ]
     },
     {
