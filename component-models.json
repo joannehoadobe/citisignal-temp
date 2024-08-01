@@ -563,9 +563,9 @@
       "id": "recommended-products",
       "fields": [
         {
-          "component": "text",
+          "component": "aem-content",
           "valueType": "string",
-          "name": "Service",
+          "name": "link",
           "label": "Service",
           "value": ""
         }
