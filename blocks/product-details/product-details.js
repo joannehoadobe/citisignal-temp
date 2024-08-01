@@ -244,21 +244,19 @@ export default async function decorate(block) {
                       // Plans flow
                       if (isPlanProduct) {
                         initModal(next, state);
-                      }
-
-                      state.set('adding', true);
-                      if (!next.valid) {
-                        // eslint-disable-next-line no-console
-                        console.warn('Invalid product', next.values);
-                        return;
-                      }
-
-                      const addToCartResponse = await addProductsToCart([{ ...next.values }]);
-
-                      if (next.valid && !addToCartResponse.errors) {
-                        const { quantity } = next.values;
-                        const productMetaDescription = next.data.metaDescription;
-                        initToast(quantity, productMetaDescription);
+                      } else {
+                        state.set('adding', true);
+                        if (!next.valid) {
+                          // eslint-disable-next-line no-console
+                          console.warn('Invalid product', next.values);
+                          return;
+                        }
+                        const addToCartResponse = await addProductsToCart([{ ...next.values }]);
+                        if (next.valid && !addToCartResponse.errors) {
+                          const { quantity } = next.values;
+                          const productMetaDescription = next.data.metaDescription;
+                          initToast(quantity, productMetaDescription);
+                        }
                       }
                     } catch (error) {
                       // eslint-disable-next-line no-console

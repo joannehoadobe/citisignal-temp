@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { addProductsToCart } from '@dropins/storefront-cart/api.js';
+import initToast from './toast.js';
 
 export default function initModal(next, state) {
   // Check if modal already exists
@@ -44,7 +45,12 @@ export default function initModal(next, state) {
           return;
         }
 
-        await addProductsToCart([{ ...next.values }]);
+        const addToCartResponse = await addProductsToCart([{ ...next.values }]);
+        if (next.valid && !addToCartResponse.errors) {
+          const { quantity } = next.values;
+          const productMetaDescription = next.data.metaDescription;
+          initToast(quantity, productMetaDescription);
+        }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.warn('Error adding product to cart', error);
