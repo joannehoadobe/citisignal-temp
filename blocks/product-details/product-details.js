@@ -12,6 +12,8 @@ import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js'
 import { getConfigValue } from '../../scripts/configs.js';
 import { fetchPlaceholders } from '../../scripts/aem.js';
 import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
+import initModal from './modal.js';
+import initToast from './toast.js';
 
 // Error Handling (404)
 async function errorGettingProduct(code = 404) {
@@ -109,6 +111,8 @@ function setMetaTags(product) {
 }
 
 export default async function decorate(block) {
+  let isPlanProduct = false;
+
   if (!window.getProductPromise) {
     window.getProductPromise = getProduct(this.props.sku);
   }
@@ -119,6 +123,11 @@ export default async function decorate(block) {
   if (!product) {
     await errorGettingProduct();
     return Promise.reject();
+  }
+
+  if (product) {
+    const attr = [...product.attributes].find((item) => item.name === 'cs_product_family' && item.value === 'Plans');
+    if (attr) isPlanProduct = true;
   }
 
   const langDefinitions = {
@@ -232,14 +241,23 @@ export default async function decorate(block) {
                   disabled: adding || !next.data.inStock,
                   onClick: async () => {
                     try {
-                      state.set('adding', true);
-                      if (!next.valid) {
-                        // eslint-disable-next-line no-console
-                        console.warn('Invalid product', next.values);
-                        return;
+                      // Plans flow
+                      if (isPlanProduct) {
+                        initModal(next, state);
+                      } else {
+                        state.set('adding', true);
+                        if (!next.valid) {
+                          // eslint-disable-next-line no-console
+                          console.warn('Invalid product', next.values);
+                          return;
+                        }
+                        const addToCartResponse = await addProductsToCart([{ ...next.values }]);
+                        if (next.valid && !addToCartResponse.errors) {
+                          const { quantity } = next.values;
+                          const productMetaDescription = next.data.metaDescription;
+                          initToast(quantity, productMetaDescription);
+                        }
                       }
-
-                      await addProductsToCart([{ ...next.values }]);
                     } catch (error) {
                       // eslint-disable-next-line no-console
                       console.warn('Error adding product to cart', error);
