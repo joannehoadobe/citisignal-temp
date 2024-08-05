@@ -33,7 +33,8 @@
         "enrichment",
         "product-details",
         "recommended-products",
-        "commerce-cart"
+        "commerce-cart",
+        "commerce-checkout"
       ]
     },
     {
