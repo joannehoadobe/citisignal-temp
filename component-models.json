@@ -596,5 +596,18 @@
           "readOnly": true
         }
       ]
+    },
+    {
+      "id": "commerce-order-confirmation",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "placeholder",
+          "label": "Placeholder",
+          "value": "No configs for Commerce Order Confirmation",
+          "readOnly": true
+        }
+      ]
     }
   ]
