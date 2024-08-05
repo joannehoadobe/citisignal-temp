@@ -257,6 +257,10 @@
             {
               "name": "Social Media",
               "value": "social-media"
+            },
+            {
+              "name": "Default Width, Top Divider (Order Conf)",
+              "value": "default-width top-divider"
             }
           ]
         }
