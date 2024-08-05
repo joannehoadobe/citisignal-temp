@@ -579,7 +579,7 @@
           "valueType": "string",
           "name": "placeholder",
           "label": "Placeholder",
-          "value": "",
+          "value": "No configs for Commerce Cart",
           "readOnly": true
         }
       ]
