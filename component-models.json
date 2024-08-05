@@ -8,7 +8,7 @@
           "label": "Title"
         },
         {
-          "component": "text-area",
+          "component": "text",
           "name": "description",
           "label": "Description"
         },
