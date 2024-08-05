@@ -235,7 +235,7 @@
                   "template": {
                     "name": "Commerce Cart",
                     "model": "commerce-cart",
-                    "test": "Placeholder"
+                    "placeholder": "No configs for Commerce Cart"
                   }
                 }
               }
