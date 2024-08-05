@@ -34,7 +34,8 @@
         "product-details",
         "recommended-products",
         "commerce-cart",
-        "commerce-checkout"
+        "commerce-checkout",
+        "commerce-order-confirmation"
       ]
     },
     {
