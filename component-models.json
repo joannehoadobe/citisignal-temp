@@ -260,7 +260,7 @@
             },
             {
               "name": "Default Width, Top Divider (Order Conf)",
-              "value": "default-width top-divider"
+              "value": "default-width, top-divider"
             }
           ]
         }
