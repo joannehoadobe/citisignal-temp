@@ -160,83 +160,6 @@
       ]
     },
     {
-      "id": "accordion-item",
-      "fields": [
-        {
-          "component": "richtext",
-          "name": "accordianLabel",
-          "value": "",
-          "label": "Item Label",
-          "valueType": "string"
-        },
-        {
-          "component": "richtext",
-          "name": "accordianBody",
-          "value": "",
-          "label": "Item Body",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "pressRelease",
-          "label": "Press Release",
-          "multi": false
-        },
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "financialSupplement",
-          "label": "Financial Supplement",
-          "multi": false
-        },
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "presentation",
-          "label": "Presentation",
-          "multi": false
-        }
-      ]
-    },
-    {
-      "id": "card",
-      "fields": [
-        {
-          "component": "aem-content",
-          "name": "reference",
-          "value": "",
-          "label": "Article",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "cardCategory",
-          "value": "",
-          "label": "Category",
-          "valueType": "string",
-          "options": [
-            {
-              "value": "press release",
-              "name": "Press Release"
-            },
-            {
-              "value": "health & wellness",
-              "name": "Health & Wellness"
-            },
-            {
-              "value": "technology & innovation",
-              "name": "Technology & Innovation"
-            },
-            {
-              "value": "perspectives",
-              "name": "Perspectives"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "section",
       "fields": [
         {
@@ -611,6 +534,83 @@
           "label": "Placeholder",
           "value": "No configs for Commerce Order Confirmation",
           "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "accordion-item",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "accordianLabel",
+          "value": "",
+          "label": "Item Label",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "accordianBody",
+          "value": "",
+          "label": "Item Body",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "pressRelease",
+          "label": "Press Release",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "financialSupplement",
+          "label": "Financial Supplement",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "presentation",
+          "label": "Presentation",
+          "multi": false
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "fields": [
+        {
+          "component": "aem-content",
+          "name": "reference",
+          "value": "",
+          "label": "Article",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "cardCategory",
+          "value": "",
+          "label": "Category",
+          "valueType": "string",
+          "options": [
+            {
+              "value": "press release",
+              "name": "Press Release"
+            },
+            {
+              "value": "health & wellness",
+              "name": "Health & Wellness"
+            },
+            {
+              "value": "technology & innovation",
+              "name": "Technology & Innovation"
+            },
+            {
+              "value": "perspectives",
+              "name": "Perspectives"
+            }
+          ]
         }
       ]
     }
