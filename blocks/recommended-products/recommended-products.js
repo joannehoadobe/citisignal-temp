@@ -4,9 +4,14 @@ import { jsx } from '../../scripts/scripts.js';
 export default async function decorate(block) {
   const isAemXwalk = getMetadata('aemxwalk');
   if (isAemXwalk && isAemXwalk === 'aemxwalk') {
+    const { href } = window.location;
     const test1 = block.querySelector('a');
     /* eslint-disable-next-line no-console */
     console.log(`In recommended-products.js, block: ${test1}`);
+    /* eslint-disable-next-line no-console */
+    console.log(`In recommended-products.js, link href: ${test1.href}`);
+    /* eslint-disable-next-line no-console */
+    console.log(`In recommended-products.js, window.location: ${href}`);
   }
   const link = block.querySelector('a');
   const response = await fetch(link.href);
