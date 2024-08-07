@@ -490,11 +490,17 @@
       "id": "recommended-products",
       "fields": [
         {
-          "component": "aem-content",
+          "component": "select",
           "valueType": "string",
           "name": "link",
           "label": "Service",
-          "value": ""
+          "value": "",
+          "options": [
+            {
+              "name": "Default",
+              "value": "/products/recommended-products.json"
+            }
+          ]
         }
       ]
     },
