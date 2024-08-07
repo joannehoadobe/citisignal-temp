@@ -1,17 +1,22 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
 import { jsx } from '../../scripts/scripts.js';
+import { getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
   const isAemXwalk = getMetadata('aemxwalk');
+  const isAemAuthor = getAemAuthorEnv();
   if (isAemXwalk && isAemXwalk === 'aemxwalk') {
     const { href } = window.location;
-    const test1 = block.querySelector('a');
+    const originalLink = block.querySelector('a');
     /* eslint-disable-next-line no-console */
-    console.log(`In recommended-products.js, block: ${test1}`);
+    console.log(`In recommended-products.js, block: ${originalLink}`);
     /* eslint-disable-next-line no-console */
-    console.log(`In recommended-products.js, link href: ${test1.href}`);
+    console.log(`In recommended-products.js, link href: ${originalLink.href}`);
     /* eslint-disable-next-line no-console */
     console.log(`In recommended-products.js, window.location: ${href}`);
+    if (!isAemAuthor) {
+      originalLink.href = `${window.location.origin}/${originalLink.href}`;
+    }
   }
   const link = block.querySelector('a');
   const response = await fetch(link.href);
