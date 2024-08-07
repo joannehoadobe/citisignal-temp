@@ -1,7 +1,13 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
 import { jsx } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const isAemXwalk = getMetadata('aemxwalk');
+  if (isAemXwalk && isAemXwalk === 'aemxwalk') {
+    const test1 = block.querySelector('a');
+    /* eslint-disable-next-line no-console */
+    console.log(`In recommended-products.js, block: ${test1}`);
+  }
   const link = block.querySelector('a');
   const response = await fetch(link.href);
 
