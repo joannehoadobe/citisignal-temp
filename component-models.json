@@ -482,16 +482,7 @@
           "valueType": "string",
           "name": "date",
           "label": "Date",
-          "value": "",
-          "hidden": true
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "placeholder",
-          "label": "Placeholder",
-          "value": "No configs yet for Product Details",
-          "readOnly": true
+          "value": ""
         }
       ]
     },
