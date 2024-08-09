@@ -485,6 +485,7 @@
           "description": "Enter a valid date in the format MM/DD/YYYY",
           "required": true,
           "validation": {
+            "minLength": 8,
             "regExp": "^foo:.*",
             "customErrorMsg": "Enter a valid date in the format MM/DD/YYYY"
           },
