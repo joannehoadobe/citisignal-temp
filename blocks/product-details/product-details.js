@@ -172,6 +172,18 @@ export default async function decorate(block) {
   const models = {
     ProductDetails: {
       initialData: { ...product },
+      transform: (data) => {
+        data.images.forEach((image) => {
+          // Extract the image file name from the URL
+          const imageUrlParts = image.url.split('/');
+          const imageFileName = imageUrlParts[imageUrlParts.length - 1];
+          // Update the URL to the new format
+          image.url = `/images/products/${imageFileName}`;
+        });
+        return {
+          ...data,
+        };
+      },
     },
   };
 
