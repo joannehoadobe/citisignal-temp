@@ -478,16 +478,14 @@
       "id": "product-details",
       "fields": [
         {
-          "component": "date",
-          "valueType": "date",
+          "component": "text",
+          "valueType": "string",
           "name": "date",
           "label": "Date",
           "description": "Enter a valid date in the format MM/DD/YYYY",
           "required": true,
-          "placeholder": "MM/DD/YYYY",
-          "displayFormat": "MM/DD/YYYY",
-          "valueFormat": null,
           "validation": {
+            "regExp": "^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\\d{4}$",
             "customErrorMsg": "Enter a valid date in the format MM/DD/YYYY"
           },
           "value": ""
