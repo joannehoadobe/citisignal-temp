@@ -486,7 +486,7 @@
           "required": true,
           "placeholder": "MM/DD/YYYY",
           "displayFormat": "MM/DD/YYYY",
-          "valueFormat": "MM/DD/YYYY",
+          "valueFormat": null,
           "validation": {
             "customErrorMsg": "Enter a valid date in the format MM/DD/YYYY"
           },
