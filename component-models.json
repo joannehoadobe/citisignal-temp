@@ -478,7 +478,7 @@
       "id": "product-details",
       "fields": [
         {
-          "component": "date-time",
+          "component": "date",
           "valueType": "date",
           "name": "date",
           "label": "Date",
