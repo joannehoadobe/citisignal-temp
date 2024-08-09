@@ -9,11 +9,10 @@
       "/content/citisignal-edge-delivery/redirects:/redirects.json",
       "/content/citisignal-edge-delivery/placeholders:/placeholders.json",
       "/content/citisignal-edge-delivery/products/recommended-products:/products/recommended-products.json",
-      "/content/dam/citisignal/images/products/:/images/products"
+      "/content/dam/citisignal/images/products/:/images/products/"
     ],
     "includes": [
       "/content/citisignal-edge-delivery",
-      "/content/dam/citisignal/images/products/",
-      "/content/dam/images/"
+      "/content/dam/citisignal/images/products/"
     ]
 }
