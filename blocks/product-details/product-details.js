@@ -350,5 +350,6 @@ export default async function decorate(block) {
   const placeholderWrapper = document.createElement('div');
   placeholderWrapper.className = 'product-details-placeholder-wrapper';
   placeholderWrapper.textContent = 'Product Details block AEM author';
-  return block.append(placeholderWrapper);
+  block.appendChild(placeholderWrapper);
+  return block;
 }
