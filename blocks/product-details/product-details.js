@@ -345,6 +345,8 @@ export default async function decorate(block) {
       }, 0);
     });
   }
+  /* eslint-disable-next-line no-console */
+  console.log(`in product-details block, block innerHTML = ${block.innerHTML}, block.textContent = ${block.textContent}`);
   const placeholderWrapper = document.createElement('div');
   placeholderWrapper.className = 'product-details-placeholder-wrapper';
   placeholderWrapper.textContent = 'Product Details block AEM author';
