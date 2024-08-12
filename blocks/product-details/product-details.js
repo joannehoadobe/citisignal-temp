@@ -345,4 +345,5 @@ export default async function decorate(block) {
       }, 0);
     });
   }
+  return errorGettingProduct();
 }
