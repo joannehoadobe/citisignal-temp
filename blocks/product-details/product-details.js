@@ -345,5 +345,8 @@ export default async function decorate(block) {
       }, 0);
     });
   }
-  return block.appendChild('<div>Product Details block</div>');
+  const placeholderWrapper = document.createElement('div');
+  placeholderWrapper.className = 'product-details-placeholder-wrapper';
+  placeholderWrapper.textContent = 'Product Details block AEM author';
+  return block.append(placeholderWrapper);
 }
