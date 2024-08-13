@@ -30,3 +30,7 @@
 .dropin-design .order-confirmation-details {
   border: none;
 }
+
+.dropin-design .order-confirmation .order-confirmation-footer {
+  text-align: start;
+}
