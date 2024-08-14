@@ -8,7 +8,6 @@
       "/content/citisignal-edge-delivery/configs-dev:/configs-dev.json",
       "/content/citisignal-edge-delivery/redirects:/redirects.json",
       "/content/citisignal-edge-delivery/placeholders:/placeholders.json",
-      "/content/citisignal-edge-delivery/enrichment/enrichment:/enrichment/enrichment.json",
       "/content/citisignal-edge-delivery/products/recommended-products:/products/recommended-products.json",
       "/content/dam/citisignal/images/products/:/images/products/"
     ],
