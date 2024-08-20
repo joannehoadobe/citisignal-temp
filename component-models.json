@@ -579,12 +579,28 @@
           "multi": true
         },
         {
-          "component": "reference",
-          "valueType": "string",
-          "name": "image",
-          "label": "Image",
-          "multi": false,
-          "condition": { "==": [{ "var": "classes" }, "promo"] }
+          "component": "container",
+          "name": "promo-columns",
+          "label": "Columns (Promo)",
+          "collapsible": false,
+          "multi": true,
+          "condition": { "==": [{ "var": "classes" }, "promo"] },
+          "fields": [
+            {
+              "component": "reference",
+              "valueType": "string",
+              "name": "image",
+              "label": "Image",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "imageText",
+              "label": "Text",
+              "valueType": "string",
+              "multi": false
+            }
+          ]
         }
       ]
     },
