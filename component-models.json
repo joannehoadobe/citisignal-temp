@@ -591,6 +591,58 @@
           ]
         },
         {
+          "component": "select",
+          "name": "gridIconOne_icon",
+          "value": "",
+          "label": "Icon",
+          "valueType": "string",
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] },
+          "options": [
+            {
+              "name": "Home",
+              "value": ":delivery-home:"
+            },
+            {
+              "name": "Truck",
+              "value": ":delivery-truck:"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "gridIconOne_text",
+          "label": "Text",
+          "valueType": "string",
+          "multi": false,
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] }
+        },
+        {
+          "component": "select",
+          "name": "gridIconTwo_icon",
+          "value": "",
+          "label": "Icon",
+          "valueType": "string",
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] },
+          "options": [
+            {
+              "name": "Home",
+              "value": ":delivery-home:"
+            },
+            {
+              "name": "Truck",
+              "value": ":delivery-truck:"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "gridIconTwo_text",
+          "label": "Text",
+          "valueType": "string",
+          "multi": false,
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] }
+        },
+        {
           "component": "container",
           "name": "grid-icon-columns-left",
           "label": "Columns (Grid Icons)",
