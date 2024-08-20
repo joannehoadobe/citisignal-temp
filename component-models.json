@@ -592,7 +592,7 @@
         },
         {
           "component": "container",
-          "name": "grid-icon-columns",
+          "name": "grid-icon-columns-left",
           "label": "Columns (Grid Icons)",
           "collapsible": false,
           "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] },
@@ -620,7 +620,16 @@
               "label": "Text",
               "valueType": "string",
               "multi": false
-            },
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "grid-icon-columns-right",
+          "label": "Columns (Grid Icons)",
+          "collapsible": false,
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] },
+          "fields": [
             {
               "component": "select",
               "name": "gridIconRight_icon",
