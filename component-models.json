@@ -547,6 +547,25 @@
       ]
     },
     {
+      "id": "columns",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "label": "style",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string",
+          "multi": true
+        }
+      ]
+    },
+    {
       "id": "accordion-item",
       "fields": [
         {
