@@ -566,7 +566,7 @@
             },
             {
               "name": "Grid with Icons",
-              "value": "grid placeholder-icons"
+              "value": "grid--placeholder-icons"
             },
             {
               "name": "Promo",
@@ -596,7 +596,7 @@
           "label": "Columns (Grid Icons)",
           "collapsible": false,
           "multi": true,
-          "condition": { "==": [{ "var": "classes" }, "grid placeholder-icons"] },
+          "condition": { "==": [{ "var": "classes" }, "grid--placeholder-icons"] },
           "fields": [
             {
               "component": "select",
