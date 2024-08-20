@@ -22,6 +22,10 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-img-col');
         }
       }
+      // test
+      if (!col.textContent.trim()) {
+        col.remove();
+      }
     });
   });
 }
