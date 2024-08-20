@@ -571,12 +571,20 @@
           ]
         },
         {
-          "component": "text",
-          "name": "text",
-          "value": "",
-          "label": "Text",
-          "valueType": "string",
-          "multi": true
+          "component": "container",
+          "name": "grid-columns",
+          "label": "Columns (Grid)",
+          "collapsible": false,
+          "condition": { "==": [{ "var": "classes" }, "grid"] },
+          "fields": [
+            {
+              "component": "richtext",
+              "name": "gridText",
+              "label": "Text",
+              "valueType": "string",
+              "multi": true
+            }
+          ]
         },
         {
           "component": "container",
@@ -588,13 +596,13 @@
             {
               "component": "reference",
               "valueType": "string",
-              "name": "promo",
+              "name": "promoEnrichment_image",
               "label": "Image",
               "multi": false
             },
             {
               "component": "text",
-              "name": "promo_description",
+              "name": "promoEnrichment_description",
               "label": "Text",
               "valueType": "string",
               "multi": false
