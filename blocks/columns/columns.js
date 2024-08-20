@@ -24,7 +24,7 @@ export default function decorate(block) {
       }
       // test
       if (!col.textContent.trim()) {
-        col.remove();
+        row.remove();
       }
     });
   });
