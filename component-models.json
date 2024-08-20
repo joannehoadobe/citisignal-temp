@@ -565,6 +565,10 @@
               "value": "grid"
             },
             {
+              "name": "Grid with Icons",
+              "value": "grid, placeholder-icons"
+            },
+            {
               "name": "Promo",
               "value": "promo"
             }
@@ -583,6 +587,39 @@
               "label": "Text",
               "valueType": "string",
               "multi": true
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "grid-icon-columns",
+          "label": "Columns (Grid Icons)",
+          "collapsible": false,
+          "condition": { "==": [{ "var": "classes" }, "grid, placeholder-icons"] },
+          "fields": [
+            {
+              "component": "select",
+              "name": "gridIcon_icon",
+              "value": "",
+              "label": "Icon",
+              "valueType": "string",
+              "options": [
+                {
+                  "name": "Home",
+                  "value": ":delivery-home:"
+                },
+                {
+                  "name": "Truck",
+                  "value": ":delivery-truck:"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "name": "gridIcon_text",
+              "label": "Text",
+              "valueType": "string",
+              "multi": false
             }
           ]
         },
