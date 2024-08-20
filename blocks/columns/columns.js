@@ -1,6 +1,8 @@
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
+  /* eslint-disable-next-line no-console */
+  console.log(`in columns block, in classes = ${block.classList}`);
 
   // setup image columns
   [...block.children].forEach((row) => {
