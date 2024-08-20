@@ -586,7 +586,7 @@
               "name": "gridLeftText",
               "label": "Text",
               "valueType": "string",
-              "multi": true
+              "multi": false
             }
           ]
         },
