@@ -222,8 +222,10 @@ export function renderPrice(product, format, html = (strings, ...values) => stri
 
 /* PDP specific functionality */
 
-export function getSkuFromUrl() {
-  const path = window.location.pathname;
+export function getSkuFromUrl(defaultSku) {
+  // const defaultSku = defaultSku
+  console.log("defaultSku: ", defaultSku);
+  const path = defaultSku ? `/products/${defaultSku}` : window.location.pathname;
   let result;
 
   if (path.startsWith('/experiments/')) {

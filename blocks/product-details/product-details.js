@@ -117,17 +117,23 @@ export default async function decorate(block) {
     window.getProductPromise = getProduct(this.props.sku);
   }
 
-  const [product, placeholders] = await Promise.all([
+  let product;
+  const [tempProduct, placeholders] = await Promise.all([
     window.getProductPromise, fetchPlaceholders()]);
+  product = tempProduct;
 
-  if (!product) {
-    await errorGettingProduct();
-    return Promise.reject();
-  }
-
+  let productSku;
   if (product) {
+    // product available
     const attr = [...product.attributes].find((item) => item.name === 'cs_product_family' && item.value === 'Plans');
     if (attr) isPlanProduct = true;
+    productSku = getSkuFromUrl();
+  } else {
+    // no product found, no sku
+    product = await getProduct('samsung-galaxy-S22-ultra'); // temporary until doc based is setup
+    productSku = 'samsung-galaxy-S22-ultra'; // temporary until doc based is setup
+    // await errorGettingProduct();
+    // return Promise.reject();
   }
 
   const langDefinitions = {
@@ -224,7 +230,7 @@ export default async function decorate(block) {
     setTimeout(async () => {
       try {
         await productRenderer.render(ProductDetails, {
-          sku: getSkuFromUrl(),
+          sku: productSku,
           carousel: {
             controls: 'thumbnailsColumn',
             arrowsOnMainImage: true,
