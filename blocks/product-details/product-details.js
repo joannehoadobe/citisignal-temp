@@ -177,8 +177,10 @@ export default async function decorate(block) {
           // Extract the image file name from the URL
           const imageUrlParts = image.url.split('/');
           const imageFileName = imageUrlParts[imageUrlParts.length - 1];
+          const modifiedImageFileName = imageFileName.replace(/_/g, '-');
+
           // Update the URL to the new format
-          image.url = `/images/products/${imageFileName}`;
+          image.url = `/images/products/${modifiedImageFileName}`;
         });
         return {
           ...data,
