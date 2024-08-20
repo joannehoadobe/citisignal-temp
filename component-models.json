@@ -594,7 +594,7 @@
             },
             {
               "component": "text",
-              "name": "imageText",
+              "name": "image-text",
               "label": "Text",
               "valueType": "string",
               "multi": false
