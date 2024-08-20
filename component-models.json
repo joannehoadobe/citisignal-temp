@@ -577,6 +577,14 @@
           "label": "Text",
           "valueType": "string",
           "multi": true
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false,
+          "condition": { "==": [{ "var": "classes" }, "promo"] }
         }
       ]
     },
