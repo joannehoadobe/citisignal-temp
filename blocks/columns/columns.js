@@ -1,3 +1,5 @@
+import { getAemAuthorEnv } from '../../scripts/configs.js';
+
 export default function decorate(block) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < block.classList.length; i++) {
@@ -28,4 +30,10 @@ export default function decorate(block) {
       }
     });
   });
+
+  const isAemAuthor = getAemAuthorEnv();
+  if (isAemAuthor) {
+    /* eslint-disable-next-line no-console */
+    console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
+  }
 }
