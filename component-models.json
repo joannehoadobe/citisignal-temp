@@ -591,21 +591,20 @@
           "name": "promo-columns",
           "label": "Columns (Promo)",
           "collapsible": false,
+          "multi": true,
           "condition": { "==": [{ "var": "classes" }, "promo"] },
           "fields": [
             {
               "component": "reference",
               "valueType": "string",
               "name": "promoEnrichment_image",
-              "label": "Image",
-              "multi": false
+              "label": "Image"
             },
             {
               "component": "text",
               "name": "promoEnrichment_description",
               "label": "Text",
-              "valueType": "string",
-              "multi": false
+              "valueType": "string"
             }
           ]
         }
