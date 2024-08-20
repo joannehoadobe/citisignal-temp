@@ -714,7 +714,6 @@
           "name": "promo-columns-right",
           "label": "Columns (Promo)",
           "collapsible": false,
-          "multi": true,
           "condition": { "==": [{ "var": "classes" }, "promo"] },
           "fields": [
             {
