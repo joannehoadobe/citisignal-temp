@@ -588,13 +588,13 @@
             {
               "component": "reference",
               "valueType": "string",
-              "name": "image",
+              "name": "promo",
               "label": "Image",
               "multi": false
             },
             {
               "component": "text",
-              "name": "image-text",
+              "name": "promoDescription",
               "label": "Text",
               "valueType": "string",
               "multi": false

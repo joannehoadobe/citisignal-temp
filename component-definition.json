@@ -280,6 +280,7 @@
                   "template": {
                     "name": "Columns",
                     "model": "columns",
+                    "key-value": true,
                     "classes": "grid"
                   }
                 }
