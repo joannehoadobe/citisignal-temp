@@ -550,10 +550,21 @@
       "id": "columns",
       "fields": [
         {
-          "component": "text",
+          "component": "select",
+          "name": "classes",
           "valueType": "string",
-          "label": "style",
-          "value": ""
+          "label": "Style",
+          "value": "",
+          "options": [
+            {
+              "name": "Grid",
+              "value": "grid"
+            },
+            {
+              "name": "Promo",
+              "value": "promo"
+            }
+          ]
         },
         {
           "component": "richtext",

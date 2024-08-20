@@ -280,7 +280,7 @@
                   "template": {
                     "name": "Columns",
                     "model": "columns",
-                    "style": "grid"
+                    "classes": "grid"
                   }
                 }
               }
