@@ -576,17 +576,49 @@
         },
         {
           "component": "container",
-          "name": "grid-columns",
+          "name": "grid-columns-left",
           "label": "Columns (Grid)",
           "collapsible": false,
           "condition": { "==": [{ "var": "classes" }, "grid"] },
           "fields": [
             {
               "component": "richtext",
-              "name": "gridText",
+              "name": "gridLeftText",
               "label": "Text",
               "valueType": "string",
               "multi": true
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "grid-columns-middle",
+          "label": "Columns (Grid)",
+          "collapsible": false,
+          "condition": { "==": [{ "var": "classes" }, "grid"] },
+          "fields": [
+            {
+              "component": "richtext",
+              "name": "gridMiddleText",
+              "label": "Text",
+              "valueType": "string",
+              "multi": false
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "grid-columns-right",
+          "label": "Columns (Grid)",
+          "collapsible": false,
+          "condition": { "==": [{ "var": "classes" }, "grid"] },
+          "fields": [
+            {
+              "component": "richtext",
+              "name": "gridRightText",
+              "label": "Text",
+              "valueType": "string",
+              "multi": false
             }
           ]
         },
@@ -658,7 +690,7 @@
         },
         {
           "component": "container",
-          "name": "promo-columns",
+          "name": "promo-columns-left",
           "label": "Columns (Promo)",
           "collapsible": false,
           "multi": true,
@@ -667,12 +699,34 @@
             {
               "component": "reference",
               "valueType": "string",
-              "name": "promoEnrichment_image",
+              "name": "promoEnrichmentLeft_image",
               "label": "Image"
             },
             {
               "component": "text",
-              "name": "promoEnrichment_description",
+              "name": "promoEnrichmentLeft_description",
+              "label": "Text",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "promo-columns-right",
+          "label": "Columns (Promo)",
+          "collapsible": false,
+          "multi": true,
+          "condition": { "==": [{ "var": "classes" }, "promo"] },
+          "fields": [
+            {
+              "component": "reference",
+              "valueType": "string",
+              "name": "promoEnrichmentRight_image",
+              "label": "Image"
+            },
+            {
+              "component": "text",
+              "name": "promoEnrichmentRight_description",
               "label": "Text",
               "valueType": "string"
             }
