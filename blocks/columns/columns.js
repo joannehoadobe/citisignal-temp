@@ -1,11 +1,11 @@
 export default function decorate(block) {
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < block.classList.length; i++) {
-    if (block.classList[i].includes('grid--placeholder-icons')) {
-      block.classList.remove('grid--placeholder-icons');
-      block.classList.add('grid');
-    }
-  }
+  // // eslint-disable-next-line no-plusplus
+  // for (let i = 0; i < block.classList.length; i++) {
+  //   if (block.classList[i].includes('grid--placeholder-icons')) {
+  //     block.classList.remove('grid--placeholder-icons');
+  //     block.classList.add('grid');
+  //   }
+  // }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   /* eslint-disable-next-line no-console */
