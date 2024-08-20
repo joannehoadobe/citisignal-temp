@@ -2,6 +2,14 @@
   margin: 4rem 0;
 }
 
+.section.recommended-products-container .default-content-wrapper h5 {
+  font-weight: 600;
+}
+
+.section.recommended-products-container .default-content-wrapper h5::after {
+  content: unset;
+}
+
 .recommended-products .slider {
   display: flex;
   align-items: center;
