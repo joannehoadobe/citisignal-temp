@@ -180,6 +180,10 @@
             {
               "name": "Social Media",
               "value": "social-media"
+            },
+            {
+              "name": "PDP Enrichment",
+              "value": "pdp-enrichment"
             }
           ]
         }
