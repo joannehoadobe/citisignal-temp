@@ -595,6 +595,7 @@
           "name": "grid-icon-columns",
           "label": "Columns (Grid Icons)",
           "collapsible": false,
+          "multi": true,
           "condition": { "==": [{ "var": "classes" }, "grid placeholder-icons"] },
           "fields": [
             {
