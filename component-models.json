@@ -594,7 +594,7 @@
             },
             {
               "component": "text",
-              "name": "promoDescription",
+              "name": "promo_description",
               "label": "Text",
               "valueType": "string",
               "multi": false
