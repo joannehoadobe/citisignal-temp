@@ -224,7 +224,6 @@ export function renderPrice(product, format, html = (strings, ...values) => stri
 
 export function getSkuFromUrl(defaultSku) {
   // const defaultSku = defaultSku
-  console.log("defaultSku: ", defaultSku);
   const path = defaultSku ? `/products/${defaultSku}` : window.location.pathname;
   let result;
 
