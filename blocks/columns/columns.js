@@ -32,8 +32,11 @@ export default function decorate(block) {
   });
 
   const isAemAuthor = getAemAuthorEnv();
-  if (isAemAuthor) {
+  if (isAemAuthor && block.innerHTML.trim() === '' && block.childNodes && block.childNodes.length === 0) {
     /* eslint-disable-next-line no-console */
     console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
+    const authorBlock = document.createElement('div');
+    authorBlock.textContent = 'Columns block';
+    block.appendChild(authorBlock);
   }
 }
