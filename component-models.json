@@ -563,9 +563,16 @@
           "condition": { "==": [{ "var": "classes" }, "grid"] },
           "fields": [
             {
-              "component": "richtext",
-              "name": "gridLeftText",
-              "label": "Text",
+              "component": "text",
+              "name": "gridLeft_title",
+              "label": "Title",
+              "valueType": "string",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "gridLeft_description",
+              "label": "Description",
               "valueType": "string",
               "multi": false
             }
@@ -579,9 +586,16 @@
           "condition": { "==": [{ "var": "classes" }, "grid"] },
           "fields": [
             {
-              "component": "richtext",
-              "name": "gridMiddleText",
-              "label": "Text",
+              "component": "text",
+              "name": "gridMiddle_title",
+              "label": "Title",
+              "valueType": "string",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "gridMiddle_description",
+              "label": "Description",
               "valueType": "string",
               "multi": false
             }
@@ -595,9 +609,16 @@
           "condition": { "==": [{ "var": "classes" }, "grid"] },
           "fields": [
             {
-              "component": "richtext",
-              "name": "gridRightText",
-              "label": "Text",
+              "component": "text",
+              "name": "gridRight_title",
+              "label": "Title",
+              "valueType": "string",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "gridRight_description",
+              "label": "Description",
               "valueType": "string",
               "multi": false
             }
