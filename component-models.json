@@ -566,7 +566,7 @@
             },
             {
               "name": "Grid with Icons",
-              "value": "grid---placeholder-icons"
+              "value": "grid-placeholder-icons"
             },
             {
               "name": "Promo",
@@ -627,7 +627,7 @@
           "name": "grid-icon-columns-left",
           "label": "Columns (Grid Icons)",
           "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid---placeholder-icons"] },
+          "condition": { "==": [{ "var": "classes" }, "grid-placeholder-icons"] },
           "fields": [
             {
               "component": "select",
@@ -660,7 +660,7 @@
           "name": "grid-icon-columns-right",
           "label": "Columns (Grid Icons)",
           "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid---placeholder-icons"] },
+          "condition": { "==": [{ "var": "classes" }, "grid-placeholder-icons"] },
           "fields": [
             {
               "component": "select",

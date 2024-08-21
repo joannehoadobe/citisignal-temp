@@ -3,8 +3,8 @@ import { getAemAuthorEnv } from '../../scripts/configs.js';
 export default function decorate(block) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < block.classList.length; i++) {
-    if (block.classList[i].includes('grid---placeholder-icons')) {
-      block.classList.remove('grid---placeholder-icons');
+    if (block.classList[i].includes('grid-placeholder-icons')) {
+      block.classList.remove('grid-placeholder-icons');
       block.classList.add('grid');
     }
   }
