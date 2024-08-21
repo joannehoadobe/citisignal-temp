@@ -471,6 +471,51 @@
             "customErrorMsg": "Enter a valid date in the format MM/DD/YYYY"
           },
           "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "add-to-cart-btn-text",
+          "label": "Add To Cart Button Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "add-to-wishlist-btn-text",
+          "label": "Add To Wishlist Button Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "share-btn-text",
+          "label": "Share Button Text",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "carousel-layout",
+          "label": "Carousel Layout",
+          "value": "",
+          "options": [
+            {
+              "name": "Column",
+              "value": "column"
+            },
+            {
+              "name": "Row",
+              "value": "row"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "default-product",
+          "label": "Default Product",
+          "value": ""
         }
       ]
     },
