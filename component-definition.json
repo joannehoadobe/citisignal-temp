@@ -187,7 +187,9 @@
                     "name": "Product Details",
                     "model": "product-details",
                     "key-value": true,
-                    "date": "08/07/2024"
+                    "date": "08/07/2024",
+                    "carousel-layout": "column",
+                    "default-product": "apple-iphone-13/phone-13-pro"
                   }
                 }
               }
