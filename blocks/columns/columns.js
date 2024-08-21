@@ -1,6 +1,7 @@
 import { getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default function decorate(block) {
+  // this is for UE to use the same columns block no matter the layout
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < block.classList.length; i++) {
     if (block.classList[i].includes('grid-placeholder-icons')) {
@@ -10,8 +11,6 @@ export default function decorate(block) {
   }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
-  /* eslint-disable-next-line no-console */
-  console.log(`in columns block, in classes = ${block.classList}`);
 
   // setup image columns
   [...block.children].forEach((row) => {
@@ -24,7 +23,8 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-img-col');
         }
       }
-      // test
+      // this is to remove empty <div></div> because of UE
+      // using the same columns block
       if (!col.textContent.trim()) {
         row.remove();
       }
@@ -36,7 +36,7 @@ export default function decorate(block) {
     /* eslint-disable-next-line no-console */
     console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
     const authorBlock = document.createElement('div');
-    authorBlock.textContent = 'Columns block';
+    authorBlock.textContent = 'Columns block for enrichment';
     block.appendChild(authorBlock);
   }
 }
