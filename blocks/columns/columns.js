@@ -9,8 +9,10 @@ export default function decorate(block) {
       block.classList.add('grid');
     }
   }
-  const cols = [...block.firstElementChild.children];
-  block.classList.add(`columns-${cols.length}-cols`);
+  if (block.firstElementChild && block.firstElementChild.children) {
+    const cols = [...block.firstElementChild.children];
+    block.classList.add(`columns-${cols.length}-cols`);
+  }
 
   // setup image columns
   [...block.children].forEach((row) => {
@@ -25,8 +27,13 @@ export default function decorate(block) {
       }
       // this is to remove empty <div></div> because of UE
       // using the same columns block
-      if (!col.textContent.trim()) {
-        row.remove();
+      // if (!col.textContent.trim()) {
+      //   row.remove();
+      // }
+      // this is to remove the info-only <div></div> listing the style
+      // chosen in UE because it's not an actual 'content' block
+      if (col.textContent.includes('grid-layout') || col.textContent.includes('icon-layout') || col.textContent.includes('promo-layout')) {
+        col.remove();
       }
     });
   });
@@ -36,7 +43,7 @@ export default function decorate(block) {
     /* eslint-disable-next-line no-console */
     console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
     const authorBlock = document.createElement('div');
-    authorBlock.textContent = 'Columns block for enrichment';
+    authorBlock.textContent = 'Columns container for enrichment';
     block.appendChild(authorBlock);
   }
 }
