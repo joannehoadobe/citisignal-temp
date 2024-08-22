@@ -22,16 +22,16 @@ export default function decorate(block) {
     [...row.children].forEach((col) => {
       // eslint-disable-next-line no-console
       console.log(`col = ${col}, text content = ${col.textContent}`);
-      //     const pic = col.querySelector('picture');
-      //     if (pic) {
-      //       const picWrapper = pic.closest('div');
-      //       if (picWrapper && picWrapper.children.length === 1) {
-      //         // picture is only content in column
-      //         picWrapper.classList.add('columns-img-col');
-      //       }
-      //     }
+      const pic = col.querySelector('picture');
+      if (pic) {
+        const picWrapper = pic.closest('div');
+        if (picWrapper && picWrapper.children.length === 1) {
+          // picture is only content in column
+          picWrapper.classList.add('columns-img-col');
+        }
+      }
       // this is to remove ...
-      if (col.textContent.includes('text, grid-layout')) {
+      if (col.textContent.includes('grid-layout') || col.textContent.includes('icon-layout')) {
         col.remove();
       }
     });
