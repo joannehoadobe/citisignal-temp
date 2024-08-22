@@ -10,7 +10,7 @@ import ProductDetails from '@dropins/storefront-pdp/containers/ProductDetails.js
 // Libs
 import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js';
 import { getConfigValue } from '../../scripts/configs.js';
-import { fetchPlaceholders } from '../../scripts/aem.js';
+import { fetchPlaceholders, readBlockConfig } from '../../scripts/aem.js';
 import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
 import initModal from './modal.js';
 import initToast from './toast.js';
@@ -113,6 +113,9 @@ function setMetaTags(product) {
 export default async function decorate(block) {
   let isPlanProduct = false;
 
+  const blockConfig = readBlockConfig(block);
+  block.innerHTML = '';
+
   if (!window.getProductPromise) {
     window.getProductPromise = getProduct(this.props.sku);
   }
@@ -130,8 +133,8 @@ export default async function decorate(block) {
     productSku = getSkuFromUrl();
   } else {
     // no product found, no sku
-    product = await getProduct('samsung-galaxy-S22-ultra'); // temporary until doc based is setup
-    productSku = 'samsung-galaxy-S22-ultra'; // temporary until doc based is setup
+    product = await getProduct(blockConfig['default-product']); // temporary until doc based is setup
+    productSku = blockConfig['default-product']; // temporary until doc based is setup
     // await errorGettingProduct();
     // return Promise.reject();
   }
@@ -232,7 +235,7 @@ export default async function decorate(block) {
         await productRenderer.render(ProductDetails, {
           sku: productSku,
           carousel: {
-            controls: 'thumbnailsColumn',
+            controls: blockConfig['carousel-layout'] === 'column' ? 'thumbnailsColumn' : 'row',
             arrowsOnMainImage: true,
             mobile: true,
             peak: {
@@ -255,7 +258,7 @@ export default async function decorate(block) {
                 return {
                   text: adding
                     ? next.dictionary.Custom.AddingToCart?.label
-                    : next.dictionary.PDP.Product.AddToCart?.label,
+                    : blockConfig['add-to-cart-btn-text'],
                   icon: 'Cart',
                   variant: 'primary',
                   disabled: adding || !next.data.inStock,
@@ -289,7 +292,7 @@ export default async function decorate(block) {
               });
               // Add To Wishlist Button
               ctx.appendButton(() => ({
-                text: 'Add To List',
+                text: blockConfig['add-to-wishlist-btn-text'],
                 icon: 'Heart',
                 variant: 'secondary',
                 onClick: () => console.debug('Add to Wishlist', ctx.data),
@@ -297,7 +300,7 @@ export default async function decorate(block) {
 
               // Share Button
               ctx.appendButton(() => ({
-                text: 'Share',
+                text: blockConfig['share-btn-text'],
                 icon: 'Share',
                 variant: 'secondary',
                 onClick: () => console.debug('Share Button', ctx.data),
