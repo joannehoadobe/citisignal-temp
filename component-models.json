@@ -599,214 +599,11 @@
               "value": "promo"
             }
           ]
-        },
-        {
-          "component": "container",
-          "name": "grid-columns-left",
-          "label": "Columns (Grid)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid"] },
-          "fields": [
-            {
-              "component": "text",
-              "name": "gridLeft_title",
-              "label": "Title",
-              "valueType": "string",
-              "multi": false
-            },
-            {
-              "component": "text",
-              "name": "gridLeft_description",
-              "label": "Description",
-              "valueType": "string",
-              "multi": false
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "grid-columns-middle",
-          "label": "Columns (Grid)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid"] },
-          "fields": [
-            {
-              "component": "text",
-              "name": "gridMiddle_title",
-              "label": "Title",
-              "valueType": "string",
-              "multi": false
-            },
-            {
-              "component": "text",
-              "name": "gridMiddle_description",
-              "label": "Description",
-              "valueType": "string",
-              "multi": false
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "grid-columns-right",
-          "label": "Columns (Grid)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid"] },
-          "fields": [
-            {
-              "component": "text",
-              "name": "gridRight_title",
-              "label": "Title",
-              "valueType": "string",
-              "multi": false
-            },
-            {
-              "component": "text",
-              "name": "gridRight_description",
-              "label": "Description",
-              "valueType": "string",
-              "multi": false
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "grid-icon-columns-left",
-          "label": "Columns (Grid Icons)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid-placeholder-icons"] },
-          "fields": [
-            {
-              "component": "select",
-              "name": "gridIconLeft_icon",
-              "value": "",
-              "label": "Icon",
-              "valueType": "string",
-              "options": [
-                {
-                  "name": "Home",
-                  "value": ":delivery-home:"
-                },
-                {
-                  "name": "Truck",
-                  "value": ":delivery-truck:"
-                }
-              ]
-            },
-            {
-              "component": "text",
-              "name": "gridIconLeft_text",
-              "label": "Text",
-              "valueType": "string",
-              "multi": false
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "grid-icon-columns-right",
-          "label": "Columns (Grid Icons)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "grid-placeholder-icons"] },
-          "fields": [
-            {
-              "component": "select",
-              "name": "gridIconRight_icon",
-              "value": "",
-              "label": "Icon",
-              "valueType": "string",
-              "options": [
-                {
-                  "name": "Home",
-                  "value": ":delivery-home:"
-                },
-                {
-                  "name": "Truck",
-                  "value": ":delivery-truck:"
-                }
-              ]
-            },
-            {
-              "component": "text",
-              "name": "gridIconRight_text",
-              "label": "Text",
-              "valueType": "string",
-              "multi": false
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "promo-columns-left",
-          "label": "Columns (Promo)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "promo"] },
-          "fields": [
-            {
-              "component": "reference",
-              "valueType": "string",
-              "name": "promoEnrichmentLeft_image",
-              "label": "Image"
-            },
-            {
-              "component": "text",
-              "name": "promoEnrichmentLeft_description",
-              "label": "Text",
-              "valueType": "string"
-            }
-          ]
-        },
-        {
-          "component": "container",
-          "name": "promo-columns-right",
-          "label": "Columns (Promo)",
-          "collapsible": false,
-          "condition": { "==": [{ "var": "classes" }, "promo"] },
-          "fields": [
-            {
-              "component": "reference",
-              "valueType": "string",
-              "name": "promoEnrichmentRight_image",
-              "label": "Image"
-            },
-            {
-              "component": "text",
-              "name": "promoEnrichmentRight_description",
-              "label": "Text",
-              "valueType": "string"
-            }
-          ]
         }
       ]
     },
     {
-      "id": "columns2",
-      "fields": [
-        {
-          "component": "select",
-          "name": "classes",
-          "valueType": "string",
-          "label": "Style",
-          "value": "",
-          "options": [
-            {
-              "name": "Grid",
-              "value": "grid"
-            },
-            {
-              "name": "Grid with Icons",
-              "value": "grid-placeholder-icons"
-            },
-            {
-              "name": "Promo",
-              "value": "promo"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "columns2-text",
+      "id": "columns-text",
       "fields": [
         {
           "component": "text",
@@ -831,7 +628,7 @@
       ]
     },
     {
-      "id": "columns2-icon",
+      "id": "columns-icon",
       "fields": [
         {
           "component": "text",
@@ -841,7 +638,7 @@
         },
         {
           "component": "select",
-          "name": "content_icon",
+          "name": "gridIcon_icon",
           "value": "",
           "label": "Icon",
           "valueType": "string",
@@ -858,15 +655,15 @@
         },
         {
           "component": "text",
-          "name": "content_text",
-          "label": "Text",
+          "name": "gridIcon_description",
+          "label": "Description",
           "valueType": "string",
           "multi": false
         }
       ]
     },
     {
-      "id": "columns2-promo",
+      "id": "columns-promo",
       "fields": [
         {
           "component": "text",
@@ -877,13 +674,13 @@
         {
           "component": "reference",
           "valueType": "string",
-          "name": "content_image",
+          "name": "gridPromo_image",
           "label": "Image"
         },
         {
           "component": "text",
-          "name": "content_description",
-          "label": "Text",
+          "name": "gridPromo_description",
+          "label": "Description",
           "valueType": "string"
         }
       ]
