@@ -2,11 +2,16 @@ import { getAemAuthorEnv } from '../../scripts/configs.js';
 
 export default function decorate(block) {
   // this is for UE to use the same columns block no matter the layout
+  // eslint-disable-next-line no-console
+  console.log(`in columns2 block, class list = ${block.classList}`);
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < block.classList.length; i++) {
     if (block.classList[i].includes('grid-placeholder-icons')) {
       block.classList.remove('grid-placeholder-icons');
       block.classList.add('grid');
+    }
+    if (block.classList[i].includes('grid')) {
+      block.classList.add('columns');
     }
   }
   const cols = [...block.firstElementChild.children];
