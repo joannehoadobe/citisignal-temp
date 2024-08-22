@@ -30,10 +30,10 @@ export default function decorate(block) {
       //         picWrapper.classList.add('columns-img-col');
       //       }
       //     }
-      //     // this is to remove ...
-      //     if (!col.textContent.includes('text, grid-layout')) {
-      //       row.remove();
-      //     }
+      // this is to remove ...
+      if (col.textContent.includes('text, grid-layout')) {
+        row.remove();
+      }
     });
   });
 
