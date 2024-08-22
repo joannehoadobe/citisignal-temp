@@ -26,10 +26,10 @@ export default function decorate(block) {
         }
       }
       // this is to remove empty <div></div> because of UE
-      // using the same columns block
-      // if (!col.textContent.trim()) {
-      //   row.remove();
-      // }
+      // using the same columns block, only in PREVIEW/PUBLISH
+      if (!col.textContent.trim()) {
+        row.remove();
+      }
       // this is to remove the info-only <div></div> listing the style
       // chosen in UE because it's not an actual 'content' block
       if (col.textContent.includes('grid-layout') || col.textContent.includes('icon-layout') || col.textContent.includes('promo-layout')) {
