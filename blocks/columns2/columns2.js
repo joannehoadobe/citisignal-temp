@@ -23,9 +23,8 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-img-col');
         }
       }
-      // this is to remove empty <div></div> because of UE
-      // using the same columns block
-      if (!col.textContent.trim()) {
+      // this is to remove ...
+      if (!col.textContent.includes('text, grid-layout')) {
         row.remove();
       }
     });
