@@ -286,8 +286,8 @@
                   "template": {
                     "model": "columns-text",
                     "name" : "Text",
-                    "grid_title" : "Placeholder Text",
-                    "grid_description": "Placeholder Text",
+                    "grid_title" : "Placeholder Title",
+                    "grid_description": "Placeholder Description",
                     "classes": "grid-layout"
                   }
                 }
@@ -305,7 +305,7 @@
                     "model": "columns-icon",
                     "name" : "Icon",
                     "gridIcon_icon": ":delivery-home:",
-                    "gridIcon_description": "Placeholder Text",
+                    "gridIcon_description": "Placeholder Description",
                     "classes": "icon-layout"
                   }
                 }
