@@ -39,8 +39,8 @@ export default function decorate(block) {
   if (isAemAuthor && /^\s*\n\s*$/.test(block.innerHTML)) { // block.innerHTML.trim() === '' && block.childNodes && block.childNodes.length === 0) {
     /* eslint-disable-next-line no-console */
     console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
-    const authorBlock = document.createElement('div');
-    authorBlock.textContent = 'Columns block for enrichment';
-    block.appendChild(authorBlock);
+    // const authorBlock = document.createElement('div');
+    // authorBlock.textContent = 'Columns block for enrichment';
+    // block.appendChild(authorBlock);
   }
 }
