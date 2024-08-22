@@ -9,6 +9,7 @@ export default function decorate(block) {
     if (block.classList[i].includes('grid-placeholder-icons')) {
       block.classList.remove('grid-placeholder-icons');
       block.classList.add('grid');
+      block.classList.add('columns'); // this is temporary until revert back to columns block
     }
     if (block.classList[i].includes('grid')) {
       block.classList.add('columns');
@@ -38,12 +39,17 @@ export default function decorate(block) {
   });
 
   const isAemAuthor = getAemAuthorEnv();
-  /* eslint-disable-next-line no-console */
-  console.log(`in columns block, inner HTML = ${block.innerHTML}, text content = ${block.textContent}`);
+
   if (isAemAuthor) {
-    const authorBlock = document.createElement('div');
-    authorBlock.textContent = 'Columns block for enrichment';
-    block.appendChild(authorBlock);
+    const firstDiv = block.querySelector('div');
+    if (firstDiv) {
+      const firstDivContent = firstDiv.textContent;
+      /* eslint-disable-next-line no-console */
+      console.log(`in columns block, FIRST DIV  text content = ${firstDivContent}`);
+      const authorBlock = document.createElement('div');
+      authorBlock.textContent = 'Columns block for enrichment';
+      block.appendChild(authorBlock);
+    }
   }
   if (isAemAuthor && /^\s*\n\s*$/.test(block.innerHTML)) { // block.innerHTML.trim() === '' && block.childNodes && block.childNodes.length === 0) {
     /* eslint-disable-next-line no-console */
