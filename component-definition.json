@@ -188,8 +188,11 @@
                     "model": "product-details",
                     "key-value": true,
                     "date": "08/07/2024",
+                    "add-to-cart-btn-text": "Add To Cart",
+                    "add-to-wishlist-btn-text": "Add To List",
+                    "share-btn-text": "Share",
                     "carousel-layout": "column",
-                    "default-product": "apple-iphone-13/phone-13-pro"
+                    "default-product": "samsung-galaxy-S22-ultra"
                   }
                 }
               }
