@@ -15,8 +15,10 @@ export default function decorate(block) {
       block.classList.add('columns');
     }
   }
-  const cols = [...block.firstElementChild.children];
-  block.classList.add(`columns-${cols.length}-cols`);
+  if (block.firstElementChild && block.firstElementChild.children) {
+    const cols = [...block.firstElementChild.children];
+    block.classList.add(`columns-${cols.length}-cols`);
+  }
 
   // setup image columns
   [...block.children].forEach((row) => {
