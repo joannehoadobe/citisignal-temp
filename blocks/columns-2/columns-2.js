@@ -18,22 +18,22 @@ export default function decorate(block) {
   block.classList.add(`columns-${cols.length}-cols`);
 
   // setup image columns
-  [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
-        }
-      }
-      // this is to remove ...
-      if (!col.textContent.includes('text, grid-layout')) {
-        row.remove();
-      }
-    });
-  });
+  // [...block.children].forEach((row) => {
+  //   [...row.children].forEach((col) => {
+  //     const pic = col.querySelector('picture');
+  //     if (pic) {
+  //       const picWrapper = pic.closest('div');
+  //       if (picWrapper && picWrapper.children.length === 1) {
+  //         // picture is only content in column
+  //         picWrapper.classList.add('columns-img-col');
+  //       }
+  //     }
+  //     // this is to remove ...
+  //     if (!col.textContent.includes('text, grid-layout')) {
+  //       row.remove();
+  //     }
+  //   });
+  // });
 
   const isAemAuthor = getAemAuthorEnv();
   if (isAemAuthor && /^\s*\n\s*$/.test(block.innerHTML)) { // block.innerHTML.trim() === '' && block.childNodes && block.childNodes.length === 0) {
