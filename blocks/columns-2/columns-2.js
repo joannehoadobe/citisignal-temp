@@ -31,9 +31,9 @@ export default function decorate(block) {
       //       }
       //     }
       // this is to remove ...
-      // if (col.textContent.includes('text, grid-layout')) {
-      //   row.remove();
-      // }
+      if (col.textContent.includes('text, grid-layout')) {
+        col.remove();
+      }
     });
   });
 
