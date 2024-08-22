@@ -815,9 +815,16 @@
           "hidden": true
         },
         {
-          "component": "richtext",
-          "name": "text",
-          "label": "Text",
+          "component": "text",
+          "name": "grid_title",
+          "label": "Title",
+          "valueType": "string",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "grid_description",
+          "label": "Description",
           "valueType": "string",
           "multi": false
         }
