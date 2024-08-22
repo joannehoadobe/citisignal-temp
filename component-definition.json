@@ -277,6 +277,75 @@
             }
           },
           {
+            "title": "Columns2",
+            "id": "columns2",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Columns 2",
+                    "model": "columns2",
+                    "filter": "columns2"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Text",
+            "id": "columns2-text",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "model": "columns2-text",
+                    "name" : "Text",
+                    "text" : "Placeholder Text",
+                    "classes": "grid-layout"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Icon",
+            "id": "columns2-icon",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "model": "columns2-icon",
+                    "name" : "Icon",
+                    "content_icon": ":delivery-home:",
+                    "content_text": "Placeholder Text",
+                    "classes": "icon-layout"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Promo",
+            "id": "columns2-promo",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "model": "columns2-promo",
+                    "name" : "Promo",
+                    "content_image" : "/content/dam/citisignal/product-enrichment-1.png",
+                    "content_description" : "Placeholder Description",
+                    "classes": "promo-layout"
+                  }
+                }
+              }
+            }
+          },
+          {
             "title": "Cards",
             "id": "cards",
             "plugins": {
