@@ -11,7 +11,7 @@ export default function decorate(block) {
       block.classList.add('grid');
       block.classList.add('columns'); // this is temporary until revert back to columns block
     }
-    if (block.classList[i].includes('grid')) {
+    if (block.classList[i].includes('grid') || block.classList[i].includes('promo')) {
       block.classList.add('columns');
     }
   }
@@ -43,7 +43,7 @@ export default function decorate(block) {
   if (isAemAuthor) {
     const firstDiv = block.querySelector('div');
     /* eslint-disable-next-line no-console */
-    console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${firstDiv.textContent}`);
+    console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${block.textContent}`);
     if (!firstDiv) {
       const firstDivContent = firstDiv.textContent;
       /* eslint-disable-next-line no-console */
