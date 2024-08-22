@@ -43,7 +43,7 @@ export default function decorate(block) {
   if (isAemAuthor) {
     const firstDiv = block.querySelector('div');
     /* eslint-disable-next-line no-console */
-    console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${block.textContent}`);
+    console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${block.textContent}, block innerHTML = ${block.innerHTML}, children = ${block.children.length}`);
     if (!firstDiv) {
       const firstDivContent = firstDiv.textContent;
       /* eslint-disable-next-line no-console */
