@@ -1,6 +1,6 @@
 import { getAemAuthorEnv } from '../../scripts/configs.js';
 
-const AEM_DIV_EXTRA_CONTENT = ['grid-layout', 'icon-layout', 'promo-layout'];
+const AEM_DIV_EXTRA_CONTENT = ['text, grid-layout', 'icon-layout', 'promo-layout'];
 
 export default function decorate(block) {
   // this is for UE to use the same columns block no matter the layout
@@ -34,7 +34,7 @@ export default function decorate(block) {
       }
       // this is to remove the info-only <div></div> listing the style
       // chosen in UE because it's not an actual 'content' block
-      if (AEM_DIV_EXTRA_CONTENT.includes(col.textContent)) {
+      if (AEM_DIV_EXTRA_CONTENT.includes(col.textContent.trim())) {
         col.remove();
       }
     });
