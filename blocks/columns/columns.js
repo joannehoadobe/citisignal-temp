@@ -35,8 +35,7 @@ export default function decorate(block) {
       // this is to remove the info-only <div></div> listing the style
       // chosen in UE because it's not an actual 'content' block
       if (AEM_DIV_EXTRA_CONTENT.includes(col.textContent)) {
-        col.parentNode.remove();
-        // col.remove();
+        col.remove();
       }
     });
   });
