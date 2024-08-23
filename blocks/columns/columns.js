@@ -1,5 +1,7 @@
 import { getAemAuthorEnv } from '../../scripts/configs.js';
 
+const AEM_DIV_EXTRA_CONTENT = ['grid-layout', 'icon-layout', 'promo-layout'];
+
 export default function decorate(block) {
   // this is for UE to use the same columns block no matter the layout
   // eslint-disable-next-line no-plusplus
@@ -32,8 +34,8 @@ export default function decorate(block) {
       }
       // this is to remove the info-only <div></div> listing the style
       // chosen in UE because it's not an actual 'content' block
-      if (col.textContent.includes('grid-layout') || col.textContent.includes('icon-layout') || col.textContent.includes('promo-layout')) {
-        col.remove();
+      if (AEM_DIV_EXTRA_CONTENT.includes(col.textContent)) {
+        // col.remove();
       }
     });
   });
