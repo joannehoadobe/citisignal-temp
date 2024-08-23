@@ -45,7 +45,9 @@ export default function decorate(block) {
   // if (isAemAuthor) {
   //   const firstDiv = block.querySelector('div');
   //   /* eslint-disable-next-line no-console, max-len */
-  //   console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${block.textContent}, block innerHTML = ${block.innerHTML}, children = ${block.children.length}, firstDiv = ${firstDiv}`);
+  //   console.log(`in columns block, FIRST DIV OUTSIDE IF  text content = ${block.textContent}`);
+  //   console.log(`block innerHTML = ${block.innerHTML}, children = ${block.children.length}`);
+  //   console.log(` firstDiv = ${firstDiv}`);
   //   if (firstDiv && /^\s*\n\s*$/.test(block.innerHTML)) {
   //     const firstDivContent = firstDiv.textContent;
   //     /* eslint-disable-next-line no-console */
