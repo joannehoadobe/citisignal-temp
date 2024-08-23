@@ -1,6 +1,6 @@
 import { getAemAuthorEnv } from '../../scripts/configs.js';
 
-const AEM_DIV_EXTRA_CONTENT = ['text, grid-layout', 'icon-layout', 'promo-layout'];
+const AEM_DIV_EXTRA_CONTENT = ['text, grid-layout', 'icon, icon-layout', 'promo-layout'];
 
 export default function decorate(block) {
   // this is for UE to use the same columns block no matter the layout
