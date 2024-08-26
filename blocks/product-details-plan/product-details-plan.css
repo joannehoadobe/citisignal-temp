@@ -288,7 +288,7 @@
   padding: 16px;
   font-size: 14px;
   opacity: 0;
-  transition: opacity 0.5s, top 0.5s;
+  transition: opacity 0.3s, top 0.3s;
   box-sizing: border-box;
 }
 
