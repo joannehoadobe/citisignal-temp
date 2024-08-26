@@ -216,7 +216,11 @@
   cursor: pointer;
 }
 
-.modal-content .cta-btns a {
+.modal-content .cta-btns button:disabled {
+  background-color: #eeeeee;
+}
+
+.modal-content .cta-btns button.add-a-phone {
   border-radius: 20px;
   padding: 8px 24px;
   background: var(--color-brand-500);
@@ -225,7 +229,7 @@
   font-size: 14px;
 }
 
-.modal-content .cta-btns a:hover {
+.modal-content .cta-btns button.add-a-phone:hover {
   text-decoration: none;
   background: var(--color-brand-600);
   color: #fff;
