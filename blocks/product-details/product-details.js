@@ -169,6 +169,8 @@ export default async function decorate(block) {
       },
       Custom: {
         AddingToCart: { label: placeholders.pdpCustomAddingtocart },
+        AddToWishlist: { label: placeholders.pdpCustomAddtowishlist },
+        Share: { label: placeholders.pdpCustomShare },
       },
     },
   };
@@ -253,7 +255,7 @@ export default async function decorate(block) {
                 return {
                   text: adding
                     ? next.dictionary.Custom.AddingToCart?.label
-                    : blockConfig['add-to-cart-btn-text'],
+                    : blockConfig['add-to-cart-btn-text'] || placeholders.pdpProductAddtocart,
                   icon: 'Cart',
                   variant: 'primary',
                   disabled: adding || !next.data.inStock,
@@ -284,7 +286,7 @@ export default async function decorate(block) {
               });
               // Add To Wishlist Button
               ctx.appendButton(() => ({
-                text: blockConfig['add-to-wishlist-btn-text'],
+                text: blockConfig['add-to-wishlist-btn-text'] ? blockConfig['add-to-wishlist-btn-text'] : placeholders.pdpCustomAddtowishlist,
                 icon: 'Heart',
                 variant: 'secondary',
                 onClick: () => console.debug('Add to Wishlist', ctx.data),
@@ -292,7 +294,7 @@ export default async function decorate(block) {
 
               // Share Button
               ctx.appendButton(() => ({
-                text: blockConfig['share-btn-text'],
+                text: blockConfig['share-btn-text'] ? blockConfig['share-btn-text'] : placeholders.pdpCustomShare,
                 icon: 'Share',
                 variant: 'secondary',
                 onClick: () => console.debug('Share Button', ctx.data),
