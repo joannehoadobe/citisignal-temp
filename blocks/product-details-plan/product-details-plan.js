@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-console
+console.log('in REALLY BEGINNING OF PDP Plan block');
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 import { events } from '@dropins/tools/event-bus.js';
