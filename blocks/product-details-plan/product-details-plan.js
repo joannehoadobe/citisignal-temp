@@ -110,6 +110,8 @@ function setMetaTags(product) {
 }
 
 export default async function decorate(block) {
+  // eslint-disable-next-line no-console
+  console.log('in pdp plan BLOCK beginning');
   const blockConfig = readBlockConfig(block);
   block.innerHTML = '';
 
