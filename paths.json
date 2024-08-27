@@ -10,12 +10,10 @@
       "/content/citisignal-edge-delivery/placeholders:/placeholders.json",
       "/content/citisignal-edge-delivery/products/recommended-products:/products/recommended-products.json",
       "/content/citisignal-edge-delivery/enrichment/enrichment:/enrichment/enrichment.json",
-      "/content/dam/citisignal/images/products/:/images/products/",
-      "/content/citisignal-edge-delivery/products/plan/:/products/plan/"
+      "/content/dam/citisignal/images/products/:/images/products/"
     ],
     "includes": [
       "/content/citisignal-edge-delivery",
-      "/content/dam/citisignal/images/products/",
-      "/content/citisignal-edge-delivery/products/plan/"
+      "/content/dam/citisignal/images/products/"
     ]
 }
