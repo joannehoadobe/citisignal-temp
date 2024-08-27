@@ -7,107 +7,107 @@ import { render as productRenderer } from '@dropins/storefront-pdp/render.js';
 import ProductDetails from '@dropins/storefront-pdp/containers/ProductDetails.js';
 
 // Libs
-import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js';
+import { getProduct, getSkuFromUrl/* , setJsonLd */ } from '../../scripts/commerce.js';
 import { getConfigValue } from '../../scripts/configs.js';
 import { fetchPlaceholders, readBlockConfig } from '../../scripts/aem.js';
 import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
 import initModal from './modal.js';
 
-// Error Handling (404)
-async function errorGettingProduct(code = 404) {
-  const htmlText = await fetch(`/${code}.html`).then((response) => {
-    if (response.ok) {
-      return response.text();
-    }
-    throw new Error(`Error getting ${code} page`);
-  });
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlText, 'text/html');
-  document.body.innerHTML = doc.body.innerHTML;
-  document.head.innerHTML = doc.head.innerHTML;
-}
+// // Error Handling (404)
+// async function errorGettingProduct(code = 404) {
+//   const htmlText = await fetch(`/${code}.html`).then((response) => {
+//     if (response.ok) {
+//       return response.text();
+//     }
+//     throw new Error(`Error getting ${code} page`);
+//   });
+//   const parser = new DOMParser();
+//   const doc = parser.parseFromString(htmlText, 'text/html');
+//   document.body.innerHTML = doc.body.innerHTML;
+//   document.head.innerHTML = doc.head.innerHTML;
+// }
 
-async function setJsonLdProduct(product) {
-  const {
-    name, inStock, description, sku, urlKey, price, priceRange, images, attributes,
-  } = product;
+// async function setJsonLdProduct(product) {
+//   const {
+//     name, inStock, description, sku, urlKey, price, priceRange, images, attributes,
+//   } = product;
 
-  const amount = priceRange?.minimum?.final?.amount || price?.final?.amount;
-  const brand = attributes.find((attr) => attr.name === 'brand');
+//   const amount = priceRange?.minimum?.final?.amount || price?.final?.amount;
+//   const brand = attributes.find((attr) => attr.name === 'brand');
 
-  setJsonLd({
-    '@context': 'http://schema.org',
-    '@type': 'Product',
-    name,
-    description,
-    image: images[0]?.url,
-    offers: [{
-      '@type': 'http://schema.org/Offer',
-      price: amount?.value,
-      priceCurrency: amount?.currency,
-      availability: inStock ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock',
-    }],
-    productID: sku,
-    brand: {
-      '@type': 'Brand',
-      name: brand?.value,
-    },
-    url: new URL(`/products/plan/${urlKey}/${sku.toLowerCase()}`, window.location),
-    sku,
-    '@id': new URL(`/products/plan/${urlKey}/${sku.toLowerCase()}`, window.location),
-  }, 'product');
-}
+//   setJsonLd({
+//     '@context': 'http://schema.org',
+//     '@type': 'Product',
+//     name,
+//     description,
+//     image: images[0]?.url,
+//     offers: [{
+//       '@type': 'http://schema.org/Offer',
+//       price: amount?.value,
+//       priceCurrency: amount?.currency,
+//       availability: inStock ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock',
+//     }],
+//     productID: sku,
+//     brand: {
+//       '@type': 'Brand',
+//       name: brand?.value,
+//     },
+//     url: new URL(`/products/plan/${urlKey}/${sku.toLowerCase()}`, window.location),
+//     sku,
+//     '@id': new URL(`/products/plan/${urlKey}/${sku.toLowerCase()}`, window.location),
+//   }, 'product');
+// }
 
-function createMetaTag(property, content, type) {
-  if (!property || !type) {
-    return;
-  }
-  let meta = document.head.querySelector(`meta[${type}="${property}"]`);
-  if (meta) {
-    if (!content) {
-      meta.remove();
-      return;
-    }
-    meta.setAttribute(type, property);
-    meta.setAttribute('content', content);
-    return;
-  }
-  if (!content) {
-    return;
-  }
-  meta = document.createElement('meta');
-  meta.setAttribute(type, property);
-  meta.setAttribute('content', content);
-  document.head.appendChild(meta);
-}
+// function createMetaTag(property, content, type) {
+//   if (!property || !type) {
+//     return;
+//   }
+//   let meta = document.head.querySelector(`meta[${type}="${property}"]`);
+//   if (meta) {
+//     if (!content) {
+//       meta.remove();
+//       return;
+//     }
+//     meta.setAttribute(type, property);
+//     meta.setAttribute('content', content);
+//     return;
+//   }
+//   if (!content) {
+//     return;
+//   }
+//   meta = document.createElement('meta');
+//   meta.setAttribute(type, property);
+//   meta.setAttribute('content', content);
+//   document.head.appendChild(meta);
+// }
 
-function setMetaTags(product) {
-  if (!product) {
-    return;
-  }
+// function setMetaTags(product) {
+//   if (!product) {
+//     return;
+//   }
 
-  const price = product.priceRange
-    ? product.priceRange.minimum.final.amount : product.price.final.amount;
+//   const price = product.priceRange
+//     ? product.priceRange.minimum.final.amount : product.price.final.amount;
 
-  createMetaTag('title', product.metaTitle, 'name');
-  createMetaTag('description', product.metaDescription, 'name');
-  createMetaTag('keywords', product.metaKeyword, 'name');
+//   createMetaTag('title', product.metaTitle, 'name');
+//   createMetaTag('description', product.metaDescription, 'name');
+//   createMetaTag('keywords', product.metaKeyword, 'name');
 
-  createMetaTag('og:type', 'og:product', 'property');
-  createMetaTag('og:description', product.shortDescription, 'property');
-  createMetaTag('og:title', product.metaTitle, 'property');
-  createMetaTag('og:url', window.location.href, 'property');
-  const mainImage = product?.images?.filter((image) => image.roles.includes('thumbnail'))[0];
-  const metaImage = mainImage?.url || product?.images[0]?.url;
-  createMetaTag('og:image', metaImage, 'property');
-  createMetaTag('og:image:secure_url', metaImage, 'property');
-  createMetaTag('og:product:price:amount', price.value, 'property');
-  createMetaTag('og:product:price:currency', price.currency, 'property');
+//   createMetaTag('og:type', 'og:product', 'property');
+//   createMetaTag('og:description', product.shortDescription, 'property');
+//   createMetaTag('og:title', product.metaTitle, 'property');
+//   createMetaTag('og:url', window.location.href, 'property');
+//   const mainImage = product?.images?.filter((image) => image.roles.includes('thumbnail'))[0];
+//   const metaImage = mainImage?.url || product?.images[0]?.url;
+//   createMetaTag('og:image', metaImage, 'property');
+//   createMetaTag('og:image:secure_url', metaImage, 'property');
+//   createMetaTag('og:product:price:amount', price.value, 'property');
+//   createMetaTag('og:product:price:currency', price.currency, 'property');
 
-  createMetaTag('twitter:card', product.shortDescription, 'name');
-  createMetaTag('twitter:title', product.metaTitle, 'name');
-  createMetaTag('twitter:image', metaImage, 'name');
-}
+//   createMetaTag('twitter:card', product.shortDescription, 'name');
+//   createMetaTag('twitter:title', product.metaTitle, 'name');
+//   createMetaTag('twitter:image', metaImage, 'name');
+// }
 
 export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
@@ -221,8 +221,8 @@ export default async function decorate(block) {
       return;
     }
 
-    setJsonLdProduct(product);
-    setMetaTags(product);
+    // setJsonLdProduct(product);
+    // setMetaTags(product);
     document.title = product.name;
   }, { eager: true });
 
@@ -330,7 +330,7 @@ export default async function decorate(block) {
         })(block);
       } catch (e) {
         console.error(e);
-        await errorGettingProduct();
+        // await errorGettingProduct();
       } finally {
         resolve();
       }
