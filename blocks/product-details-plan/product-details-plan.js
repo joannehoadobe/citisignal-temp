@@ -263,7 +263,7 @@ export default async function decorate(block) {
                   onClick: async () => {
                     try {
                       // Plans flow
-                      initModal(next, state);
+                      initModal(next, state, blockConfig);
                     } catch (error) {
                       // eslint-disable-next-line no-console
                       console.warn('Error adding product to cart', error);
