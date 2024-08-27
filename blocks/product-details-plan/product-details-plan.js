@@ -111,7 +111,7 @@ function setMetaTags(product) {
 
 export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
-  block.innerHTML = '';
+  // block.innerHTML = '';
 
   const skuFromUrl = getSkuFromUrl();
   if (!window.getProductPromise) {
