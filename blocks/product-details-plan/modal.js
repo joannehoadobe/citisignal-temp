@@ -4,7 +4,7 @@
 import { addProductsToCart } from '@dropins/storefront-cart/api.js';
 import initToast from './toast.js';
 
-export default function initModal(next, state) {
+export default function initModal(next, state, blockConfig) {
   // Check if modal already exists
   let modal = document.getElementById('modal');
   if (!modal) {
@@ -12,8 +12,8 @@ export default function initModal(next, state) {
         <div id="modal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span id="closeModalBtn" class="close">&times;</span>
-                <p>Phone lines are all set. How about adding a brand new device to your setup?</p>
-                <p>Select a phone that’s pre-set with your plan for immediate use upon arrival, or bring your own device to enjoy our hassle-free activation and tailored services, ensuring a smooth start with your choice.</p>
+                <p>${blockConfig['modal-content-title']}</p>
+                <p>${blockConfig['modal-content-description']}</p>
                 <div class="cta-btns">
                   <button type="button" id="BringMyOwnPhoneBtn">Bring My Own Phone</button>
                   <button type="button" id="AddAPhoneBtn" class="add-a-phone">Add A Phone</button>
