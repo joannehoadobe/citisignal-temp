@@ -116,6 +116,8 @@ export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
   block.innerHTML = '';
 
+  // test
+  block.textContent = 'this is where PDP plan should be';
   //   const skuFromUrl = getSkuFromUrl();
   //   if (!window.getProductPromise) {
   //     window.getProductPromise = getProduct(skuFromUrl);
