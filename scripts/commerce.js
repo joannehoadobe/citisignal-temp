@@ -231,10 +231,10 @@ export function getSkuFromUrl(defaultSku) {
     const pathStr = path.match(/\/experiments\/([\w|-]+)\/([\w|-]+)\/([\w|-]+)$/);
     result = pathStr?.[3];
   }
-  // if (path.startsWith('/products/')) {
-  //   const pathStr = path.match(/\/products\/(.+)$/);
-  //   result = pathStr?.[1];
-  // }
+  if (path.startsWith('/products/')) {
+    const pathStr = path.match(/\/products\/(.+)$/);
+    result = pathStr?.[1];
+  }
   if (path.startsWith('/products/plan/')) {
     const pathStr = path.match(/\/products\/plan\/(.+)$/);
     result = pathStr?.[1];
