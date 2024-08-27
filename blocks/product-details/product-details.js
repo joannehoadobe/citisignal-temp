@@ -113,8 +113,9 @@ export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
   block.innerHTML = '';
 
+  const skuFromUrl = getSkuFromUrl();
   if (!window.getProductPromise) {
-    window.getProductPromise = getProduct(this.props.sku);
+    window.getProductPromise = getProduct(skuFromUrl);
   }
 
   let product;
@@ -125,7 +126,7 @@ export default async function decorate(block) {
   let productSku;
   if (product) {
     // product available
-    productSku = getSkuFromUrl();
+    productSku = skuFromUrl; // getSkuFromUrl();
   } else {
     // no product found, no sku
     product = await getProduct(blockConfig['default-product']);
