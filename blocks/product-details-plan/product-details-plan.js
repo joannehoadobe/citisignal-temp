@@ -81,33 +81,33 @@ import { fetchPlaceholders, readBlockConfig } from '../../scripts/aem.js';
 //   document.head.appendChild(meta);
 // }
 
-// function setMetaTags(product) {
-//   if (!product) {
-//     return;
-//   }
+function setMetaTags(product) {
+  if (!product) {
+    return;
+  }
 
-//   const price = product.priceRange
-//     ? product.priceRange.minimum.final.amount : product.price.final.amount;
+  const price = product.priceRange
+    ? product.priceRange.minimum.final.amount : product.price.final.amount;
 
-//   createMetaTag('title', product.metaTitle, 'name');
-//   createMetaTag('description', product.metaDescription, 'name');
-//   createMetaTag('keywords', product.metaKeyword, 'name');
+  createMetaTag('title', product.metaTitle, 'name');
+  createMetaTag('description', product.metaDescription, 'name');
+  createMetaTag('keywords', product.metaKeyword, 'name');
 
-//   createMetaTag('og:type', 'og:product', 'property');
-//   createMetaTag('og:description', product.shortDescription, 'property');
-//   createMetaTag('og:title', product.metaTitle, 'property');
-//   createMetaTag('og:url', window.location.href, 'property');
-//   const mainImage = product?.images?.filter((image) => image.roles.includes('thumbnail'))[0];
-//   const metaImage = mainImage?.url || product?.images[0]?.url;
-//   createMetaTag('og:image', metaImage, 'property');
-//   createMetaTag('og:image:secure_url', metaImage, 'property');
-//   createMetaTag('og:product:price:amount', price.value, 'property');
-//   createMetaTag('og:product:price:currency', price.currency, 'property');
+  createMetaTag('og:type', 'og:product', 'property');
+  createMetaTag('og:description', product.shortDescription, 'property');
+  createMetaTag('og:title', product.metaTitle, 'property');
+  createMetaTag('og:url', window.location.href, 'property');
+  const mainImage = product?.images?.filter((image) => image.roles.includes('thumbnail'))[0];
+  const metaImage = mainImage?.url || product?.images[0]?.url;
+  createMetaTag('og:image', metaImage, 'property');
+  createMetaTag('og:image:secure_url', metaImage, 'property');
+  createMetaTag('og:product:price:amount', price.value, 'property');
+  createMetaTag('og:product:price:currency', price.currency, 'property');
 
-//   createMetaTag('twitter:card', product.shortDescription, 'name');
-//   createMetaTag('twitter:title', product.metaTitle, 'name');
-//   createMetaTag('twitter:image', metaImage, 'name');
-// }
+  createMetaTag('twitter:card', product.shortDescription, 'name');
+  createMetaTag('twitter:title', product.metaTitle, 'name');
+  createMetaTag('twitter:image', metaImage, 'name');
+}
 
 export default async function decorate(block) {
   // eslint-disable-next-line no-console
