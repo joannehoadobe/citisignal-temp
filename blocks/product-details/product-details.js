@@ -113,8 +113,9 @@ export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
   block.innerHTML = '';
 
+  const skuFromUrl = getSkuFromUrl();
   if (!window.getProductPromise) {
-    window.getProductPromise = getProduct(this.props.sku);
+    window.getProductPromise = getProduct(skuFromUrl);
   }
 
   let product;
