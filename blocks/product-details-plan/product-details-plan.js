@@ -1,8 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-export default async function decorate(block) {
-  // eslint-disable-next-line no-console
-  console.log('in stripped down PDP plan block');
-}
 // /* eslint-disable import/no-unresolved */
 // /* eslint-disable import/no-extraneous-dependencies */
 // import { events } from '@dropins/tools/event-bus.js';
@@ -14,7 +9,7 @@ export default async function decorate(block) {
 // // Libs
 // import { getProduct, getSkuFromUrl, setJsonLd } from '../../scripts/commerce.js';
 // import { getConfigValue } from '../../scripts/configs.js';
-// import { fetchPlaceholders, readBlockConfig } from '../../scripts/aem.js';
+import { fetchPlaceholders, readBlockConfig } from '../../scripts/aem.js';
 // import { createAccordion, generateListHTML } from '../../scripts/scripts.js';
 // import initModal from './modal.js';
 
@@ -114,218 +109,219 @@ export default async function decorate(block) {
 //   createMetaTag('twitter:image', metaImage, 'name');
 // }
 
-// export default async function decorate(block) {
-//   // eslint-disable-next-line no-console
-//   console.log('in pdp plan BLOCK beginning');
-//   const blockConfig = readBlockConfig(block);
-//   block.innerHTML = '';
+export default async function decorate(block) {
+  // eslint-disable-next-line no-console
+  console.log('in pdp plan BLOCK beginning');
+  // eslint-disable-next-line no-unused-vars
+  const blockConfig = readBlockConfig(block);
+  block.innerHTML = '';
 
-//   const skuFromUrl = getSkuFromUrl();
-//   if (!window.getProductPromise) {
-//     window.getProductPromise = getProduct(skuFromUrl);
-//   }
+  //   const skuFromUrl = getSkuFromUrl();
+  //   if (!window.getProductPromise) {
+  //     window.getProductPromise = getProduct(skuFromUrl);
+  //   }
 
-//   let product;
-//   const [tempProduct, placeholders] = await Promise.all([
-//     window.getProductPromise, fetchPlaceholders()]);
-//   product = tempProduct;
+  //   let product;
+  //   const [tempProduct, placeholders] = await Promise.all([
+  //     window.getProductPromise, fetchPlaceholders()]);
+  //   product = tempProduct;
 
-//   let productSku;
-//   if (product) {
-//     // product available
-//     productSku = getSkuFromUrl();
-//   } else {
-//     // no product found, no sku
-//     product = await getProduct(blockConfig['default-product']);
-//     productSku = blockConfig['default-product'];
-//     // await errorGettingProduct();
-//     // return Promise.reject();
-//   }
+  //   let productSku;
+  //   if (product) {
+  //     // product available
+  //     productSku = getSkuFromUrl();
+  //   } else {
+  //     // no product found, no sku
+  //     product = await getProduct(blockConfig['default-product']);
+  //     productSku = blockConfig['default-product'];
+  //     // await errorGettingProduct();
+  //     // return Promise.reject();
+  //   }
 
-//   const langDefinitions = {
-//     default: {
-//       PDP: {
-//         Product: {
-//           Incrementer: { label: placeholders.pdpProductIncrementer },
-//           OutOfStock: { label: placeholders.pdpProductOutofstock },
-//           AddToCart: { label: placeholders.pdpProductAddtocart },
-//           Details: { label: placeholders.pdpProductDetails },
-//           RegularPrice: { label: placeholders.pdpProductRegularprice },
-//           SpecialPrice: { label: placeholders.pdpProductSpecialprice },
-//           PriceRange: {
-//             From: { label: placeholders.pdpProductPricerangeFrom },
-//             To: { label: placeholders.pdpProductPricerangeTo },
-//           },
-//           Image: { label: placeholders.pdpProductImage },
-//         },
-//         Swatches: {
-//           Required: { label: placeholders.pdpSwatchesRequired },
-//         },
-//         Carousel: {
-//           label: placeholders.pdpCarousel,
-//           Next: { label: placeholders.pdpCarouselNext },
-//           Previous: { label: placeholders.pdpCarouselPrevious },
-//           Slide: { label: placeholders.pdpCarouselSlide },
-//           Controls: {
-//             label: placeholders.pdpCarouselControls,
-//             Button: { label: placeholders.pdpCarouselControlsButton },
-//           },
-//         },
-//         Overlay: {
-//           Close: { label: placeholders.pdpOverlayClose },
-//         },
-//       },
-//       Custom: {
-//         AddingToCart: { label: placeholders.pdpCustomAddingtocart },
-//         AddToWishlist: { label: placeholders.pdpCustomAddtowishlist },
-//         Share: { label: placeholders.pdpCustomShare },
-//       },
-//     },
-//   };
+  //   const langDefinitions = {
+  //     default: {
+  //       PDP: {
+  //         Product: {
+  //           Incrementer: { label: placeholders.pdpProductIncrementer },
+  //           OutOfStock: { label: placeholders.pdpProductOutofstock },
+  //           AddToCart: { label: placeholders.pdpProductAddtocart },
+  //           Details: { label: placeholders.pdpProductDetails },
+  //           RegularPrice: { label: placeholders.pdpProductRegularprice },
+  //           SpecialPrice: { label: placeholders.pdpProductSpecialprice },
+  //           PriceRange: {
+  //             From: { label: placeholders.pdpProductPricerangeFrom },
+  //             To: { label: placeholders.pdpProductPricerangeTo },
+  //           },
+  //           Image: { label: placeholders.pdpProductImage },
+  //         },
+  //         Swatches: {
+  //           Required: { label: placeholders.pdpSwatchesRequired },
+  //         },
+  //         Carousel: {
+  //           label: placeholders.pdpCarousel,
+  //           Next: { label: placeholders.pdpCarouselNext },
+  //           Previous: { label: placeholders.pdpCarouselPrevious },
+  //           Slide: { label: placeholders.pdpCarouselSlide },
+  //           Controls: {
+  //             label: placeholders.pdpCarouselControls,
+  //             Button: { label: placeholders.pdpCarouselControlsButton },
+  //           },
+  //         },
+  //         Overlay: {
+  //           Close: { label: placeholders.pdpOverlayClose },
+  //         },
+  //       },
+  //       Custom: {
+  //         AddingToCart: { label: placeholders.pdpCustomAddingtocart },
+  //         AddToWishlist: { label: placeholders.pdpCustomAddtowishlist },
+  //         Share: { label: placeholders.pdpCustomShare },
+  //       },
+  //     },
+  //   };
 
-//   const models = {
-//     ProductDetails: {
-//       initialData: { ...product },
-//       transform: (data) => {
-//         data.images.forEach((image) => {
-//           // Extract the image file name from the URL
-//           const imageUrlParts = image.url.split('/');
-//           const imageFileName = imageUrlParts[imageUrlParts.length - 1];
-//           const modifiedImageFileName = imageFileName.replace(/_/g, '-');
+  //   const models = {
+  //     ProductDetails: {
+  //       initialData: { ...product },
+  //       transform: (data) => {
+  //         data.images.forEach((image) => {
+  //           // Extract the image file name from the URL
+  //           const imageUrlParts = image.url.split('/');
+  //           const imageFileName = imageUrlParts[imageUrlParts.length - 1];
+  //           const modifiedImageFileName = imageFileName.replace(/_/g, '-');
 
-//           // Update the URL to the new format
-//           image.url = `/images/products/${modifiedImageFileName}`;
-//         });
-//         return {
-//           ...data,
-//         };
-//       },
-//     },
-//   };
+  //           // Update the URL to the new format
+  //           image.url = `/images/products/${modifiedImageFileName}`;
+  //         });
+  //         return {
+  //           ...data,
+  //         };
+  //       },
+  //     },
+  //   };
 
-//   // Initialize Dropins
-//   initializers.register(productApi.initialize, {
-//     langDefinitions,
-//     models,
-//   });
+  //   // Initialize Dropins
+  //   initializers.register(productApi.initialize, {
+  //     langDefinitions,
+  //     models,
+  //   });
 
-//   // Set Fetch Endpoint (Service)
-//   productApi.setEndpoint(await getConfigValue('commerce-endpoint'));
+  //   // Set Fetch Endpoint (Service)
+  //   productApi.setEndpoint(await getConfigValue('commerce-endpoint'));
 
-//   // Set Fetch Headers (Service)
-//   productApi.setFetchGraphQlHeaders({
-//     'Content-Type': 'application/json',
-//     'Magento-Environment-Id': await getConfigValue('commerce-environment-id'),
-//     'Magento-Website-Code': await getConfigValue('commerce-website-code'),
-//     'Magento-Store-View-Code': await getConfigValue('commerce-store-view-code'),
-//     'Magento-Store-Code': await getConfigValue('commerce-store-code'),
-//     'Magento-Customer-Group': await getConfigValue('commerce-customer-group'),
-//     'x-api-key': await getConfigValue('commerce-x-api-key'),
-//   });
+  //   // Set Fetch Headers (Service)
+  //   productApi.setFetchGraphQlHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Magento-Environment-Id': await getConfigValue('commerce-environment-id'),
+  //     'Magento-Website-Code': await getConfigValue('commerce-website-code'),
+  //     'Magento-Store-View-Code': await getConfigValue('commerce-store-view-code'),
+  //     'Magento-Store-Code': await getConfigValue('commerce-store-code'),
+  //     'Magento-Customer-Group': await getConfigValue('commerce-customer-group'),
+  //     'x-api-key': await getConfigValue('commerce-x-api-key'),
+  //   });
 
-//   events.on('eds/lcp', () => {
-//     if (!product) {
-//       return;
-//     }
+  //   events.on('eds/lcp', () => {
+  //     if (!product) {
+  //       return;
+  //     }
 
-//     setJsonLdProduct(product);
-//     setMetaTags(product);
-//     document.title = product.name;
-//   }, { eager: true });
+  //     setJsonLdProduct(product);
+  //     setMetaTags(product);
+  //     document.title = product.name;
+  //   }, { eager: true });
 
-//   // Render Containers
-//   return new Promise((resolve) => {
-//     setTimeout(async () => {
-//       try {
-//         await productRenderer.render(ProductDetails, {
-//           sku: productSku,
-//           carousel: {
-//             controls: blockConfig['carousel-layout'] === 'column' ? 'thumbnailsColumn' : 'row',
-//             arrowsOnMainImage: true,
-//             mobile: true,
-//             peak: {
-//               mobile: true,
-//               desktop: false,
-//             },
-//             gap: 'small',
-//           },
-//           slots: {
-//             Quantity: (ctx) => {
-//               const label = document.createElement('div');
-//               label.className = 'quantity-label';
-//               label.textContent = 'Quantity';
-//               ctx.prependChild(label);
-//             },
-//             Actions: (ctx) => {
-//               // Add to Cart Button
-//               ctx.appendButton((next, state) => {
-//                 const adding = state.get('adding');
-//                 return {
-//                   text: adding
-//                     ? next.dictionary.Custom.AddingToCart?.label
-//                     : blockConfig['add-to-cart-btn-text'] || placeholders.pdpProductAddtocart,
-//                   icon: 'Cart',
-//                   variant: 'primary',
-//                   disabled: adding || !next.data.inStock,
-//                   onClick: async () => {
-//                     try {
-//                       // Plans flow
-//                       initModal(next, state);
-//                     } catch (error) {
-//                       // eslint-disable-next-line no-console
-//                       console.warn('Error adding product to cart', error);
-//                     } finally {
-//                       state.set('adding', false);
-//                     }
-//                   },
-//                 };
-//               });
-//               // Add To Wishlist Button
-//               ctx.appendButton(() => ({
-//                 text: blockConfig['add-to-wishlist-btn-text'] ? blockConfig['add-to-wishlist-btn-text'] : placeholders.pdpCustomAddtowishlist,
-//                 icon: 'Heart',
-//                 variant: 'secondary',
-//                 onClick: () => console.debug('Add to Wishlist', ctx.data),
-//               }));
+  //   // Render Containers
+  //   return new Promise((resolve) => {
+  //     setTimeout(async () => {
+  //       try {
+  //         await productRenderer.render(ProductDetails, {
+  //           sku: productSku,
+  //           carousel: {
+  //             controls: blockConfig['carousel-layout'] === 'column' ? 'thumbnailsColumn' : 'row',
+  //             arrowsOnMainImage: true,
+  //             mobile: true,
+  //             peak: {
+  //               mobile: true,
+  //               desktop: false,
+  //             },
+  //             gap: 'small',
+  //           },
+  //           slots: {
+  //             Quantity: (ctx) => {
+  //               const label = document.createElement('div');
+  //               label.className = 'quantity-label';
+  //               label.textContent = 'Quantity';
+  //               ctx.prependChild(label);
+  //             },
+  //             Actions: (ctx) => {
+  //               // Add to Cart Button
+  //               ctx.appendButton((next, state) => {
+  //                 const adding = state.get('adding');
+  //                 return {
+  //                   text: adding
+  //                     ? next.dictionary.Custom.AddingToCart?.label
+  //                     : blockConfig['add-to-cart-btn-text'] || placeholders.pdpProductAddtocart,
+  //                   icon: 'Cart',
+  //                   variant: 'primary',
+  //                   disabled: adding || !next.data.inStock,
+  //                   onClick: async () => {
+  //                     try {
+  //                       // Plans flow
+  //                       initModal(next, state);
+  //                     } catch (error) {
+  //                       // eslint-disable-next-line no-console
+  //                       console.warn('Error adding product to cart', error);
+  //                     } finally {
+  //                       state.set('adding', false);
+  //                     }
+  //                   },
+  //                 };
+  //               });
+  //               // Add To Wishlist Button
+  //               ctx.appendButton(() => ({
+  //                 text: blockConfig['add-to-wishlist-btn-text'] ? blockConfig['add-to-wishlist-btn-text'] : placeholders.pdpCustomAddtowishlist,
+  //                 icon: 'Heart',
+  //                 variant: 'secondary',
+  //                 onClick: () => console.debug('Add to Wishlist', ctx.data),
+  //               }));
 
-//               // Share Button
-//               ctx.appendButton(() => ({
-//                 text: blockConfig['share-btn-text'] ? blockConfig['share-btn-text'] : placeholders.pdpCustomShare,
-//                 icon: 'Share',
-//                 variant: 'secondary',
-//                 onClick: () => console.debug('Share Button', ctx.data),
-//               }));
-//             },
-//             Description: (ctx) => {
-//               const defaultContent = ctx?.data?.description;
-//               if (!defaultContent) return;
+  //               // Share Button
+  //               ctx.appendButton(() => ({
+  //                 text: blockConfig['share-btn-text'] ? blockConfig['share-btn-text'] : placeholders.pdpCustomShare,
+  //                 icon: 'Share',
+  //                 variant: 'secondary',
+  //                 onClick: () => console.debug('Share Button', ctx.data),
+  //               }));
+  //             },
+  //             Description: (ctx) => {
+  //               const defaultContent = ctx?.data?.description;
+  //               if (!defaultContent) return;
 
-//               const [html, updateContent] = createAccordion('Overview', defaultContent, true);
-//               ctx.replaceWith(html);
+  //               const [html, updateContent] = createAccordion('Overview', defaultContent, true);
+  //               ctx.replaceWith(html);
 
-//               ctx.onChange((next) => {
-//                 updateContent(next?.data?.description);
-//               });
-//             },
-//             ShortDescription: (ctx) => {
-//               const shortDescContent = ctx?.data?.shortDescription;
-//               if (!shortDescContent) return;
+  //               ctx.onChange((next) => {
+  //                 updateContent(next?.data?.description);
+  //               });
+  //             },
+  //             ShortDescription: (ctx) => {
+  //               const shortDescContent = ctx?.data?.shortDescription;
+  //               if (!shortDescContent) return;
 
-//               const [html, updateContent] = createAccordion('Short description', shortDescContent, false);
-//               ctx.replaceWith(html);
+  //               const [html, updateContent] = createAccordion('Short description', shortDescContent, false);
+  //               ctx.replaceWith(html);
 
-//               ctx.onChange((next) => {
-//                 updateContent(next?.data?.shortDescription);
-//               });
-//             },
-//             Attributes: (ctx) => {
-//               const attributes = ctx?.data?.attributes;
-//               if (!attributes) return;
+  //               ctx.onChange((next) => {
+  //                 updateContent(next?.data?.shortDescription);
+  //               });
+  //             },
+  //             Attributes: (ctx) => {
+  //               const attributes = ctx?.data?.attributes;
+  //               if (!attributes) return;
 
-//               let list;
-//               list = generateListHTML(attributes);
-//               const [html, updateContent] = createAccordion('Product specs', list, false);
-//               ctx.replaceWith(html);
+  //               let list;
+  //               list = generateListHTML(attributes);
+  //               const [html, updateContent] = createAccordion('Product specs', list, false);
+  //               ctx.replaceWith(html);
 
 //               ctx.onChange((next) => {
 //                 list = generateListHTML(next?.data?.attributes);
@@ -343,4 +339,4 @@ export default async function decorate(block) {
 //       }
 //     }, 0);
 //   });
-// }
+}
