@@ -2,9 +2,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { addProductsToCart } from '@dropins/storefront-cart/api.js';
+import { fetchPlaceholders } from '../../scripts/aem.js';
 import initToast from './toast.js';
 
-export default function initModal(next, state, blockConfig) {
+export default async function initModal(next, state, blockConfig) {
+  const placeholders = await fetchPlaceholders();
+  const title = blockConfig['modal-content-title'] || placeholders.pdpPlanModalTitle;
+  const description = blockConfig['modal-content-description'] || placeholders.pdpPlanModalDescription;
+
   // Check if modal already exists
   let modal = document.getElementById('modal');
   if (!modal) {
@@ -12,8 +17,8 @@ export default function initModal(next, state, blockConfig) {
         <div id="modal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span id="closeModalBtn" class="close">&times;</span>
-                <p>${blockConfig['modal-content-title']}</p>
-                <p>${blockConfig['modal-content-description']}</p>
+                <p>${title}</p>
+                <p>${description}</p>
                 <div class="cta-btns">
                   <button type="button" id="BringMyOwnPhoneBtn">Bring My Own Phone</button>
                   <button type="button" id="AddAPhoneBtn" class="add-a-phone">Add A Phone</button>

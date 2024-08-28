@@ -169,9 +169,11 @@ export default async function decorate(block) {
         },
       },
       Custom: {
+        Share: { label: placeholders.pdpCustomShare },
         AddingToCart: { label: placeholders.pdpCustomAddingtocart },
         AddToWishlist: { label: placeholders.pdpCustomAddtowishlist },
-        Share: { label: placeholders.pdpCustomShare },
+        PlanModalTitle: { label: placeholders.pdpPlanModalTitle },
+        PlanModalDescription: { label: placeholders.pdpPlanModalDescription },
       },
     },
   };
