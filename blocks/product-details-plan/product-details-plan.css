@@ -265,6 +265,14 @@
   }  
 }
 
+@media (width <= 768px) {
+  .modal-content .cta-btns {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+}
+
 /* toast notification */
 #toast-container {
   position: fixed;
