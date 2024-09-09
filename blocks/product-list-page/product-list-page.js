@@ -7,27 +7,13 @@ export default async function decorate(block) {
     let authorContentPath = getAemContentPath();
     authorContentPath = `${authorContentPath}.resource/scripts/widgets/search.js`;
     await import(`${authorContentPath}`);
-    // eslint-disable-next-line import/no-unresolved
-    // await import('@widgets/search.js');
-    // eslint-disable-next-line no-console
-    console.log('after calling with custom functions in configs.js for plp');
   } else {
     // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
     await import('/scripts/widgets/search.js');
   }
-  // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
-  // await import('/scripts/widgets/search.js');
 
   const { category, urlpath, type } = readBlockConfig(block);
   block.textContent = '';
-  // const plpAttributes = block.attributes;
-  // const isAemAuthor = getAemAuthorEnv();
-  // if (!isAemAuthor) {
-  //   block.textContent = '';
-  // } else if (isAemAuthor && plpAttributes && plpAttributes.getNamedItem('data-aue-resource')) {
-  //   /* eslint-disable-next-line no-console */
-  //   console.log(`in product-list-page block, in AEM author env = ${isAemAuthor}, window.location = ${window.location}`);
-  // }
 
   const storeDetails = {
     environmentId: await getConfigValue('commerce-environment-id'),
