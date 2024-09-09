@@ -2,7 +2,8 @@ import { readBlockConfig } from '../../scripts/aem.js';
 import { getConfigValue } from '../../scripts/configs.js';
 
 export default async function decorate(block) {
-  // // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
+  // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
+  await import('/content/citisignal-edge-delivery.resource/scripts/widgets/search.js');
   // await import('/scripts/widgets/search.js');
 
   const { category, urlpath, type } = readBlockConfig(block);
