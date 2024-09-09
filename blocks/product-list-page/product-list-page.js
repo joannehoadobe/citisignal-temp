@@ -9,6 +9,8 @@ export default async function decorate(block) {
     // await import(`${authorContentPath}`);
     // eslint-disable-next-line import/no-unresolved
     await import('@widgets/search.js');
+    // eslint-disable-next-line no-console
+    console.log('after calling to importmap for plp');
   } else {
     // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
     await import('/scripts/widgets/search.js');
