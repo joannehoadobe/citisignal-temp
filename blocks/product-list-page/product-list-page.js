@@ -4,9 +4,11 @@ import { getConfigValue, getAemAuthorEnv, getAemContentPath } from '../../script
 export default async function decorate(block) {
   const isAemAuthor = getAemAuthorEnv();
   if (isAemAuthor) {
-    let authorContentPath = getAemContentPath();
-    authorContentPath = `${authorContentPath}.resource/scripts/widgets/search.js`;
-    await import(`${authorContentPath}`);
+    // let authorContentPath = getAemContentPath();
+    // authorContentPath = `${authorContentPath}.resource/scripts/widgets/search.js`;
+    // await import(`${authorContentPath}`);
+    // eslint-disable-next-line import/no-unresolved
+    await import('@widgets/search.js');
   } else {
     // eslint-disable-next-line import/no-absolute-path, import/no-unresolved
     await import('/scripts/widgets/search.js');
