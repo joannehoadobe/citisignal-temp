@@ -71,8 +71,8 @@ export default async function decorate(block) {
   } catch (error) {
     console.error(error);
   } finally {
-    if (!isAemAuthor) {
-      block.closest('.enrichment-wrapper')?.remove();
-    }
+    // if (!isAemAuthor) {
+    block.closest('.enrichment-wrapper')?.remove();
+    // }
   }
 }
