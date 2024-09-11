@@ -39,40 +39,40 @@ export default async function decorate(block) {
     }
 
     const index = await fetchIndex('enrichment/enrichment');
-    // if (!isAemAuthor) {
-    const matchingFragments = index.data
-      .filter((fragment) => Object.keys(filters).every((filterKey) => {
-        const values = JSON.parse(fragment[filterKey]);
-        return values.includes(filters[filterKey]);
-      }))
-      .map((fragment) => fragment.path);
+    if (!isAemAuthor) {
+      const matchingFragments = index.data
+        .filter((fragment) => Object.keys(filters).every((filterKey) => {
+          const values = JSON.parse(fragment[filterKey]);
+          return values.includes(filters[filterKey]);
+        }))
+        .map((fragment) => fragment.path);
 
-    (await Promise.all(matchingFragments.map((path) => loadFragment(path))))
-      .filter((fragment) => fragment)
-      .forEach((fragment) => {
-        const sections = fragment.querySelectorAll(':scope .section');
+      (await Promise.all(matchingFragments.map((path) => loadFragment(path))))
+        .filter((fragment) => fragment)
+        .forEach((fragment) => {
+          const sections = fragment.querySelectorAll(':scope .section');
 
-        // If only single section, replace block with content of section
-        if (sections.length === 1) {
-          block.closest('.section').classList.add(...sections[0].classList);
-          const wrapper = block.closest('.enrichment-wrapper');
-          Array.from(sections[0].children)
-            .forEach((child) => wrapper.parentNode.insertBefore(child, wrapper));
-        } else if (sections.length > 1) {
+          // If only single section, replace block with content of section
+          if (sections.length === 1) {
+            block.closest('.section').classList.add(...sections[0].classList);
+            const wrapper = block.closest('.enrichment-wrapper');
+            Array.from(sections[0].children)
+              .forEach((child) => wrapper.parentNode.insertBefore(child, wrapper));
+          } else if (sections.length > 1) {
           // If multiple sections, insert them after section of block
-          const blockSection = block.closest('.section');
-          Array.from(sections)
-            .reverse()
-            .forEach((section) => blockSection
-              .parentNode.insertBefore(section, blockSection.nextSibling));
-        }
-      });
-    // }
+            const blockSection = block.closest('.section');
+            Array.from(sections)
+              .reverse()
+              .forEach((section) => blockSection
+                .parentNode.insertBefore(section, blockSection.nextSibling));
+          }
+        });
+    }
   } catch (error) {
     console.error(error);
   } finally {
-    // if (!isAemAuthor) {
-    block.closest('.enrichment-wrapper')?.remove();
-    // }
+    if (!isAemAuthor) {
+      block.closest('.enrichment-wrapper')?.remove();
+    }
   }
 }
