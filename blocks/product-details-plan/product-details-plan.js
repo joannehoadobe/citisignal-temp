@@ -261,7 +261,7 @@ export default async function decorate(block) {
                     : blockConfig['add-to-cart-btn-text'] || placeholders.pdpProductAddtocart,
                   icon: 'Cart',
                   variant: 'primary',
-                  disabled: adding || !next.data.inStock,
+                  disabled: adding || !next.data.inStock || !next.valid,
                   onClick: async () => {
                     try {
                       // Plans flow
