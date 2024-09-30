@@ -89,6 +89,10 @@
   max-width: 100%;
 }
 
+.product-list-page .ds-widgets_results > div:nth-child(2) > div > div {
+  justify-content: flex-end;
+}
+
 /* Custom Styling */
 .product-list-page .ds-sdk-product-image-carousel > div {
   justify-content: center;
@@ -155,4 +159,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.product-list-page .ds-widgets_results .ds-sdk-filter-button {
+  display: none;
 }
