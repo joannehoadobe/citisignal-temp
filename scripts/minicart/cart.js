@@ -231,10 +231,6 @@ export async function addToCart(sku, options, quantity, source) {
     handleCartErrors(errors);
 
     const { cart, user_errors: userErrors } = data.addProductsToCart;
-    console.log("GRAPHQL cart data: ",data);
-    console.log("GRAPHQL errors: ", errors);
-    console.log("cart: ", cart);
-    console.log("userErrors: ", userErrors);
     if (userErrors && userErrors.length > 0) {
       console.error('User errors while adding item to cart', userErrors);
     }
