@@ -269,6 +269,7 @@ export default async function decorate(block) {
                         return;
                       }
                       const addToCartResponse = await addProductsToCart([{ ...next.values }]);
+                      // Todo: Need to check why errors is not in the response
 
                       // toast notification
                       if (next.valid && addToCartResponse) {
