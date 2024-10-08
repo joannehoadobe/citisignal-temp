@@ -16,8 +16,10 @@
 }
 
 .teaser-img-col img {
-  height: 100%;
+  height: auto;
   width: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .teaser > div:not(.teaser-img-col) {
