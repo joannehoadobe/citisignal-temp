@@ -541,7 +541,7 @@ header .header > .default-content-wrapper p {
   font-size: var(--body-font-size-xxs);
 }
 
-header .header > .default-content-wrapper p:first-of-type .icon {
+header .header > .default-content-wrapper p:not(:last-of-type) .icon {
   width: 16px;
   height: 16px;
 }
