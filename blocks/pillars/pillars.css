@@ -1,0 +1,162 @@
+.pillars > div {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pillars img {
+  width: 100%;
+}
+
+.pillars > div > div {
+  order: 1;
+}
+
+.pillars > div > .pillars-img-col {
+  order: 0;
+}
+
+.pillars > div > .pillars-img-col img {
+  object-fit: cover;
+  display: block;
+}
+
+@media (width >= 900px) {
+  .pillars > div {
+    align-items: center;
+    flex-direction: unset;
+  }
+
+  .pillars > div > div {
+    flex: 1;
+    order: unset;
+  }
+
+  .pillars > div > .pillars-img-col img {
+    min-height: 475px;
+  }
+}
+
+/* enrichment pillars block */
+.pdp-enrichment .default-content-wrapper h5 {
+  content: unset;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+.pdp-enrichment .default-content-wrapper h5::after {
+  content: unset;
+}
+
+.pdp-enrichment .pillars-wrapper {
+  margin-bottom: 3rem;
+}
+
+/* promo */
+.pillars.promo {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pillars.promo > div {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 50px 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  min-height: 297px;
+}
+
+.pillars.promo > div picture,
+.pillars.promo > div img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.pillars.promo > div p {
+  margin: 0;
+}
+
+.pillars.grid > div > div p {
+  margin: 0;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.pillars.promo > div p:last-of-type {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: left;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 38px;
+  letter-spacing: 1.28px;
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  .pillars.promo {
+    flex-direction: row;
+  }
+
+  .pillars.promo > div {
+    padding: 4%;
+  }
+}
+
+/* grid */
+.pillars.grid {
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+}
+
+.pillars.grid > div {
+  align-items: unset;
+  flex: 1;
+}
+
+.pillars.grid > div > div {
+  display: flex;
+  flex: 1 1 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 18px;
+  background: #F5F5F5;
+  padding: 8% 12%;
+  text-align: center;
+  min-height: 296px;
+  box-sizing: border-box;
+}
+
+
+.pillars.grid > div > div p:last-of-type {
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.pillars.grid > div > div p > span.icon {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (width >= 900px) {
+  .pillars.grid {
+    flex-direction: row;
+  }
+}

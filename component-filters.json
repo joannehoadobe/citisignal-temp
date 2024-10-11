@@ -24,15 +24,15 @@
         "commerce-cart",
         "commerce-checkout",
         "commerce-order-confirmation",
-        "columns"
+        "pillars"
       ]
     },
     {
-      "id": "columns",
+      "id": "pillars",
       "components": [
-        "columns-text",
-        "columns-icon",
-        "columns-promo"
+        "pillars-text",
+        "pillars-icon",
+        "pillars-promo"
       ]
     },
     {
