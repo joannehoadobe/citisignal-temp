@@ -645,7 +645,7 @@
       ]
     },
     {
-      "id": "columns",
+      "id": "pillars",
       "fields": [
         {
           "component": "select",
@@ -671,7 +671,7 @@
       ]
     },
     {
-      "id": "columns-text",
+      "id": "pillars-text",
       "fields": [
         {
           "component": "text",
@@ -696,7 +696,7 @@
       ]
     },
     {
-      "id": "columns-icon",
+      "id": "pillars-icon",
       "fields": [
         {
           "component": "text",
@@ -731,7 +731,7 @@
       ]
     },
     {
-      "id": "columns-promo",
+      "id": "pillars-promo",
       "fields": [
         {
           "component": "text",

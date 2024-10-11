@@ -282,16 +282,16 @@
             }
           },
           {
-            "title": "Columns",
-            "id": "columns",
+            "title": "Pillars",
+            "id": "pillars",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block",
                   "template": {
-                    "name": "Columns",
-                    "model": "columns",
-                    "filter": "columns"
+                    "name": "Pillars",
+                    "model": "pillars",
+                    "filter": "pillars"
                   }
                 }
               }
@@ -299,13 +299,13 @@
           },
           {
             "title": "Text",
-            "id": "columns-text",
+            "id": "pillars-text",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block/item",
                   "template": {
-                    "model": "columns-text",
+                    "model": "pillars-text",
                     "name" : "Text",
                     "grid_title" : "Placeholder Title",
                     "grid_description": "Placeholder Description",
@@ -317,13 +317,13 @@
           },
           {
             "title": "Icon",
-            "id": "columns-icon",
+            "id": "pillars-icon",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block/item",
                   "template": {
-                    "model": "columns-icon",
+                    "model": "pillars-icon",
                     "name" : "Icon",
                     "gridIcon_icon": ":delivery-home:",
                     "gridIcon_description": "Placeholder Description",
@@ -335,13 +335,13 @@
           },
           {
             "title": "Promo",
-            "id": "columns-promo",
+            "id": "pillars-promo",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block/item",
                   "template": {
-                    "model": "columns-promo",
+                    "model": "pillars-promo",
                     "name" : "Promo",
                     "gridPromo_image" : "/content/dam/citisignal/product-enrichment-1.png",
                     "gridPromo_description" : "Placeholder Description",
