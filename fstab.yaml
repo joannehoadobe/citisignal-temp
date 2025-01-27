@@ -1,8 +1,9 @@
 mountpoints:
-  /:
-    url: "https://author-p53852-e347001.adobeaemcloud.com/bin/franklin.delivery/joannehoadobe/citisignal-temp/main"
-    type: "markup"
-    suffix: ".html"
+  /: https://adobe.sharepoint.com/:f:/r/sites/citisignal-storefront/Shared%20Documents/citisignal?csf=1&web=1&e=b2egXy
+#  /:
+#    url: "https://author-p53852-e347001.adobeaemcloud.com/bin/franklin.delivery/joannehoadobe/citisignal-temp/main"
+#    type: "markup"
+#    suffix: ".html"
 
 folders:
   /products/plan/: /products/plan/default
